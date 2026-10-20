@@ -79,12 +79,11 @@ export function normalizeResearch(archive, nowMs = Date.now()) {
       'Recomputation checks consistency, not authenticity of a trusted RPC provider.'] });
 }
 
-export async function loadResearch(directory, nowMs = Date.now()) {
+export async function loadResearchArchive(directory) {
   let checkpoint;
   try { checkpoint = await readJson(path.join(directory, 'checkpoint.json'), directory); }
   catch (error) {
-    if (error.code === 'ENOENT') return { schemaVersion: 1, available: false, dataset: 'saved-research',
-      freshness: 'unavailable', observations: [], sizing: null, analysis: null, qualifiedOpportunities: 0, netProfitKnown: false };
+    if (error.code === 'ENOENT') return null;
     throw error;
   }
   if (checkpoint?.schemaVersion !== 1 || checkpoint.chainId !== 1 || !namePattern.test(checkpoint.lastReport) ||
@@ -92,7 +91,13 @@ export async function loadResearch(directory, nowMs = Date.now()) {
   const archive = await readJson(path.join(directory, checkpoint.lastReport), directory);
   if (archive?.snapshot?.blockNumber !== checkpoint.blockNumber || archive.snapshot.blockHash !== checkpoint.blockHash ||
       archive.snapshot.capturedAtMs !== checkpoint.capturedAtMs) throw new Error('Research checkpoint mismatch');
-  return normalizeResearch(archive, nowMs);
+  return archive;
+}
+
+export async function loadResearch(directory, nowMs = Date.now()) {
+  const archive = await loadResearchArchive(directory);
+  return archive ? normalizeResearch(archive, nowMs) : { schemaVersion: 1, available: false, dataset: 'saved-research',
+    freshness: 'unavailable', observations: [], sizing: null, analysis: null, qualifiedOpportunities: 0, netProfitKnown: false };
 }
 
 export async function saveResearch(directory, archive) {

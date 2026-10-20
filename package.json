@@ -10,6 +10,7 @@
     "research": "node apps/monitor/research.mjs",
     "discover": "node apps/monitor/new-pools.mjs",
     "agent": "node apps/monitor/agent.mjs",
+    "paper:forward": "node apps/monitor/forward.mjs",
     "start": "node apps/server/server.mjs",
     "size:demo": "node apps/monitor/sizing-demo.mjs",
     "test": "node --test",

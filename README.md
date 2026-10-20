@@ -67,3 +67,5 @@ Costed-size research is now available through `npm run size:demo` (explicit synt
 ## Costed research and agent review
 
 `npm run research` publishes a validated local research checkpoint. `GET /api/research` recomputes its bounded size matrix and provides a read-only agent preview in MIR overview and LXR. Gas remains unknown unless explicit scenario assumptions are supplied. Mock mode clears this independent panel. `npm run agent` maintains separate persistent discovery/research decision histories; page reloads do not collect data or save decisions. See [research storage and provenance](docs/RESEARCH.md) and [agent boundaries](docs/AGENT.md).
+
+`npm run paper:forward` registers a costed hypothesis before a later observation, then replays the frozen direction, size and policy on a later committed block. Its bounded atomic journal survives restarts, retains expired/unknown results and creates no balances or fills. This CLI workflow is separate from the UI preview. See [forward experiments and limitations](docs/FORWARD-EXPERIMENTS.md).
