@@ -1,0 +1,1120 @@
+{
+  "version": 2,
+  "files": [
+    {
+      "file": "README-AR.md",
+      "bytes": 7823,
+      "sha256": "7bcdc4c3fe8d3c664777fbec8c4e26f50281fa576616ef5e420a56a478a65974"
+    },
+    {
+      "file": "02-icons/favicon-16.png",
+      "bytes": 281,
+      "sha256": "0f32543969c93f2e8c6c0b8f145834c657f5e7cbfac4f04f81c4349ed9d5f100"
+    },
+    {
+      "file": "02-icons/favicon-24.png",
+      "bytes": 410,
+      "sha256": "828a0f8417aca109df0b24c21b2c3597d00fde5899b1f7d7b43c6023182c6128"
+    },
+    {
+      "file": "02-icons/favicon-32.png",
+      "bytes": 432,
+      "sha256": "985986bee6674123bad0f1ace7c6d647fd73691a02125a7f76faaee9cefb7db7"
+    },
+    {
+      "file": "02-icons/favicon-adaptive.svg",
+      "bytes": 324,
+      "sha256": "35673aa367c1c30ce5b938c9aef6dd1c3b31ef2d9f6b054b40d006e4cfe6ea46"
+    },
+    {
+      "file": "02-icons/favicon.ico",
+      "bytes": 6257,
+      "sha256": "dc4f85d79b029afec6d09cef0fe05f31164610a25740758729cfe0bcb398a21a"
+    },
+    {
+      "file": "02-icons/favicon.svg",
+      "bytes": 324,
+      "sha256": "35673aa367c1c30ce5b938c9aef6dd1c3b31ef2d9f6b054b40d006e4cfe6ea46"
+    },
+    {
+      "file": "02-icons/mir-symbol-16.png",
+      "bytes": 280,
+      "sha256": "dcbfe61352ae1236f71f61ae615629a79a662b1513b1379d5dfe94b6ae01675c"
+    },
+    {
+      "file": "02-icons/mir-symbol-24.png",
+      "bytes": 414,
+      "sha256": "4bc9314b9079211f12aeca58d88551003609abaad47e69ee9e5969043c0e8334"
+    },
+    {
+      "file": "02-icons/mir-symbol-32.png",
+      "bytes": 644,
+      "sha256": "75b07b767ba50ce9d9d28b96384ff1f160307b33cab980ec0471696cf1c9d7fa"
+    },
+    {
+      "file": "03-tokens/mir.tailwind-v4.css",
+      "bytes": 1190,
+      "sha256": "22add567e6a7e3f2cb8e61d56f45e9b89d7a11ff7541c4b6251c5d239ac3da96"
+    },
+    {
+      "file": "03-tokens/mir.tokens.css",
+      "bytes": 1758,
+      "sha256": "d7d3691f4c64438328ed73eb0de0d09ff4673e8afb51062cd86a807b302cdf7e"
+    },
+    {
+      "file": "03-tokens/mir.tokens.json",
+      "bytes": 6988,
+      "sha256": "e9e9443e17f0846056f6ab98993ecef2a21aa27c0fe83db8f9a78e9693b4fe1b"
+    },
+    {
+      "file": "03-tokens/mir.workspace.css",
+      "bytes": 515,
+      "sha256": "9199f4112d889e7fafc2e6764840dafa2aee65af9d1f44d4669fe8c683111b91"
+    },
+    {
+      "file": "03-tokens/tailwind.config.cjs",
+      "bytes": 2730,
+      "sha256": "f2647e63311196f77c7b94d72b6d12f265a6de699db144eb492825900ad1b1ef"
+    },
+    {
+      "file": "04-patterns/mir-blueprint-dark.svg",
+      "bytes": 866,
+      "sha256": "fbd0abc0aa6c0f33f9cb66e0c3bec5bb407c257d0324c8028e6a352600a3068e"
+    },
+    {
+      "file": "04-patterns/mir-blueprint-light.svg",
+      "bytes": 866,
+      "sha256": "3570d3cda1ad0501949828eed53b9b0b717aab983b821fffdc357fefe2174acb"
+    },
+    {
+      "file": "04-patterns/mir-graph-dark.svg",
+      "bytes": 695,
+      "sha256": "6c7659fdacee07403c4fb7cb37b2e33320621c8ead81818479c2ddc5dcdc07d5"
+    },
+    {
+      "file": "04-patterns/mir-graph-light.svg",
+      "bytes": 695,
+      "sha256": "a7839b7771928297528d13143f06a1db17674917bc32894d1512ad2b32aeac72"
+    },
+    {
+      "file": "04-patterns/mir-orbital-dark.svg",
+      "bytes": 615,
+      "sha256": "dd899b2888250ac1eeb1da963d1f03db943d42aa0199d17388f148f1d0e487bb"
+    },
+    {
+      "file": "04-patterns/mir-orbital-light.svg",
+      "bytes": 615,
+      "sha256": "992a4248738147ceeb59ff0a0c9d7525b397a5eabc8b83a05755fbe4ac55c2ce"
+    },
+    {
+      "file": "04-patterns/mir-trajectories-dark.svg",
+      "bytes": 604,
+      "sha256": "1da2f01a864f94caac1b94bdd1eb4a4ebcca3e37441f8093ff8423c821b43c1d"
+    },
+    {
+      "file": "04-patterns/mir-trajectories-light.svg",
+      "bytes": 604,
+      "sha256": "46fec13ec8391286590666f5d0a33c053afde60ccdda1c14cd3e9520b31d7c22"
+    },
+    {
+      "file": "04-patterns/patterns.css",
+      "bytes": 257,
+      "sha256": "20f8b9029d4f0ea6d903819bc6a5a61d5df43f1dbea851b985ce92a0ed56681b"
+    },
+    {
+      "file": "05-imagery/mir-orbital-hero-1280.webp",
+      "bytes": 200622,
+      "sha256": "86e1878b151740563c1b1865429aa8e1c4aca00a831c043f74dcc16452070e18"
+    },
+    {
+      "file": "05-imagery/mir-orbital-hero-1920.jpg",
+      "bytes": 512356,
+      "sha256": "9eaa458973772fcd0bde1962a48b88156f6bdb1631ea2a3c719a355d85e54bfc"
+    },
+    {
+      "file": "05-imagery/mir-orbital-hero-1920.webp",
+      "bytes": 339114,
+      "sha256": "1a61f89dcfd9e37d7d6f402fdd5a4f1a298a4f17faaf4f7287971261368563f8"
+    },
+    {
+      "file": "05-imagery/mir-orbital-hero-960.webp",
+      "bytes": 121870,
+      "sha256": "4d327fba19481c2424932aceb9bb93d819a1acdce5832604cc610987b8024191"
+    },
+    {
+      "file": "05-imagery/mir-orbital-hero-master.png",
+      "bytes": 2583595,
+      "sha256": "d03cc71c64581ce7e90a747ad85c605bfa60fe5dd57a70906bbac665c49906cd"
+    },
+    {
+      "file": "06-templates/mir-open-graph.png",
+      "bytes": 32497,
+      "sha256": "5826f197312f7652094f36c92fd2b1b48ef8c920a65411c40bb7617b3c5fc798"
+    },
+    {
+      "file": "06-templates/mir-open-graph.svg",
+      "bytes": 1538,
+      "sha256": "1840f402bb8065927c8b0727227966fe2f9f58cd79e7cec6e58994011134cea2"
+    },
+    {
+      "file": "06-templates/mir-profile-banner.png",
+      "bytes": 31137,
+      "sha256": "38a9eccdec9b4bf220b1010ef56631eeb9aeaa38ee155daa4ca0c3670be9a98b"
+    },
+    {
+      "file": "06-templates/mir-profile-banner.svg",
+      "bytes": 1588,
+      "sha256": "0d4fac3a8f6d27bc88c7e821d063e6df500e578a1a25bea668cc7a5087e5e1aa"
+    },
+    {
+      "file": "06-templates/mir-social-landscape.png",
+      "bytes": 47686,
+      "sha256": "c6eb055ec15ef4355112d540db599a559283a69d9941964263a06f680e66beac"
+    },
+    {
+      "file": "06-templates/mir-social-landscape.svg",
+      "bytes": 1565,
+      "sha256": "4458e0844b5237f15d4bf2bdf612fa6a9ec8a913e82751091b1dbd1661fbdd85"
+    },
+    {
+      "file": "06-templates/mir-social-square.png",
+      "bytes": 40514,
+      "sha256": "141c51462ce903ec68ea73df93c61f995106819dc098ab06a52e8fcca26751b2"
+    },
+    {
+      "file": "06-templates/mir-social-square.svg",
+      "bytes": 1546,
+      "sha256": "ae488e8e49641f2bbacd7167815dbe4445861f8202a8d0bc57fcc92193c2240b"
+    },
+    {
+      "file": "07-web/app.js",
+      "bytes": 12691,
+      "sha256": "6194ac4b5f449d98c28bd72483bdc26cee76ca683336f84788d4fabe5876d27d"
+    },
+    {
+      "file": "07-web/components.html",
+      "bytes": 4617,
+      "sha256": "4f691d7a971ba753ca4b6cba424b07ff21be444d540fcbbf9d8b32e49089ef74"
+    },
+    {
+      "file": "07-web/components.js",
+      "bytes": 1609,
+      "sha256": "29ec1ca464f1881ddee04bccd5ea84b82d0fc6f5e4fc7d90ad1cf3d71259545e"
+    },
+    {
+      "file": "07-web/connected.css",
+      "bytes": 1061,
+      "sha256": "6de56ec1552b6be7bece23614f705bb1b0708f399b692d21062f820c6f58b80d"
+    },
+    {
+      "file": "07-web/dashboard.html",
+      "bytes": 13985,
+      "sha256": "56fada4bbf65f00c7ff138e3b0afceb10faef5fa05a65a78b2ff30f3f6335eda"
+    },
+    {
+      "file": "07-web/index.html",
+      "bytes": 3940,
+      "sha256": "b5604c0d04aacc58d0eca2c9d524edcb67becb24eabb87cc01d6709e91f49c9f"
+    },
+    {
+      "file": "07-web/lxr.html",
+      "bytes": 13987,
+      "sha256": "3eb5da1ff05d9f410b8663a6031b90ba6034a0819e3e156920ccce85f05b0cdc"
+    },
+    {
+      "file": "07-web/README.md",
+      "bytes": 734,
+      "sha256": "407d5f47475d6e5e3d6053423ff052ec6c631033c6dc21b4674bc49588710e6f"
+    },
+    {
+      "file": "07-web/reference.css",
+      "bytes": 13477,
+      "sha256": "e778ad4ea129b8319f57a301fabd21218868c076ea9c32edfc87439db45fbbe9"
+    },
+    {
+      "file": "07-web/sample-data.json",
+      "bytes": 2386,
+      "sha256": "6825489fae656c5b1cd9a67779d40417d0eae2a045f21a373dc4aa758c49f9f7"
+    },
+    {
+      "file": "07-web/styles.css",
+      "bytes": 17342,
+      "sha256": "8b340a95f99dd63d9e99af2408fe23e6c4736dcb8293976f7d387429654a7ef4"
+    },
+    {
+      "file": "08-mockups/mir-components-desktop-dark.png",
+      "bytes": 138973,
+      "sha256": "f79132cbf82ff3186ec29ba8570dc989f0c2f86da39d78f43a2872a95713bb08"
+    },
+    {
+      "file": "08-mockups/mir-components-desktop-light.png",
+      "bytes": 138639,
+      "sha256": "b6e1ea29c63eb01ab5f85e44f62589a1d82eb777dc22a64ef30a1b0de8357f56"
+    },
+    {
+      "file": "08-mockups/mir-components-mobile-dark.png",
+      "bytes": 46426,
+      "sha256": "ae928f9b99a9455b54c481762a74c57d8dac45e339eab078450ac0554df89a8e"
+    },
+    {
+      "file": "08-mockups/mir-components-mobile-full-dark.png",
+      "bytes": 123919,
+      "sha256": "bb7184fd144fa587fd05154d2f8973afb53e64d1c8ed6fe03c1854dbf210a931"
+    },
+    {
+      "file": "08-mockups/mir-components-mobile-full-light.png",
+      "bytes": 123926,
+      "sha256": "0d321c0180232d742139557a8460c4a3910ccd3a2871fa74807923f8b64a57b7"
+    },
+    {
+      "file": "08-mockups/mir-components-mobile-light.png",
+      "bytes": 46476,
+      "sha256": "deebc5f2a821ba9ad3a41409da76e5ff9b8bc572aa719714632ca1e0570db83a"
+    },
+    {
+      "file": "08-mockups/mir-dashboard-desktop-dark.png",
+      "bytes": 168515,
+      "sha256": "e917bcea0615d99a7284b03b1ce2ad0422802f5d2b6a45f1048a43d3f504169c"
+    },
+    {
+      "file": "08-mockups/mir-dashboard-desktop-light.png",
+      "bytes": 168368,
+      "sha256": "d0073820b09044873c05bd7f48ef5a9a88fa1f703a35e4021146805db9762580"
+    },
+    {
+      "file": "08-mockups/mir-dashboard-mobile-dark.png",
+      "bytes": 47485,
+      "sha256": "9faa526af2530a9c73d1665ab9c213ca4adbe95399953f369f7f11a2b3f5fe50"
+    },
+    {
+      "file": "08-mockups/mir-dashboard-mobile-full-dark.png",
+      "bytes": 66215,
+      "sha256": "e68ccd085f418a167702728e9f75d72a6821137552476c5c460330821f525394"
+    },
+    {
+      "file": "08-mockups/mir-dashboard-mobile-full-light.png",
+      "bytes": 66242,
+      "sha256": "fc305a28c83272b9c51d7f10d868204ce3e3ec2afeb3186b038b96622bec6806"
+    },
+    {
+      "file": "08-mockups/mir-dashboard-mobile-light.png",
+      "bytes": 47624,
+      "sha256": "66f00b775381fa7db11922d60867f8da29f999f12145b1cc309e00759c2a0c07"
+    },
+    {
+      "file": "08-mockups/mir-landing-desktop-dark.png",
+      "bytes": 1505090,
+      "sha256": "f39b5650b14ceccdae33f5ee3c440acd92abad126d476ec24e6c239bb5a3c392"
+    },
+    {
+      "file": "08-mockups/mir-landing-desktop-light.png",
+      "bytes": 1505090,
+      "sha256": "f39b5650b14ceccdae33f5ee3c440acd92abad126d476ec24e6c239bb5a3c392"
+    },
+    {
+      "file": "08-mockups/mir-landing-mobile-dark.png",
+      "bytes": 430788,
+      "sha256": "4594942495c819a3083c388920b6622ac5ee53a23f920d89489980e049919b01"
+    },
+    {
+      "file": "08-mockups/mir-landing-mobile-full-dark.png",
+      "bytes": 430788,
+      "sha256": "4594942495c819a3083c388920b6622ac5ee53a23f920d89489980e049919b01"
+    },
+    {
+      "file": "08-mockups/mir-landing-mobile-full-light.png",
+      "bytes": 430788,
+      "sha256": "4594942495c819a3083c388920b6622ac5ee53a23f920d89489980e049919b01"
+    },
+    {
+      "file": "08-mockups/mir-landing-mobile-light.png",
+      "bytes": 430788,
+      "sha256": "4594942495c819a3083c388920b6622ac5ee53a23f920d89489980e049919b01"
+    },
+    {
+      "file": "08-mockups/mir-landing-viewport-dark.png",
+      "bytes": 1505090,
+      "sha256": "f39b5650b14ceccdae33f5ee3c440acd92abad126d476ec24e6c239bb5a3c392"
+    },
+    {
+      "file": "08-mockups/mir-landing-viewport-light.png",
+      "bytes": 1505090,
+      "sha256": "f39b5650b14ceccdae33f5ee3c440acd92abad126d476ec24e6c239bb5a3c392"
+    },
+    {
+      "file": "08-mockups/mir-lxr-desktop-dark.png",
+      "bytes": 168515,
+      "sha256": "e917bcea0615d99a7284b03b1ce2ad0422802f5d2b6a45f1048a43d3f504169c"
+    },
+    {
+      "file": "08-mockups/mir-lxr-desktop-light.png",
+      "bytes": 168368,
+      "sha256": "d0073820b09044873c05bd7f48ef5a9a88fa1f703a35e4021146805db9762580"
+    },
+    {
+      "file": "08-mockups/mir-lxr-mobile-dark.png",
+      "bytes": 47485,
+      "sha256": "9faa526af2530a9c73d1665ab9c213ca4adbe95399953f369f7f11a2b3f5fe50"
+    },
+    {
+      "file": "08-mockups/mir-lxr-mobile-full-dark.png",
+      "bytes": 66215,
+      "sha256": "e68ccd085f418a167702728e9f75d72a6821137552476c5c460330821f525394"
+    },
+    {
+      "file": "08-mockups/mir-lxr-mobile-full-light.png",
+      "bytes": 66242,
+      "sha256": "fc305a28c83272b9c51d7f10d868204ce3e3ec2afeb3186b038b96622bec6806"
+    },
+    {
+      "file": "08-mockups/mir-lxr-mobile-light.png",
+      "bytes": 47624,
+      "sha256": "66f00b775381fa7db11922d60867f8da29f999f12145b1cc309e00759c2a0c07"
+    },
+    {
+      "file": "09-brand-book/brand-book.css",
+      "bytes": 7548,
+      "sha256": "8ac227ce88ed4ec39e00b375d005eefe5e3a7d13bf3504072c09faafc9a83ac0"
+    },
+    {
+      "file": "09-brand-book/MIR-Brand-Book-source.html",
+      "bytes": 35543,
+      "sha256": "6bb35563b123e932b89f9b5cceaefcfeb79700a457a8f9674cb41ff9ec565060"
+    },
+    {
+      "file": "09-brand-book/MIR-Orbital-Intelligence-Brand-Book.pdf",
+      "bytes": 6088632,
+      "sha256": "ead8aa107c0d50dd72968cbb191e25cf04da39bce1d2000bd853bad906c7ff45"
+    },
+    {
+      "file": "10-handoff/book-layout-qa-v2.json",
+      "bytes": 3626,
+      "sha256": "f8531eb2f4c0d11e1f706cf407be8d9f7ffff0bcd6ee44828d0d1c4cd55e6b57"
+    },
+    {
+      "file": "10-handoff/book-layout-qa.json",
+      "bytes": 3626,
+      "sha256": "f8531eb2f4c0d11e1f706cf407be8d9f7ffff0bcd6ee44828d0d1c4cd55e6b57"
+    },
+    {
+      "file": "10-handoff/brand-book-contact-sheet.png",
+      "bytes": 1839571,
+      "sha256": "87abfcffbf9d5a0464aa8ce25a756efd7834c428a6687bd22fb277c95ffff07f"
+    },
+    {
+      "file": "10-handoff/contrast-audit.json",
+      "bytes": 2150,
+      "sha256": "155f08ea099765a5039dc95a7aaaaa254e33753d5facb35f91e2c7e4424aa47c"
+    },
+    {
+      "file": "10-handoff/delivery-qa.json",
+      "bytes": 307,
+      "sha256": "da5a017cad560143a8f1175fa16128d883bab14f3da42560b9d0fcbbc80316a6"
+    },
+    {
+      "file": "10-handoff/font-sources.json",
+      "bytes": 2028,
+      "sha256": "b08ad4e552ea6beb4751f67990449147e1edf347f3fc90bb1bc4aba07365bfa5"
+    },
+    {
+      "file": "10-handoff/hero-direction-v2.txt",
+      "bytes": 877,
+      "sha256": "553524328352af6e3572de7e5399ab13813f11bdd1b0256fb78f01f4c094b6f7"
+    },
+    {
+      "file": "10-handoff/hero-prompt.txt",
+      "bytes": 1154,
+      "sha256": "4ecd8e1d8a5c2b9cac4b1244ee84af574d3cfaecea1ed4e874a320b4ca91a038"
+    },
+    {
+      "file": "10-handoff/interface-qa.json",
+      "bytes": 612,
+      "sha256": "da55a50e44a7b38859c86398bcf9f7276e6c5b17b597cca69cbe1523612a7983"
+    },
+    {
+      "file": "10-handoff/logo-optical-proof-v2.png",
+      "bytes": 19111,
+      "sha256": "0ac6d1bfb760ce0db165c8d042a92f17b72ea72844ac6c30eeb874462ca0c3b1"
+    },
+    {
+      "file": "10-handoff/logo-optical-proof.png",
+      "bytes": 55397,
+      "sha256": "34b16986eed168303b85ca268564284ad3b9a3b336207b8c54e8075ce1d36582"
+    },
+    {
+      "file": "10-handoff/README-AR.md",
+      "bytes": 7823,
+      "sha256": "7bcdc4c3fe8d3c664777fbec8c4e26f50281fa576616ef5e420a56a478a65974"
+    },
+    {
+      "file": "10-handoff/SOURCE-PROVENANCE.md",
+      "bytes": 2546,
+      "sha256": "4da308bcd36aeba1e61ca4c1c9adfbe2ef99cb8f8de1793d1b8f253ab28c81d6"
+    },
+    {
+      "file": "10-handoff/standalone-kit-qa.json",
+      "bytes": 247,
+      "sha256": "7404992039df53731c0ef5701871c6184900a3f7bba1a5a40fbd8b8dab54c278"
+    },
+    {
+      "file": "10-handoff/workspace-contrast-audit.json",
+      "bytes": 2487,
+      "sha256": "12fbc0392614588e064d2f157b5e32415a8b94c821683fe44a2da0b5cbbdcece"
+    },
+    {
+      "file": "11-source/serve.cjs",
+      "bytes": 1341,
+      "sha256": "ee73768d098fb9decdad72f4781daebd7e8625a6718e84fb1d8cc12af6a37c09"
+    },
+    {
+      "file": "fonts/fonts.css",
+      "bytes": 523,
+      "sha256": "0f07c115679012ed01fbb9c3071eb84cb6e43a87f471adf753027cdd1a6f6bbc"
+    },
+    {
+      "file": "fonts/Inter-OFL.txt",
+      "bytes": 4377,
+      "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57"
+    },
+    {
+      "file": "fonts/Inter-Variable.ttf",
+      "bytes": 876576,
+      "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031"
+    },
+    {
+      "file": "fonts/NotoSansArabic-OFL.txt",
+      "bytes": 4382,
+      "sha256": "07fc70bfeb985cc1a87a8587d0a0c80bab11c86c9dc3fd95b6f0cb332f983e96"
+    },
+    {
+      "file": "fonts/NotoSansArabic-Variable.ttf",
+      "bytes": 844676,
+      "sha256": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e"
+    },
+    {
+      "file": "fonts/SpaceGrotesk-Bold.ttf",
+      "bytes": 116056,
+      "sha256": "7209bbb75fc0f5c546a5f5773b0db74ffc6abf04c2148c1105cace5765a96bdb"
+    },
+    {
+      "file": "fonts/SpaceGrotesk-OFL.txt",
+      "bytes": 4495,
+      "sha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72"
+    },
+    {
+      "file": "fonts/SpaceGrotesk-Regular.ttf",
+      "bytes": 114428,
+      "sha256": "5ede28c4425f3fe4830c8f4754b39e9a87a93d0c3baa5e0a9924532aaa8a98bd"
+    },
+    {
+      "file": "01-logos/lxr/lxr-endorsed-dark.svg",
+      "bytes": 922,
+      "sha256": "104b9ac0182da48802f346fa7a45e2b5b525dfe6d4331fe54480c7498c751dc6"
+    },
+    {
+      "file": "01-logos/lxr/lxr-endorsed-dark@2x.png",
+      "bytes": 6618,
+      "sha256": "e38b0badce5887906f3c1b76df35251f5f0b0dfc836235a70308621cc9855cc1"
+    },
+    {
+      "file": "01-logos/lxr/lxr-endorsed-light.svg",
+      "bytes": 922,
+      "sha256": "cad54b41a2aac81a16fefb9ba4c55702b6437c481f98d7a0356fb0d30f1136a4"
+    },
+    {
+      "file": "01-logos/lxr/lxr-endorsed-light@2x.png",
+      "bytes": 6557,
+      "sha256": "55534444b7c3d9d45a591dce4924ef0841d989dd95d4e8551ae590347bb639a0"
+    },
+    {
+      "file": "01-logos/lxr/lxr-endorsed-mono-navy.svg",
+      "bytes": 874,
+      "sha256": "f741cb14fdd0063be99ca423611c501c3d9cf76733b2ccd60929e6b09f1bda80"
+    },
+    {
+      "file": "01-logos/lxr/lxr-endorsed-mono-navy@2x.png",
+      "bytes": 6323,
+      "sha256": "d21515ea5a6072a99e6566b9c35f8770393c8dfc76db735cc29b23c575ce77af"
+    },
+    {
+      "file": "01-logos/lxr/lxr-endorsed-mono-white.svg",
+      "bytes": 874,
+      "sha256": "4a7c0ff903c4a423d42d9a7a55bb191a4a8f74e4db9def7936c06dcb4cc4e502"
+    },
+    {
+      "file": "01-logos/lxr/lxr-endorsed-mono-white@2x.png",
+      "bytes": 5156,
+      "sha256": "5c12f1516952c6af926808c6d56012908eb43ee8bdceba493ee0d95dab9ce5a3"
+    },
+    {
+      "file": "01-logos/lxr/lxr-symbol-dark.svg",
+      "bytes": 338,
+      "sha256": "d00c62c49b7507b7796712b5aecbeb0f1fff486977057f5f09cbaa49ad79588d"
+    },
+    {
+      "file": "01-logos/lxr/lxr-symbol-dark@2x.png",
+      "bytes": 1614,
+      "sha256": "9c2cc7c26900faa1fcecff1f0b12a7712cf77531613b95df365c5f55897d56a0"
+    },
+    {
+      "file": "01-logos/lxr/lxr-symbol-light.svg",
+      "bytes": 338,
+      "sha256": "3982433dbb98f28f35fe6355fc833db1841ba8f18527934717019dccd8355f90"
+    },
+    {
+      "file": "01-logos/lxr/lxr-symbol-light@2x.png",
+      "bytes": 1576,
+      "sha256": "127011991cd77b7401db7d960f43103cf0d5671661fd044638e50976a78ab359"
+    },
+    {
+      "file": "01-logos/lxr/lxr-symbol-mono-navy.svg",
+      "bytes": 338,
+      "sha256": "76c37c8cf8bb54b95712e277d97ac00e74d40cee4b2ddb4ac36d4794156ec050"
+    },
+    {
+      "file": "01-logos/lxr/lxr-symbol-mono-navy@2x.png",
+      "bytes": 1486,
+      "sha256": "bdc1069ec9c474d35810db5b392ceb61e97e481063809e1a93e4433ba90b6a8b"
+    },
+    {
+      "file": "01-logos/lxr/lxr-symbol-mono-white.svg",
+      "bytes": 338,
+      "sha256": "b8839d400e820432aa148f982296b34dcbd149cdf98282ab7a72d0cef50b83fc"
+    },
+    {
+      "file": "01-logos/lxr/lxr-symbol-mono-white@2x.png",
+      "bytes": 1220,
+      "sha256": "c37b3e439ffd20a2186c9ac8c77d3076f7d89fee5b2068f5d457ee9e94fd6824"
+    },
+    {
+      "file": "01-logos/lxr/lxr-wordmark-dark.svg",
+      "bytes": 542,
+      "sha256": "ab3bbea127a85263a7952aed59132f45dde74f2b8ed12d8d67a1f989ac8cbb57"
+    },
+    {
+      "file": "01-logos/lxr/lxr-wordmark-dark@2x.png",
+      "bytes": 3782,
+      "sha256": "9b170812f21c57a75a6f51183f776defc1758e102274aa0f54bdcab7f83308c4"
+    },
+    {
+      "file": "01-logos/lxr/lxr-wordmark-light.svg",
+      "bytes": 542,
+      "sha256": "bb641a5f7ea2e5b50c0ac7041a32d250cc593e41f0ebb9931d5579cedb0e5aa2"
+    },
+    {
+      "file": "01-logos/lxr/lxr-wordmark-light@2x.png",
+      "bytes": 3750,
+      "sha256": "f3a17da8bb73a3162c42f13d49344bbeeb3da52f751bd4a1473650311bb8e8e2"
+    },
+    {
+      "file": "01-logos/lxr/lxr-wordmark-mono-navy.svg",
+      "bytes": 494,
+      "sha256": "4def9a372b044c990461b81d84438614ffd92acd816b1a5d2c21a22195aacc30"
+    },
+    {
+      "file": "01-logos/lxr/lxr-wordmark-mono-navy@2x.png",
+      "bytes": 3551,
+      "sha256": "a3e79d210129f3ee03cc5b817f4c1a87484984b822f822e3f086221e0dc4f36d"
+    },
+    {
+      "file": "01-logos/lxr/lxr-wordmark-mono-white.svg",
+      "bytes": 494,
+      "sha256": "71b32234d10d0db46b03f9387ed1311f53be92f8687c3aa39eba9358f28c2822"
+    },
+    {
+      "file": "01-logos/lxr/lxr-wordmark-mono-white@2x.png",
+      "bytes": 2963,
+      "sha256": "f534aeadc07588e576a4fa3c4fc4c624626523bfc7990d06f0a3ed558112c1a2"
+    },
+    {
+      "file": "01-logos/mir/mir-horizontal-dark.svg",
+      "bytes": 739,
+      "sha256": "0e579deb987736b1b137d2c87919ce57c770dcde89f08284a32e4435bd01f1d7"
+    },
+    {
+      "file": "01-logos/mir/mir-horizontal-dark@2x.png",
+      "bytes": 7139,
+      "sha256": "2d73d67fd3b4e7ec08dede373665389e27690dcfa4b5fe5233f4d901d667afad"
+    },
+    {
+      "file": "01-logos/mir/mir-horizontal-light.svg",
+      "bytes": 739,
+      "sha256": "a92416076a7dc9081d9b0a0094dbba6d256e726fac47c33a26047bedafe0e464"
+    },
+    {
+      "file": "01-logos/mir/mir-horizontal-light@2x.png",
+      "bytes": 7087,
+      "sha256": "018e3847ad7cf8632d4e69aa344f0b4018d31b579220f4732f3cb3bf27a1cb97"
+    },
+    {
+      "file": "01-logos/mir/mir-horizontal-mono-navy.svg",
+      "bytes": 739,
+      "sha256": "2fa1cfa834c61d3435ccb45c65da0c52fbae7b3843bdb00d4d2d34f1bd25a278"
+    },
+    {
+      "file": "01-logos/mir/mir-horizontal-mono-navy@2x.png",
+      "bytes": 6932,
+      "sha256": "48c153ca8c90d61f497751edcf4a4193975fe966bc0a6a8018df2c1db326c03c"
+    },
+    {
+      "file": "01-logos/mir/mir-horizontal-mono-white.svg",
+      "bytes": 739,
+      "sha256": "a7861fa90dc538c6947b014ed9fd697a1ee1761b59647bf32e49d7912eb39f2f"
+    },
+    {
+      "file": "01-logos/mir/mir-horizontal-mono-white@2x.png",
+      "bytes": 5908,
+      "sha256": "f1c9513f233cadce8fe91660632b134bbcc6a23dbb7748e081fc1da5d8a5ecb0"
+    },
+    {
+      "file": "01-logos/mir/mir-micro-dark.svg",
+      "bytes": 310,
+      "sha256": "344555ba630b776a474ce60de680428e74bb4bcdaf84349f72b73dbb03975373"
+    },
+    {
+      "file": "01-logos/mir/mir-micro-light.svg",
+      "bytes": 310,
+      "sha256": "77900ba77ae85ce68997da0fd8bab8b2a85b3fe76a48dd3f5258554b15028c78"
+    },
+    {
+      "file": "01-logos/mir/mir-micro-mono-navy.svg",
+      "bytes": 310,
+      "sha256": "132fa2d0442e86d8c0a2b157e55b6580b11067b5014d7c971f5f6138c9989dec"
+    },
+    {
+      "file": "01-logos/mir/mir-micro-mono-white.svg",
+      "bytes": 310,
+      "sha256": "eb956051545961ce6f6d54ea25ed5a9bb3158f56bc70c4b10f68dfbce7808a52"
+    },
+    {
+      "file": "01-logos/mir/mir-stacked-dark.svg",
+      "bytes": 714,
+      "sha256": "7b6dee01145ca59789f1f5b07de1d2520a04b45bd0a2af12735c65942ae74b7e"
+    },
+    {
+      "file": "01-logos/mir/mir-stacked-dark@2x.png",
+      "bytes": 8335,
+      "sha256": "adbb9364e839ef064ad56d04d6a968ae65b52df2ca0f6de1d0e5f0ad82a93ab0"
+    },
+    {
+      "file": "01-logos/mir/mir-stacked-light.svg",
+      "bytes": 714,
+      "sha256": "01072300ac4bb5267e24038b3f382b85fe3eb829cde213f1083ae5b3a7eaf1a7"
+    },
+    {
+      "file": "01-logos/mir/mir-stacked-light@2x.png",
+      "bytes": 8311,
+      "sha256": "61da57858a1a0934859c4204040d3b26551b9cb12c52dde30c3919ffa6184c7e"
+    },
+    {
+      "file": "01-logos/mir/mir-stacked-mono-navy.svg",
+      "bytes": 714,
+      "sha256": "80d9172d1936fba9e879ed89e74dda5e2afc0f1c562752cb025a4354ce80a6f1"
+    },
+    {
+      "file": "01-logos/mir/mir-stacked-mono-navy@2x.png",
+      "bytes": 8221,
+      "sha256": "1c0183fbcde40ee5c1d9cc395ad34ea84a5fd8a6673115575b4769ad1a4c1d68"
+    },
+    {
+      "file": "01-logos/mir/mir-stacked-mono-white.svg",
+      "bytes": 714,
+      "sha256": "690de393408b4b36459e36be9cacf9f70dddef406779dc58a4167a8c407ff9b3"
+    },
+    {
+      "file": "01-logos/mir/mir-stacked-mono-white@2x.png",
+      "bytes": 7129,
+      "sha256": "3f6d2c75c5fc7372631615f6254c85b2596fbec8015d186f32e53bb2cdfa703d"
+    },
+    {
+      "file": "01-logos/mir/mir-symbol-dark.svg",
+      "bytes": 391,
+      "sha256": "5292e9a3c5f0b850d457c286a414270120ae11c259b8db532519479a9d8b2fd5"
+    },
+    {
+      "file": "01-logos/mir/mir-symbol-dark@2x.png",
+      "bytes": 4396,
+      "sha256": "0bbbdbd7e8b5af4884904cb73e181f8f50a40f0277bf2ddb67204778c209fbac"
+    },
+    {
+      "file": "01-logos/mir/mir-symbol-light.svg",
+      "bytes": 391,
+      "sha256": "f662eb63004902fc38940ff7dbaa6a0a49f7b3a76f397c5d8344a45bb7c74087"
+    },
+    {
+      "file": "01-logos/mir/mir-symbol-light@2x.png",
+      "bytes": 4391,
+      "sha256": "82b62b43f2cb4c60fedb2ce01dba7bef7e035c1d5ffb15075953fff96de64ab3"
+    },
+    {
+      "file": "01-logos/mir/mir-symbol-mono-navy.svg",
+      "bytes": 391,
+      "sha256": "7c663db1aeeef0c79ad45bce28eefc61bada79f29e8670c3beda609052fa454d"
+    },
+    {
+      "file": "01-logos/mir/mir-symbol-mono-navy@2x.png",
+      "bytes": 4290,
+      "sha256": "390cff8087b4e1d8b8a27a4007fee0d312f2cf2e2ad5a7e54ad0afc600438db0"
+    },
+    {
+      "file": "01-logos/mir/mir-symbol-mono-white.svg",
+      "bytes": 391,
+      "sha256": "d40e6d6d59e0a939c6bb3eb0ff897550da148d98e4d5d9846627e8d6562e5090"
+    },
+    {
+      "file": "01-logos/mir/mir-symbol-mono-white@2x.png",
+      "bytes": 3427,
+      "sha256": "fa07e86d3d9697bbf8e27dc961272f04dd7c0279e2191189b459543d75b1e297"
+    },
+    {
+      "file": "01-logos/mir/mir-wordmark-dark.svg",
+      "bytes": 420,
+      "sha256": "160a11152a46845fb98c16b3f3161b910130fef3738435889ae113321045476c"
+    },
+    {
+      "file": "01-logos/mir/mir-wordmark-dark@2x.png",
+      "bytes": 3312,
+      "sha256": "4f3e599fc1f15ea4c627c059982f23138d553efa0bc50262781d97b604119c22"
+    },
+    {
+      "file": "01-logos/mir/mir-wordmark-light.svg",
+      "bytes": 420,
+      "sha256": "58536012243b26f61fdc2db78ad1150400343a8352046428b45001a798ccf18c"
+    },
+    {
+      "file": "01-logos/mir/mir-wordmark-light@2x.png",
+      "bytes": 3321,
+      "sha256": "dfc1fe2ace2b79dff26428f9453b80b37024f1051ddbecbed570bdd2d51c5a6b"
+    },
+    {
+      "file": "01-logos/mir/mir-wordmark-mono-navy.svg",
+      "bytes": 420,
+      "sha256": "58536012243b26f61fdc2db78ad1150400343a8352046428b45001a798ccf18c"
+    },
+    {
+      "file": "01-logos/mir/mir-wordmark-mono-navy@2x.png",
+      "bytes": 3321,
+      "sha256": "dfc1fe2ace2b79dff26428f9453b80b37024f1051ddbecbed570bdd2d51c5a6b"
+    },
+    {
+      "file": "01-logos/mir/mir-wordmark-mono-white.svg",
+      "bytes": 420,
+      "sha256": "19406291313d7cc0a11c3209cdc45737f0f17693d458d8e4891ed103efdb38aa"
+    },
+    {
+      "file": "01-logos/mir/mir-wordmark-mono-white@2x.png",
+      "bytes": 2846,
+      "sha256": "2c449808376a7027dbf9f89c513ca2287981905767d369930226e0f8c65e2673"
+    },
+    {
+      "file": "02-icons/app/mir-app-1024.png",
+      "bytes": 48611,
+      "sha256": "37345bf358999bc6d107ce88e51e297579b58ced82490b44522a9626d02af99b"
+    },
+    {
+      "file": "02-icons/app/mir-app-128.png",
+      "bytes": 2580,
+      "sha256": "ecdb560b4993bf07adc858c94d690aadadbbe26ecebb8c8c6c9b06efefdfe807"
+    },
+    {
+      "file": "02-icons/app/mir-app-16.png",
+      "bytes": 363,
+      "sha256": "c621e329321cab7761d63c8b077fab967c450c246872440e9f82090635614a93"
+    },
+    {
+      "file": "02-icons/app/mir-app-180.png",
+      "bytes": 3552,
+      "sha256": "d517314809254c53aea4af704c75b5ed1f22c89fb07389a5575c40e09c5a0250"
+    },
+    {
+      "file": "02-icons/app/mir-app-192.png",
+      "bytes": 3964,
+      "sha256": "e2359355858b8dc249968a78381551d13f63bbd91410b7a430fa6e8ea306ddc3"
+    },
+    {
+      "file": "02-icons/app/mir-app-24.png",
+      "bytes": 558,
+      "sha256": "f013afb0f2c33a6d42760c05d543248acacd7e0505aae4ae0dc53cf46043e63b"
+    },
+    {
+      "file": "02-icons/app/mir-app-256.png",
+      "bytes": 5593,
+      "sha256": "00d9317e9971e3a89bc273703d3189bed5c7e9b4e6954df737b7f6c1afa88137"
+    },
+    {
+      "file": "02-icons/app/mir-app-32.png",
+      "bytes": 732,
+      "sha256": "23b093aeb45cd0ae9c792677c94d5a4166ed3cba2867797723f00a9f3f6482a9"
+    },
+    {
+      "file": "02-icons/app/mir-app-384.png",
+      "bytes": 9392,
+      "sha256": "7f4cd603f2b661d039932475287ee9aaa3fa281249a2a1141cd9d51561a0cf7c"
+    },
+    {
+      "file": "02-icons/app/mir-app-48.png",
+      "bytes": 1058,
+      "sha256": "9e643790c2844a858ac839947cbb866b101837a48c47fdd9438c245e1c77ce50"
+    },
+    {
+      "file": "02-icons/app/mir-app-512.png",
+      "bytes": 14534,
+      "sha256": "f582e785bfdc3996859e29c7ee5b345e593a951be1798eba4d11a69b3246bee0"
+    },
+    {
+      "file": "02-icons/app/mir-app-64.png",
+      "bytes": 1318,
+      "sha256": "94e03620cedce00f066c4a4bd9b141acdd5bfc84363e0afd6dfc8db30938a440"
+    },
+    {
+      "file": "02-icons/app/mir-maskable-192.png",
+      "bytes": 2951,
+      "sha256": "a96f099d45ca3534968a441bd330fe3d080cdebc1f5d02ae1ddc0dc8bfa24d13"
+    },
+    {
+      "file": "02-icons/app/mir-maskable-512.png",
+      "bytes": 11114,
+      "sha256": "3eca7dfe5a67ef788ae939528aba0dd4b8463b641cfada0aab036b55d0f57410"
+    },
+    {
+      "file": "02-icons/app/site.webmanifest",
+      "bytes": 583,
+      "sha256": "2a0661ab6779c1c06d66328d567dc9e0bebf70d19a6279b94d9b4e9a8b9714e9"
+    },
+    {
+      "file": "02-icons/ui/alert.svg",
+      "bytes": 300,
+      "sha256": "a182995e4345a95e21af31a2da91dd284a97fa166b2f4b79fb1424134d10d740"
+    },
+    {
+      "file": "02-icons/ui/arrow.svg",
+      "bytes": 291,
+      "sha256": "fbb23f09b23210fe52510683ba36962a282676cd1dd5f38d486446ca377bf340"
+    },
+    {
+      "file": "02-icons/ui/check.svg",
+      "bytes": 281,
+      "sha256": "d03d5e051d5512f891d8e98aabe72ee8f5ef00ee467d26011cb6a9e4695070bf"
+    },
+    {
+      "file": "02-icons/ui/close.svg",
+      "bytes": 286,
+      "sha256": "9631a611b5c58c605ae3100f0888b365310feee952fe6c229c613aab9b1bc72d"
+    },
+    {
+      "file": "02-icons/ui/download.svg",
+      "bytes": 311,
+      "sha256": "ff881c4145375aa492c479f3b4a308ac090298dab8108303355c5396bb5df1a7"
+    },
+    {
+      "file": "02-icons/ui/graph.svg",
+      "bytes": 415,
+      "sha256": "fcd87c23d78b897c5f191577dba67785846e9bfb93dac77f549615fbee52645c"
+    },
+    {
+      "file": "02-icons/ui/history.svg",
+      "bytes": 311,
+      "sha256": "685ff22d525672dfe45cf93e308b5c0837dd1bdc955e7d4ecbfb420cfb973228"
+    },
+    {
+      "file": "02-icons/ui/menu.svg",
+      "bytes": 287,
+      "sha256": "48813c6eae89ce567b2d32f5c6e4c25bc781c310cd0ac4086fe2e0c49fae21ff"
+    },
+    {
+      "file": "02-icons/ui/mir-icons.sprite.svg",
+      "bytes": 3430,
+      "sha256": "e5c6bb5589d875ba6b6adc88960cd9cf4aa687bfa6bf1facf45f06466ea86595"
+    },
+    {
+      "file": "02-icons/ui/overview.svg",
+      "bytes": 305,
+      "sha256": "43fe38ea5642e3a44a05236b9a8c16bec689ba8375d1e6b431e336b7a8e4f32a"
+    },
+    {
+      "file": "02-icons/ui/pool.svg",
+      "bytes": 317,
+      "sha256": "e6405e69e2936e1d0a4b6a4403eed94583f3fbdb2f9863e1d58114fe9557d6f4"
+    },
+    {
+      "file": "02-icons/ui/risk.svg",
+      "bytes": 322,
+      "sha256": "e3633a598e679c5a3876f3d3e20d8985d6cd1d3dea73121d56c23cfb0a77fdc6"
+    },
+    {
+      "file": "02-icons/ui/scan.svg",
+      "bytes": 320,
+      "sha256": "7d4d18a149864acd6ddb92d755fca197e60d091ff0d6d8346e6f753c091ca9ea"
+    },
+    {
+      "file": "02-icons/ui/search.svg",
+      "bytes": 311,
+      "sha256": "0687e85556271297fd8b8b4784c3f8b3a5f3b8632fc45816af46a16dbcaf15fc"
+    },
+    {
+      "file": "02-icons/ui/settings.svg",
+      "bytes": 318,
+      "sha256": "87334c09a0d0d7f4504eedaa0abf44498288adbd7694be8b3b24f57f4a8a5152"
+    },
+    {
+      "file": "02-icons/ui/simulate.svg",
+      "bytes": 301,
+      "sha256": "c5e5e126752d6a59e990a47ba3e47a789ad725ecf5da07da911b140012504d3c"
+    },
+    {
+      "file": "02-icons/ui/theme.svg",
+      "bytes": 303,
+      "sha256": "591e8a74a709da35a049bad70e298ce6eacb6075f58a8f60433866a3803c8c61"
+    },
+    {
+      "file": "07-web/assets/lxr-wordmark-dark.svg",
+      "bytes": 542,
+      "sha256": "ab3bbea127a85263a7952aed59132f45dde74f2b8ed12d8d67a1f989ac8cbb57"
+    },
+    {
+      "file": "07-web/assets/lxr-wordmark-light.svg",
+      "bytes": 542,
+      "sha256": "bb641a5f7ea2e5b50c0ac7041a32d250cc593e41f0ebb9931d5579cedb0e5aa2"
+    },
+    {
+      "file": "07-web/assets/mir-horizontal-dark.svg",
+      "bytes": 676,
+      "sha256": "ef4c12df2cfc258380e55973fe0cf0ca0e92eccec152b0ab3e41634a81179470"
+    },
+    {
+      "file": "07-web/assets/mir-horizontal-light.svg",
+      "bytes": 676,
+      "sha256": "54a254081fc7bca9f7e57f1b1ec5ef3a01094bd5c51473545cd20dcb565b0887"
+    },
+    {
+      "file": "07-web/assets/mir-orbital-station-master.png",
+      "bytes": 2583595,
+      "sha256": "d03cc71c64581ce7e90a747ad85c605bfa60fe5dd57a70906bbac665c49906cd"
+    },
+    {
+      "file": "07-web/assets/mir-station-1920.webp",
+      "bytes": 339114,
+      "sha256": "1a61f89dcfd9e37d7d6f402fdd5a4f1a298a4f17faaf4f7287971261368563f8"
+    },
+    {
+      "file": "07-web/assets/mir-symbol-dark.svg",
+      "bytes": 359,
+      "sha256": "ea67988dcd537802dcde05898bc98fa41ca26d3d72e7ac4c569d4534e9023958"
+    },
+    {
+      "file": "07-web/assets/mir-symbol-light.svg",
+      "bytes": 359,
+      "sha256": "48b8ef4a2a8a8265ae4559e66be3ea1e5a590d8b7f5986ec44955b51de16179d"
+    },
+    {
+      "file": "07-web/assets/orbital-grid.svg",
+      "bytes": 991,
+      "sha256": "9c8b506871e9f5f834b9425d27364c09c8291b83a5f62ffeba0083b21931e9f1"
+    },
+    {
+      "file": "07-web/assets/orbital-network.svg",
+      "bytes": 1133,
+      "sha256": "cbeb1a7aab1cbbb75d1cd340325af9645ab0677a96a3075379d5639d84af56c4"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-01.png",
+      "bytes": 1114097,
+      "sha256": "b27930fa701f4f68e21fc7294bb77a95aa0aa850eb05f6f3a35d629986af188f"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-02.png",
+      "bytes": 100981,
+      "sha256": "30e52461d2a7dda971e1395c63cf299d9f91369816e7a5cb665083a0a347c9bd"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-03.png",
+      "bytes": 83368,
+      "sha256": "404f49a35ae033ff0d907488f1b3cd0b36efc49ff134398dd8b87e7b6be60dd7"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-04.png",
+      "bytes": 123962,
+      "sha256": "e52dc005e14ff101b59684ee918a8c111d6518c92ca6a35a549dbd9dd573822f"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-05.png",
+      "bytes": 89084,
+      "sha256": "13eb91354bec91d110d2df44bb4d6f8525192ab01018ec517c3417701933113a"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-06.png",
+      "bytes": 59534,
+      "sha256": "9d0fb4d9115d224378d4fb1fb93f831bd321af0531970f7710d93cdc9cb8d61e"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-07.png",
+      "bytes": 92463,
+      "sha256": "222d2d0fa46134a2b72271a25933e870dcec60617758ffdeb5d00f3e0604a925"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-08.png",
+      "bytes": 91486,
+      "sha256": "b04a49612d16ad35e1c790b2540fc523b0aebcf1a317e00598403cc58db1e845"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-09.png",
+      "bytes": 89983,
+      "sha256": "11c12c277eb83ce56fb2a8cefaa7fa5b498e8b550f2d1b11744ba16600e10961"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-10.png",
+      "bytes": 92231,
+      "sha256": "d48e61e8aa67dee223679e3267393ad0a563c738e39a61fb79319631318b5b02"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-11.png",
+      "bytes": 120891,
+      "sha256": "88538256c6fc6a16e99e5d0827eac36fe3f9d0bcf6d1d55dd06e1ec2349ce80c"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-12.png",
+      "bytes": 107855,
+      "sha256": "f185c58def198a12b0def8ec646dc636c46dedb029b8837a90dda5ceaef5ae76"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-13.png",
+      "bytes": 92093,
+      "sha256": "647363af4d571134011a0694ad8fd9edd0cd7b6c4ab1243c78f48bfff88ae3a3"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-14.png",
+      "bytes": 77938,
+      "sha256": "fd7f8ce0c3fa6aefa4b82045c89978c221e9245b68e5224bf37f0c8e4b66ff31"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-15.png",
+      "bytes": 324500,
+      "sha256": "1e55aa2eacde6802415d3aaf68994c2253463d3930717959a267e47b27c8a341"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-16.png",
+      "bytes": 127618,
+      "sha256": "9436ac5bec652664664d191561fe698650aca39099bf16585ec192a113362145"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-17.png",
+      "bytes": 105450,
+      "sha256": "bfb58c9e53d093d06321d81b2bcba2b59437c162f48ced867ebcd0ff90505904"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-18.png",
+      "bytes": 131532,
+      "sha256": "d0202283dd99ac1b5783d730bf47fb728479c54795c7b6934fc2931a651093d8"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-19.png",
+      "bytes": 91659,
+      "sha256": "b1becd7fb19735fb2abd29e9265081d4b6c06a8b062bf64b8d72d9c6ff139023"
+    },
+    {
+      "file": "10-handoff/book-page-renders/page-20.png",
+      "bytes": 120814,
+      "sha256": "c1e67cc5f455e404e64e673f6fc82b4e4539c1de3804a33d0d9aaae5d13c1772"
+    }
+  ]
+}

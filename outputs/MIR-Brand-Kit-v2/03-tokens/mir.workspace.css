@@ -1,0 +1,3 @@
+/* Optional mission-control composition profile; load after mir.tokens.css. */
+.reference-landing,.reference-workspace{--background:#03101b;--surface:#061925;--surface-raised:#0b293c;--border:#294858;--control-border:#637b8f;--text:#f1e6d6;--text-muted:#b0c1cd;background:var(--background)}
+[data-theme=light] .reference-workspace,[data-theme=light] .reference-landing{--background:#f1e6d6;--surface:#faf5ec;--surface-raised:#e4e4dd;--border:#9ba8ab;--control-border:#6d7d8b;--text:#0b1e36;--text-muted:#4c6070}

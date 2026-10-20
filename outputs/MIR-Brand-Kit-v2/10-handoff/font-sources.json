@@ -1,0 +1,44 @@
+[
+  {
+    "file": "fonts/SpaceGrotesk-Regular.ttf",
+    "source": "https://raw.githubusercontent.com/floriankarsten/space-grotesk/master/fonts/ttf/static/SpaceGrotesk-Regular.ttf",
+    "sha256": "5ede28c4425f3fe4830c8f4754b39e9a87a93d0c3baa5e0a9924532aaa8a98bd",
+    "license": "SIL OFL 1.1; unmodified"
+  },
+  {
+    "file": "fonts/SpaceGrotesk-Bold.ttf",
+    "source": "https://raw.githubusercontent.com/floriankarsten/space-grotesk/master/fonts/ttf/static/SpaceGrotesk-Bold.ttf",
+    "sha256": "7209bbb75fc0f5c546a5f5773b0db74ffc6abf04c2148c1105cace5765a96bdb",
+    "license": "SIL OFL 1.1; unmodified"
+  },
+  {
+    "file": "fonts/Inter-Variable.ttf",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/Inter%5Bopsz,wght%5D.ttf",
+    "sha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+    "license": "SIL OFL 1.1; unmodified"
+  },
+  {
+    "file": "fonts/NotoSansArabic-Variable.ttf",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosansarabic/NotoSansArabic%5Bwdth,wght%5D.ttf",
+    "sha256": "63111b5b2e074dd48cc67692e0a2726d86ee94c1c37fe8598257b7b4e87e869e",
+    "license": "SIL OFL 1.1; unmodified"
+  },
+  {
+    "file": "fonts/SpaceGrotesk-OFL.txt",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/spacegrotesk/OFL.txt",
+    "sha256": "564ce565c371c5e5bbf286006565a7c9aa55a9f56e7ca58d56e05d649dd61a72",
+    "license": "SIL OFL 1.1; unmodified"
+  },
+  {
+    "file": "fonts/Inter-OFL.txt",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/inter/OFL.txt",
+    "sha256": "5b9321a4298cfeb6b34354164a1c3afc3db114569984c502b9b35d988fd58c57",
+    "license": "SIL OFL 1.1; unmodified"
+  },
+  {
+    "file": "fonts/NotoSansArabic-OFL.txt",
+    "source": "https://raw.githubusercontent.com/google/fonts/main/ofl/notosansarabic/OFL.txt",
+    "sha256": "07fc70bfeb985cc1a87a8587d0a0c80bab11c86c9dc3fd95b6f0cb332f983e96",
+    "license": "SIL OFL 1.1; unmodified"
+  }
+]

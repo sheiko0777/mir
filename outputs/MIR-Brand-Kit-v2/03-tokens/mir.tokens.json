@@ -1,0 +1,343 @@
+{
+  "$description": "MIR Orbital Intelligence \u2014 semantic modes. LXR inherits MIR tokens.",
+  "brand": {
+    "spaceNavy": {
+      "$type": "color",
+      "$value": "#0B1E36"
+    },
+    "ivory": {
+      "$type": "color",
+      "$value": "#F1E6D6"
+    },
+    "missionRed": {
+      "$type": "color",
+      "$value": "#C62828"
+    },
+    "signalCyan": {
+      "$type": "color",
+      "$value": "#00C8DB"
+    },
+    "moduleGray": {
+      "$type": "color",
+      "$value": "#8A969E"
+    }
+  },
+  "themes": {
+    "dark": {
+      "background": {
+        "$type": "color",
+        "$value": "#0B1E36"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "#102941"
+      },
+      "surfaceRaised": {
+        "$type": "color",
+        "$value": "#17354F"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#F1E6D6"
+      },
+      "textMuted": {
+        "$type": "color",
+        "$value": "#ADBCC9"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#637B8F"
+      },
+      "action": {
+        "$type": "color",
+        "$value": "#C62828"
+      },
+      "actionText": {
+        "$type": "color",
+        "$value": "#F1E6D6"
+      },
+      "interactive": {
+        "$type": "color",
+        "$value": "#00C8DB"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "#00C8DB"
+      },
+      "positive": {
+        "$type": "color",
+        "$value": "#57D9A3"
+      },
+      "negative": {
+        "$type": "color",
+        "$value": "#FF9B85"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#F4CC76"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#6DD7E5"
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": "#ADBCC9"
+      },
+      "chart1": {
+        "$type": "color",
+        "$value": "#00C8DB"
+      },
+      "chart2": {
+        "$type": "color",
+        "$value": "#E5AE65"
+      },
+      "chart3": {
+        "$type": "color",
+        "$value": "#A7C8B3"
+      },
+      "chart4": {
+        "$type": "color",
+        "$value": "#83B8E0"
+      }
+    },
+    "light": {
+      "background": {
+        "$type": "color",
+        "$value": "#F1E6D6"
+      },
+      "surface": {
+        "$type": "color",
+        "$value": "#FBF8F2"
+      },
+      "surfaceRaised": {
+        "$type": "color",
+        "$value": "#FFFFFF"
+      },
+      "text": {
+        "$type": "color",
+        "$value": "#0B1E36"
+      },
+      "textMuted": {
+        "$type": "color",
+        "$value": "#4C6072"
+      },
+      "border": {
+        "$type": "color",
+        "$value": "#6D7D8B"
+      },
+      "action": {
+        "$type": "color",
+        "$value": "#C62828"
+      },
+      "actionText": {
+        "$type": "color",
+        "$value": "#F1E6D6"
+      },
+      "interactive": {
+        "$type": "color",
+        "$value": "#006B75"
+      },
+      "focus": {
+        "$type": "color",
+        "$value": "#006B75"
+      },
+      "positive": {
+        "$type": "color",
+        "$value": "#146B49"
+      },
+      "negative": {
+        "$type": "color",
+        "$value": "#9D3E18"
+      },
+      "warning": {
+        "$type": "color",
+        "$value": "#7B5500"
+      },
+      "info": {
+        "$type": "color",
+        "$value": "#006B75"
+      },
+      "neutral": {
+        "$type": "color",
+        "$value": "#4C6072"
+      },
+      "chart1": {
+        "$type": "color",
+        "$value": "#006B75"
+      },
+      "chart2": {
+        "$type": "color",
+        "$value": "#845800"
+      },
+      "chart3": {
+        "$type": "color",
+        "$value": "#34694E"
+      },
+      "chart4": {
+        "$type": "color",
+        "$value": "#285D8B"
+      }
+    }
+  },
+  "typography": {
+    "families": {
+      "display": "Space Grotesk",
+      "body": "Inter",
+      "arabic": "Noto Sans Arabic",
+      "code": "ui-monospace"
+    },
+    "scale": {
+      "caption": 12,
+      "label": 14,
+      "body": 16,
+      "lead": 20,
+      "h3": 24,
+      "h2": 36,
+      "h1": 56,
+      "display": 80
+    },
+    "lineHeight": {
+      "tight": 1.08,
+      "heading": 1.18,
+      "body": 1.6
+    },
+    "weights": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    }
+  },
+  "spacing": {
+    "unit": 4,
+    "steps": [
+      0,
+      4,
+      8,
+      12,
+      16,
+      20,
+      24,
+      32,
+      40,
+      48,
+      64,
+      80,
+      96,
+      128
+    ]
+  },
+  "radius": {
+    "none": 0,
+    "small": 4,
+    "medium": 8,
+    "large": 12
+  },
+  "elevation": {
+    "none": "none",
+    "raised": "0 8px 24px rgb(0 0 0 / .14)",
+    "overlay": "0 24px 64px rgb(0 0 0 / .28)"
+  },
+  "border": {
+    "width": 1,
+    "strongWidth": 2
+  },
+  "breakpoints": {
+    "sm": 640,
+    "md": 768,
+    "lg": 1024,
+    "xl": 1280
+  },
+  "motion": {
+    "fastMs": 120,
+    "standardMs": 180,
+    "reduceMs": 0
+  },
+  "charts": {
+    "lineWidth": 2,
+    "minimumContrast": 3,
+    "seriesPatterns": [
+      "solid",
+      "dash 6 4",
+      "dash 2 3",
+      "dash 10 3 2 3"
+    ]
+  },
+  "risk": {
+    "unknown": "neutral",
+    "review": "warning",
+    "blocked": "negative",
+    "verifiedEvidence": "positive"
+  },
+  "status": {
+    "sample": "info",
+    "stale": "warning",
+    "sourceUnavailable": "negative",
+    "observed": "neutral"
+  },
+  "profiles": {
+    "workspace": {
+      "dark": {
+        "background": {
+          "$type": "color",
+          "$value": "#03101B"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "#061925"
+        },
+        "surfaceRaised": {
+          "$type": "color",
+          "$value": "#0B293C"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#294858"
+        },
+        "controlBorder": {
+          "$type": "color",
+          "$value": "#637B8F"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#F1E6D6"
+        },
+        "textMuted": {
+          "$type": "color",
+          "$value": "#B0C1CD"
+        }
+      },
+      "light": {
+        "background": {
+          "$type": "color",
+          "$value": "#F1E6D6"
+        },
+        "surface": {
+          "$type": "color",
+          "$value": "#FAF5EC"
+        },
+        "surfaceRaised": {
+          "$type": "color",
+          "$value": "#E4E4DD"
+        },
+        "border": {
+          "$type": "color",
+          "$value": "#9BA8AB"
+        },
+        "controlBorder": {
+          "$type": "color",
+          "$value": "#6D7D8B"
+        },
+        "text": {
+          "$type": "color",
+          "$value": "#0B1E36"
+        },
+        "textMuted": {
+          "$type": "color",
+          "$value": "#4C6070"
+        }
+      }
+    }
+  }
+}

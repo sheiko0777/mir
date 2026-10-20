@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "name": "landing-desktop",
+      "overflow": false
+    },
+    {
+      "name": "lxr-desktop-dark",
+      "overflow": false
+    },
+    {
+      "interactions": "watchlist, new pool tabs, source context passed"
+    },
+    {
+      "name": "lxr-desktop-light",
+      "overflow": false
+    },
+    {
+      "name": "lxr-mobile-dark",
+      "overflow": false
+    },
+    {
+      "name": "lxr-mobile-light",
+      "overflow": false
+    },
+    {
+      "name": "landing-mobile",
+      "overflow": false
+    },
+    {
+      "name": "saved-report",
+      "overflow": false
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,90 @@
+{
+  "dataset": "mock-sample",
+  "notice": "MOCK SAMPLE \u00e2\u20ac\u201d illustrative only, not live market data",
+  "observations": [
+    {
+      "id": "sample-0",
+      "pair": "USDC / WETH",
+      "venue": "Sample Uniswap V2",
+      "reserveDisplay": "12.40 WETH",
+      "gapDisplay": "1.24%",
+      "evidence": "unknown",
+      "classification": "NEW_SINCE_CHECKPOINT",
+      "reasons": [
+        "MOCK_SAMPLE",
+        "TOKEN_CHECKS_UNKNOWN",
+        "GAS_VALUATION_UNAVAILABLE"
+      ]
+    },
+    {
+      "id": "sample-1",
+      "pair": "ARB / USDC",
+      "venue": "Sample SushiSwap V2",
+      "reserveDisplay": "18,600 USDC",
+      "gapDisplay": "0.82%",
+      "evidence": "review",
+      "classification": "NEW_SINCE_CHECKPOINT",
+      "reasons": [
+        "MOCK_SAMPLE",
+        "TOKEN_CHECKS_UNKNOWN",
+        "GAS_VALUATION_UNAVAILABLE"
+      ]
+    },
+    {
+      "id": "sample-2",
+      "pair": "WBTC / WETH",
+      "venue": "Sample Uniswap V2",
+      "reserveDisplay": "0.34 WETH",
+      "gapDisplay": "\u2014",
+      "evidence": "blocked",
+      "classification": "NEW_SINCE_CHECKPOINT",
+      "reasons": [
+        "MOCK_SAMPLE",
+        "TOKEN_CHECKS_UNKNOWN",
+        "GAS_VALUATION_UNAVAILABLE"
+      ]
+    },
+    {
+      "id": "sample-3",
+      "pair": "LINK / USDC",
+      "venue": "Sample SushiSwap V2",
+      "reserveDisplay": "9,200 USDC",
+      "gapDisplay": "1.08%",
+      "evidence": "unknown",
+      "classification": "FOLLOW_UP",
+      "reasons": [
+        "MOCK_SAMPLE",
+        "TOKEN_CHECKS_UNKNOWN",
+        "GAS_VALUATION_UNAVAILABLE"
+      ]
+    },
+    {
+      "id": "sample-4",
+      "pair": "UNI / WETH",
+      "venue": "Sample Uniswap V2",
+      "reserveDisplay": "7.10 WETH",
+      "gapDisplay": "0.36%",
+      "evidence": "review",
+      "classification": "FOLLOW_UP",
+      "reasons": [
+        "MOCK_SAMPLE",
+        "TOKEN_CHECKS_UNKNOWN",
+        "GAS_VALUATION_UNAVAILABLE"
+      ]
+    },
+    {
+      "id": "sample-5",
+      "pair": "MODULE / WETH",
+      "venue": "Sample SushiSwap V2",
+      "reserveDisplay": "2.05 WETH",
+      "gapDisplay": "\u2014",
+      "evidence": "blocked",
+      "classification": "FOLLOW_UP",
+      "reasons": [
+        "MOCK_SAMPLE",
+        "TOKEN_CHECKS_UNKNOWN",
+        "GAS_VALUATION_UNAVAILABLE"
+      ]
+    }
+  ]
+}

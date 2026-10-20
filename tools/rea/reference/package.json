@@ -1,0 +1,8 @@
+{
+  "name": "mir-rea-reference-sandbox",
+  "private": true,
+  "description": "Isolated reference packages for explicitly selected MIR research targets; not application runtime dependencies.",
+  "dependencies": {
+    "@uniswap/v2-sdk": "4.21.5"
+  }
+}

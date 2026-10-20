@@ -1,0 +1,14 @@
+{
+  "preview": "Standalone preview navigation, source paths and explicit mock data passed",
+  "sampleRows": 6,
+  "viewportWidths": [
+    320,
+    390,
+    1440
+  ],
+  "pdf": {
+    "pages": 20,
+    "embeddedFontPrograms": true
+  },
+  "errors": []
+}

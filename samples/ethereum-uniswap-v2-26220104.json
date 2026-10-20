@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "mode": "read-only",
+  "chainId": 1,
+  "factory": "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f",
+  "blockNumber": 26220104,
+  "blockHash": "0x4ba3d093a0d9c335481eac7feac279d18c339ef301dced0e547a48d3166128ae",
+  "observedAtMs": 1792334423000,
+  "capturedAtMs": 1792335303880,
+  "startIndex": 0,
+  "requestedCount": 1,
+  "totalPairs": "525424",
+  "pools": [
+    {
+      "chainId": 1,
+      "address": "0xb4e16d0168e52d35cacd2c6185b44281ec28c9dc",
+      "factory": "0x5c69bee701ef814a2b6a3edd4b1652cb9cc5aa6f",
+      "model": "constant-product",
+      "baseToken": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+      "quoteToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+      "baseDecimals": 6,
+      "quoteDecimals": 18,
+      "baseReserve": "9850353631746",
+      "quoteReserve": "4150114365986692801484",
+      "reserveTimestamp": 1792334315,
+      "feeBps": 30,
+      "blockNumber": 26220104,
+      "blockHash": "0x4ba3d093a0d9c335481eac7feac279d18c339ef301dced0e547a48d3166128ae",
+      "observedAtMs": 1792334423000,
+      "capturedAtMs": 1792335303880,
+      "finality": "finalized",
+      "tokenChecksPassed": null,
+      "riskReasons": ["TOKEN_CHECKS_UNKNOWN", "GAS_VALUATION_UNAVAILABLE"],
+      "source": "ethereum-uniswap-v2-rpc"
+    }
+  ],
+  "excluded": []
+}

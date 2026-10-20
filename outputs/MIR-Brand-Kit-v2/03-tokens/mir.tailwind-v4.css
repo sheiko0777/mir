@@ -1,0 +1,36 @@
+/* Import after Tailwind and mir.tokens.css. */
+@theme inline {
+  --spacing:4px;
+  --color-background:var(--background);
+  --color-surface:var(--surface);
+  --color-surface-raised:var(--surface-raised);
+  --color-text:var(--text);
+  --color-text-muted:var(--text-muted);
+  --color-border:var(--border);
+  --color-action:var(--action);
+  --color-action-text:var(--action-text);
+  --color-interactive:var(--interactive);
+  --color-focus:var(--focus);
+  --color-positive:var(--positive);
+  --color-negative:var(--negative);
+  --color-warning:var(--warning);
+  --color-info:var(--info);
+  --color-neutral:var(--neutral);
+  --color-chart1:var(--chart1);
+  --color-chart2:var(--chart2);
+  --color-chart3:var(--chart3);
+  --color-chart4:var(--chart4);
+  --text-caption:12px;
+  --text-label:14px;
+  --text-body:16px;
+  --text-lead:20px;
+  --text-h3:24px;
+  --text-h2:36px;
+  --text-h1:56px;
+  --text-display:80px;
+  --font-display:"Space Grotesk",sans-serif;
+  --font-sans:"Inter","Noto Sans Arabic",sans-serif;
+  --radius-sm:4px;--radius-md:8px;--radius-lg:12px;
+  --shadow-raised:0 8px 24px rgb(0 0 0 / .14);
+  --shadow-overlay:0 24px 64px rgb(0 0 0 / .28);
+}

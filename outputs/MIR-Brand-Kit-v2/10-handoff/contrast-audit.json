@@ -1,0 +1,87 @@
+{
+  "standard": "WCAG 2.2 AA token-pair calculations",
+  "normalTextThreshold": 4.5,
+  "largeTextAndGraphicsThreshold": 3,
+  "pairs": [
+    {
+      "pair": "Ivory / Navy",
+      "foreground": "#F1E6D6",
+      "background": "#0B1E36",
+      "contrast": 13.589,
+      "role": "Text",
+      "normalTextPass": true
+    },
+    {
+      "pair": "Navy / Ivory",
+      "foreground": "#0B1E36",
+      "background": "#F1E6D6",
+      "contrast": 13.589,
+      "role": "Text",
+      "normalTextPass": true
+    },
+    {
+      "pair": "Ivory / Mission Red",
+      "foreground": "#F1E6D6",
+      "background": "#C62828",
+      "contrast": 4.559,
+      "role": "Button text",
+      "normalTextPass": true
+    },
+    {
+      "pair": "Dark muted / Navy",
+      "foreground": "#ADBCC9",
+      "background": "#0B1E36",
+      "contrast": 8.629,
+      "role": "Secondary text",
+      "normalTextPass": true
+    },
+    {
+      "pair": "Light muted / Ivory",
+      "foreground": "#4C6072",
+      "background": "#F1E6D6",
+      "contrast": 5.283,
+      "role": "Secondary text",
+      "normalTextPass": true
+    },
+    {
+      "pair": "Cyan / Navy",
+      "foreground": "#00C8DB",
+      "background": "#0B1E36",
+      "contrast": 8.207,
+      "role": "Data / focus",
+      "normalTextPass": true
+    },
+    {
+      "pair": "Dark cyan / Ivory",
+      "foreground": "#006B75",
+      "background": "#F1E6D6",
+      "contrast": 5.068,
+      "role": "Link / focus",
+      "normalTextPass": true
+    },
+    {
+      "pair": "Brand Red / Navy",
+      "foreground": "#C62828",
+      "background": "#0B1E36",
+      "contrast": 2.981,
+      "role": "Decoration only",
+      "normalTextPass": false
+    },
+    {
+      "pair": "Raw Cyan / Ivory",
+      "foreground": "#00C8DB",
+      "background": "#F1E6D6",
+      "contrast": 1.656,
+      "role": "Decoration only",
+      "normalTextPass": false
+    },
+    {
+      "pair": "Gray / Ivory",
+      "foreground": "#8A969E",
+      "background": "#F1E6D6",
+      "contrast": 2.455,
+      "role": "Decoration only",
+      "normalTextPass": false
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "name": "MIR Orbital Intelligence",
+  "short_name": "MIR",
+  "start_url": "../../07-web/index.html",
+  "display": "standalone",
+  "background_color": "#0B1E36",
+  "theme_color": "#0B1E36",
+  "icons": [
+    {
+      "src": "mir-app-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "mir-app-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "mir-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,160 @@
+{
+  "pages": 20,
+  "fonts": [
+    {
+      "name": "Inter",
+      "loaded": true
+    },
+    {
+      "name": "Space Grotesk",
+      "loaded": true
+    },
+    {
+      "name": "Noto Sans Arabic",
+      "loaded": true
+    }
+  ],
+  "layout": [
+    {
+      "page": 1,
+      "title": "A modular identity. A precise view.",
+      "contentBottom": 538.6875,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 2,
+      "title": "Positioning & purpose",
+      "contentBottom": 557.53125,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 3,
+      "title": "One platform. One engine.",
+      "contentBottom": 597.140625,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 4,
+      "title": "Heritage, story & voice",
+      "contentBottom": 606.921875,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 5,
+      "title": "The modular M",
+      "contentBottom": 603.71875,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 6,
+      "title": "Wordmarks & lockups",
+      "contentBottom": 666.875,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 7,
+      "title": "Clear space & optical sizes",
+      "contentBottom": 685.96875,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 8,
+      "title": "Variants & misuse",
+      "contentBottom": 712.84375,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 9,
+      "title": "Color, with a job to do",
+      "contentBottom": 707.921875,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 10,
+      "title": "Contrast & accessible semantics",
+      "contentBottom": 702.53125,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 11,
+      "title": "Typography for reading & precision",
+      "contentBottom": 738.828125,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 12,
+      "title": "Orbital geometry & graphic motifs",
+      "contentBottom": 709.96875,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 13,
+      "title": "Iconography & spatial rhythm",
+      "contentBottom": 602.53125,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 14,
+      "title": "Components across two modes",
+      "contentBottom": 712.671875,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 15,
+      "title": "Marketing with restraint",
+      "contentBottom": 673,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 16,
+      "title": "MIR mission control",
+      "contentBottom": 699.765625,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 17,
+      "title": "Mobile, without losing context",
+      "contentBottom": 681.9375,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 18,
+      "title": "LXR is an engine, not a promise",
+      "contentBottom": 649.90625,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 19,
+      "title": "Applications & editable templates",
+      "contentBottom": 684.765625,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    },
+    {
+      "page": 20,
+      "title": "Delivery, provenance & use",
+      "contentBottom": 597.109375,
+      "footerTop": 758.6875,
+      "overlapsFooter": false
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+coverage/
+data/
+*.log
+work/
+outputs/connected-workspace/
+outputs/*
+!outputs/MIR-Brand-Kit-v2/
+# Local command captures, SDK evidence and delivery ZIPs are reproducible artifacts.
+outputs/MIR-Brand-Kit-v2/10-handoff/book-page-renders/

@@ -1,0 +1,16 @@
+{
+  "name": "mir-by-wadj",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "demo": "node apps/monitor/demo.mjs",
+    "monitor": "node apps/monitor/live.mjs",
+    "research": "node apps/monitor/research.mjs",
+    "discover": "node apps/monitor/new-pools.mjs",
+    "agent": "node apps/monitor/agent.mjs",
+    "start": "node apps/server/server.mjs",
+    "test": "node --test"
+  }
+}

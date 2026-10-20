@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "engineTests": {
+    "passed": 27,
+    "failed": 0
+  },
+  "interfaceEvidence": "interface-qa.json",
+  "bookEvidence": "book-layout-qa.json",
+  "logoSymbol": "MIR M geometry unchanged; R bowl and LXR docking X updated",
+  "scope": "Local asset delivery. No deployment or GitHub commit."
+}

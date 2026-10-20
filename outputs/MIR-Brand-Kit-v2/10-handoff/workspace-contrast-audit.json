@@ -1,0 +1,113 @@
+{
+  "scope": "Selected workspace text and essential form boundaries; not a whole-product certification",
+  "pairs": [
+    {
+      "theme": "dark",
+      "role": "controlBorder",
+      "foreground": "#637B8F",
+      "background": "#03101B",
+      "ratio": 4.35,
+      "target": 3,
+      "passed": true
+    },
+    {
+      "theme": "dark",
+      "role": "controlBorder",
+      "foreground": "#637B8F",
+      "background": "#061925",
+      "ratio": 4.06,
+      "target": 3,
+      "passed": true
+    },
+    {
+      "theme": "dark",
+      "role": "text",
+      "foreground": "#F1E6D6",
+      "background": "#03101B",
+      "ratio": 15.57,
+      "target": 4.5,
+      "passed": true
+    },
+    {
+      "theme": "dark",
+      "role": "text",
+      "foreground": "#F1E6D6",
+      "background": "#061925",
+      "ratio": 14.51,
+      "target": 4.5,
+      "passed": true
+    },
+    {
+      "theme": "dark",
+      "role": "textMuted",
+      "foreground": "#B0C1CD",
+      "background": "#03101B",
+      "ratio": 10.38,
+      "target": 4.5,
+      "passed": true
+    },
+    {
+      "theme": "dark",
+      "role": "textMuted",
+      "foreground": "#B0C1CD",
+      "background": "#061925",
+      "ratio": 9.68,
+      "target": 4.5,
+      "passed": true
+    },
+    {
+      "theme": "light",
+      "role": "controlBorder",
+      "foreground": "#6D7D8B",
+      "background": "#F1E6D6",
+      "ratio": 3.44,
+      "target": 3,
+      "passed": true
+    },
+    {
+      "theme": "light",
+      "role": "controlBorder",
+      "foreground": "#6D7D8B",
+      "background": "#FAF5EC",
+      "ratio": 3.9,
+      "target": 3,
+      "passed": true
+    },
+    {
+      "theme": "light",
+      "role": "text",
+      "foreground": "#0B1E36",
+      "background": "#F1E6D6",
+      "ratio": 13.59,
+      "target": 4.5,
+      "passed": true
+    },
+    {
+      "theme": "light",
+      "role": "text",
+      "foreground": "#0B1E36",
+      "background": "#FAF5EC",
+      "ratio": 15.43,
+      "target": 4.5,
+      "passed": true
+    },
+    {
+      "theme": "light",
+      "role": "textMuted",
+      "foreground": "#4C6070",
+      "background": "#F1E6D6",
+      "ratio": 5.3,
+      "target": 4.5,
+      "passed": true
+    },
+    {
+      "theme": "light",
+      "role": "textMuted",
+      "foreground": "#4C6070",
+      "background": "#FAF5EC",
+      "ratio": 6.02,
+      "target": 4.5,
+      "passed": true
+    }
+  ]
+}
