@@ -3,6 +3,28 @@ import { createHash } from 'node:crypto';
 const address = /^0x[0-9a-f]{40}$/;
 const hash = /^0x[0-9a-f]{64}$/;
 const integer = n => Number.isSafeInteger(n) && n >= 0;
+const atomic = value => typeof value === 'string' && /^(0|[1-9]\d{0,77})$/.test(value);
+function validateSizing(view) {
+  const s = view.sizing;
+  if (view.dataset !== 'saved-research') {
+    if (s != null) throw new Error('Research evidence cannot be attached to a discovery block');
+    return null;
+  }
+  if (s === null && !view.observations.length) return null;
+  if (!s || s.blockHash !== view.blockHash || s.blockNumber !== view.blockNumber ||
+      !address.test(s.quoteToken) || !Number.isInteger(s.quoteDecimals) || s.quoteDecimals < 0 || s.quoteDecimals > 255 ||
+      !integer(s.candidateCount) || s.candidateCount > 5760 || typeof s.costAvailable !== 'boolean' ||
+      !atomic(s.minNetQuote) || typeof s.aboveThreshold !== 'boolean' ||
+      !Array.isArray(s.reasons) || s.reasons.some(r => typeof r !== 'string' || !/^[A-Z_]{1,80}$/.test(r)) ||
+      !(s.bestInputQuote === null && s.bestScenarioNetQuote === null || atomic(s.bestInputQuote) && BigInt(s.bestInputQuote) > 0n &&
+        typeof s.bestScenarioNetQuote === 'string' && /^-?(0|[1-9]\d{0,127})$/.test(s.bestScenarioNetQuote)) ||
+      !s.costAvailable && s.bestScenarioNetQuote !== null ||
+      s.aboveThreshold !== (s.bestScenarioNetQuote !== null && BigInt(s.bestScenarioNetQuote) > BigInt(s.minNetQuote)) ||
+      view.observations.some(o => s.pair !== `1:${[...o.tokens].sort().join(':')}` || !o.tokens.includes(s.quoteToken))) {
+    throw new Error('Invalid agent sizing evidence');
+  }
+  return s;
+}
 export const emptyAgentState = () => ({ schemaVersion: 1, cycles: 0, decisions: 0,
   lastBlockNumber: null, lastBlockHash: null, seen: [] });
 
@@ -22,11 +44,11 @@ export function planAgentCycle(view, state = emptyAgentState(), { nowMs = Date.n
       'saved-pool-observations', 'price-gap-triage', 'risk-evidence-planning', 'durable-deduplication'
     ] };
   if (!view || typeof view.available !== 'boolean') throw new Error('Invalid observation envelope');
-  if (!view.available) { report.reasons.push('DISCOVERY_UNAVAILABLE'); return { state: next, report }; }
-  if (view.dataset !== 'saved-onchain' || !integer(view.blockNumber) || !hash.test(view.blockHash) ||
+  if (!view.available) { report.reasons.push(view.dataset === 'saved-research' ? 'RESEARCH_UNAVAILABLE' : 'DISCOVERY_UNAVAILABLE'); return { state: next, report }; }
+  if (!['saved-onchain', 'saved-research'].includes(view.dataset) || !integer(view.blockNumber) || !hash.test(view.blockHash) ||
       !integer(view.capturedAtMs) || !Array.isArray(view.observations) || view.observations.length > 200 ||
       view.finality !== 'finalized') throw new Error('Invalid agent observations');
-  report.source = { blockNumber: view.blockNumber, blockHash: view.blockHash, capturedAtMs: view.capturedAtMs };
+  report.source = { dataset: view.dataset, blockNumber: view.blockNumber, blockHash: view.blockHash, capturedAtMs: view.capturedAtMs };
   if (state.lastBlockNumber !== null && (view.blockNumber < state.lastBlockNumber ||
       view.blockNumber === state.lastBlockNumber && view.blockHash !== state.lastBlockHash)) {
     report.status = 'blocked'; report.reasons.push('BLOCK_REGRESSION_OR_HASH_CONFLICT'); return { state: next, report };
@@ -52,16 +74,29 @@ export function planAgentCycle(view, state = emptyAgentState(), { nowMs = Date.n
     if (item.spotGapBps !== null && (pair.gapBps === null || BigInt(item.spotGapBps) > BigInt(pair.gapBps))) pair.gapBps = item.spotGapBps;
     pairs.set(key, pair);
   }
+  const sizingEvidence = validateSizing(view);
+  if (view.dataset === 'saved-research') report.capabilities.push('costed-size-triage');
   const candidates = [...pairs.values()].map(pair => {
     // Rank evidence collection, never financial confidence; unknown costs always block qualification.
     const crossVenue = pair.gapBps !== null && !pair.reasons.has('NO_CROSS_VENUE_POOL');
-    const tasks = pair.reasons.has('EMPTY_RESERVES') ? ['WAIT_FOR_LIQUIDITY'] :
+    let tasks = pair.reasons.has('EMPTY_RESERVES') ? ['WAIT_FOR_LIQUIDITY'] :
       !crossVenue ? ['FIND_SECOND_VENUE'] : ['CHECK_TOKEN_BEHAVIOR', 'VALUE_GAS', 'REPLAY_SIZED_QUOTES'];
-    const score = pair.reasons.has('EMPTY_RESERVES') ? 0 : crossVenue ?
+    let score = pair.reasons.has('EMPTY_RESERVES') ? 0 : crossVenue ?
       pair.gapBps !== null && BigInt(pair.gapBps) >= 100n ? 3 : 2 : 1;
     const reasons = [...new Set([...pair.reasons, 'TOKEN_CHECKS_UNKNOWN', 'GAS_VALUATION_UNAVAILABLE', 'NET_PROFIT_UNKNOWN'])].sort();
+    const sizing = sizingEvidence;
+    if (sizing) {
+      tasks = !sizing.costAvailable ? ['VALUE_GAS', 'REPLAY_SIZED_QUOTES'] : sizing.bestScenarioNetQuote === null ?
+        ['REVIEW_SIZE_CONSTRAINTS', 'REFRESH_RESEARCH'] : sizing.aboveThreshold ?
+          ['CHECK_TOKEN_BEHAVIOR', 'VALIDATE_GAS_ASSUMPTIONS', 'PAPER_REPLAY_REQUIRED'] :
+          ['REVIEW_COST_ASSUMPTIONS', 'REFRESH_RESEARCH'];
+      score = sizing.aboveThreshold ? 3 : sizing.costAvailable ? 0 : 1;
+      if (sizing.costAvailable) reasons.splice(reasons.indexOf('GAS_VALUATION_UNAVAILABLE'), 1);
+      reasons.push(...sizing.reasons, 'SCENARIO_IS_NOT_ACTUAL_NET');
+    }
     const decision = { pair: pair.pair, tokens: pair.tokens, pools: [...pair.pools].sort(),
-      spotGapBps: pair.gapBps, priority: score, tasks, reasons, qualified: false,
+      spotGapBps: pair.gapBps, priority: score, tasks, reasons: [...new Set(reasons)].sort(), qualified: false,
+      ...(sizing ? { sizing } : {}),
       netQuote: null, action: 'COLLECT_EVIDENCE', blockNumber: view.blockNumber, blockHash: view.blockHash };
     const id = createHash('sha256').update(JSON.stringify(decision)).digest('hex');
     return { id, ...decision };

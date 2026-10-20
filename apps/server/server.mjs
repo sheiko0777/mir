@@ -3,6 +3,8 @@ import { readFile, realpath, stat } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadDiscovery } from './reports.mjs';
+import { loadResearch } from './research.mjs';
+import { planAgentCycle, emptyAgentState } from '../../packages/agent/index.mjs';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
 const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': 'text/javascript',
@@ -10,6 +12,7 @@ const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': '
   '.ttf': 'font/ttf', '.json': 'application/json', '.md': 'text/plain; charset=utf-8', '.pdf': 'application/pdf' };
 
 export function createMirServer({ dataDirectory = path.join(project, 'data/discovery'),
+  researchDirectory = path.join(project, 'data/research'),
   webRoot = path.join(project, 'apps/web'), brandRoot = path.join(project, 'outputs/MIR-Brand-Kit-v2'),
   now = Date.now } = {}) {
   return http.createServer(async (request, response) => {
@@ -31,6 +34,22 @@ export function createMirServer({ dataDirectory = path.join(project, 'data/disco
         response.writeHead(503); response.end(request.method === 'HEAD' ? undefined : JSON.stringify({
           available: false, dataset: 'saved-onchain', freshness: 'unavailable', observations: [],
           error: 'Saved LXR report could not be validated. No sample data substituted.' }));
+      }
+      return;
+    }
+    if (url.pathname === '/api/research') {
+      response.setHeader('Content-Type', 'application/json; charset=utf-8');
+      try {
+        const time = now();
+        const research = await loadResearch(researchDirectory, time);
+        const preview = planAgentCycle(research, emptyAgentState(), { nowMs: time }).report;
+        const result = { ...research, agentPreview: { ...preview, previewOnly: true } };
+        response.writeHead(200); response.end(request.method === 'HEAD' ? undefined : JSON.stringify(result));
+      } catch {
+        response.writeHead(503); response.end(request.method === 'HEAD' ? undefined : JSON.stringify({
+          available: false, dataset: 'saved-research', freshness: 'unavailable', observations: [],
+          sizing: null, analysis: null, agentPreview: null,
+          error: 'Saved research could not be validated. No sample data substituted.' }));
       }
       return;
     }

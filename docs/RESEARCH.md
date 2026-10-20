@@ -41,3 +41,11 @@ All 16 tests passed. A live read-only run collected both pools at finalized Ethe
 | SushiSwap V2 → Uniswap V2 | 0.1 | 0.099343406942788236 | -0.000656593057211764 |
 
 These historical reserve calculations show no positive gross spread for the tested size. Gas and an uncertainty budget were not supplied, so net profit is unknown rather than reported as zero. Both routes remained unqualified; no paper balance was changed. The run saved raw snapshots and the report in `data/research/26220488-e3f3b5eb766cde3b7c96a0ded87f11fd125d9922b84e4f657cece1a1d8cc95df.json`. No background monitor was left running.
+
+## Committed research and UI review
+
+A successful collector writes an immutable archive and atomically advances `data/research/checkpoint.json` under a publication lock. The checkpoint is the only source for `GET /api/research`; arbitrary archives and interrupted publications are ignored. Regression or conflicting hashes at the same height are rejected. Older archives remain historical and require a new collection to populate this checkpoint.
+
+The server validates bounded raw snapshots and canonical `sizingInputs`, then recomputes the matrix and freshness at read time. Stored winners, qualifications and token-safety flags are not trusted. Corrupt input returns an unavailable response and the UI clears prior figures; missing input never falls back to sample data. Reload reads files and does not collect RPC data.
+
+MIR overview and LXR show separate watchlist provenance, a paginated size matrix, cost assumptions, risk disclosures and a read-only agent preview. Selecting Mock pauses and clears this panel. `npm run agent` persists research decisions in a separate namespace within the atomic agent journal; repeated evidence is deduplicated independently of discovery. No preview or decision creates a paper fill.

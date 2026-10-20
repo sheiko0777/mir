@@ -1,10 +1,10 @@
-import { mkdir, writeFile, rename } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseArgs } from 'node:util';
 import { createReadRpc, collectWatchlist } from '../../packages/adapters/uniswap-v2.mjs';
 import { watchlist } from '../../config/watchlist.mjs';
 import { compareMarkets } from '../../packages/lxr/research.mjs';
 import { compareSizes } from '../../packages/lxr/sizing.mjs';
+import { saveResearch } from '../server/research.mjs';
 
 try {
   const { values } = parseArgs({ options: { 'gas-units': { type: 'string' },
@@ -27,16 +27,12 @@ try {
   const snapshot = await collectWatchlist(rpc, { tokens: watchlist.tokens });
   if (snapshot.pools.some(p => p.quoteDecimals !== watchlist.quoteDecimals)) throw new Error('Watchlist quote unit mismatch');
   const report = compareMarkets(snapshot, watchlist.inputQuote);
-  const sizedReport = compareSizes(snapshot, { inputsQuote: Array.from({ length: steps },
+  const sizingInputs = { schemaVersion: 1, inputsQuote: Array.from({ length: steps },
     (_, i) => watchlist.inputQuote * BigInt(i + 1) / BigInt(steps)).filter(n => n > 0n),
-    gasUnits, priorityFeeWei, bufferBps });
+    gasUnits, priorityFeeWei, bufferBps, baseFeeFactorBps: 10000, budgetQuote: null, minNetQuote: 0n };
+  const sizedReport = compareSizes(snapshot, sizingInputs);
   const directory = resolve('data/research');
-  await mkdir(directory, { recursive: true });
-  const file = resolve(directory, `${snapshot.blockNumber}-${snapshot.blockHash.slice(2)}-${snapshot.capturedAtMs}-${process.pid}.json`);
-  const temp = `${file}.${process.pid}.tmp`;
-  await writeFile(temp, JSON.stringify({ watchlist: watchlist.name, snapshot, report, sizedReport },
-    (_, v) => typeof v === 'bigint' ? v.toString() : v, 2) + '\n', { mode: 0o600 });
-  await rename(temp, file);
+  const file = await saveResearch(directory, { watchlist: watchlist.name, snapshot, report, sizedReport, sizingInputs });
   console.log(JSON.stringify({ status: 'research-saved', poolCount: report.poolCount,
     routeCount: report.routes.length, sizedCandidateCount: sizedReport.candidates.length,
     sizingStatus: sizedReport.status, gasScenarioAvailable: sizedReport.costScenario?.available ?? false,

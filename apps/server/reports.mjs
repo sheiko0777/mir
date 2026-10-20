@@ -14,7 +14,7 @@ function atomic(value) {
   if (typeof value !== 'string' || !/^\d{1,512}$/.test(value)) throw new Error('Invalid numeric report field');
   return value;
 }
-async function readJson(file, directory) {
+export async function readJson(file, directory) {
   const resolved = await realpath(file);
   const base = await realpath(directory);
   if (path.dirname(resolved) !== base) throw new Error('Invalid report location');

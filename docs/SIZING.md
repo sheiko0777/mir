@@ -37,4 +37,4 @@ The first command is prominently labeled synthetic and has no network activity. 
 
 The MIT-licensed `@uniswap/v2-sdk@4.21.5` is an isolated reference dependency, not a production execution engine. `npm run test:sizing-reference` invokes its real `Pair.getOutputAmount` independently for each synthetic route and checks costs, constraints and winner selection. The SDK provides swap math; gas/buffer arithmetic is independently evaluated by the harness rather than attributed to the SDK. See [reuse policy](OPEN-SOURCE-REUSE.md).
 
-Unfinished work includes measured gas execution profiles, independent FX/risk evidence, token taxes/rebasing, durable out-of-sample paper outcomes, historical latency measurements, and connection of the size matrix to the agent and UI. A scenario model alone does not establish net profitability.
+Unfinished work includes measured gas execution profiles, independent FX/risk evidence, token taxes/rebasing, durable out-of-sample paper outcomes, historical latency measurements, and independent outcome validation. A scenario model alone does not establish net profitability.
