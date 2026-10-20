@@ -11,6 +11,9 @@
     "discover": "node apps/monitor/new-pools.mjs",
     "agent": "node apps/monitor/agent.mjs",
     "start": "node apps/server/server.mjs",
-    "test": "node --test"
+    "size:demo": "node apps/monitor/sizing-demo.mjs",
+    "test": "node --test",
+    "test:sdk": "node tools/rea/compare-v2.mjs",
+    "test:sizing-reference": "node tools/rea/compare-sizing.mjs"
   }
 }

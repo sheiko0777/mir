@@ -138,14 +138,20 @@ export async function collectWatchlist(rpc, { tokens, nowMs = Date.now() } = {})
 
 export async function collectPairMarkets(rpc, tokens, header, nowMs) {
   if (!header || !hashPattern.test(header.hash)) throw new Error('Pinned block unavailable');
+  if (header.baseFeePerGas != null && (typeof header.baseFeePerGas !== 'string' ||
+      !/^0x(?:0|[1-9a-f][0-9a-f]*)$/i.test(header.baseFeePerGas) || BigInt(header.baseFeePerGas) >= 2n ** 256n)) {
+    throw new Error('Invalid pinned base fee');
+  }
   const markets = [];
   for (const venue of Object.keys(VENUES)) {
     markets.push(await collectSnapshots(rpc, { tokens, nowMs, count: 1, venue }, header));
   }
   const confirmed = await rpc('eth_getBlockByNumber', [header.number, false]);
   if (confirmed?.hash !== header.hash) throw new Error('Canonical block changed across venues');
-  return { schemaVersion: 1, mode: 'read-only', blockNumber: markets[0].blockNumber,
-    blockHash: header.hash, capturedAtMs: nowMs,
+  return { schemaVersion: 1, mode: 'read-only', chainId: 1, blockNumber: markets[0].blockNumber,
+    blockHash: header.hash, observedAtMs: markets[0].observedAtMs, capturedAtMs: nowMs,
+    gas: { blockNumber: markets[0].blockNumber, blockHash: header.hash,
+      baseFeePerGasWei: header.baseFeePerGas == null ? null : BigInt(header.baseFeePerGas), source: 'pinned-rpc-header' },
     pools: markets.flatMap(m => m.pools), excluded: markets.flatMap(m => m.excluded) };
 }
 

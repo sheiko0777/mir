@@ -60,4 +60,6 @@ No signing, private keys, wallet connections, token approvals, transaction submi
 
 ## Evidence agent
 
+Costed-size research is now available through `npm run size:demo` (explicit synthetic data) and `npm run research` (saved live observations with optional explicit gas assumptions). It compares a bounded size grid after pool fees, gas scenarios and buffer, retaining losses and unknowns. The best modeled case remains unqualified. See [cost identity, commands and limitations](docs/SIZING.md), and [verified open-source reuse](docs/OPEN-SOURCE-REUSE.md).
+
 `npm run agent` plans bounded evidence-collection decisions from saved discovery observations. `npm run agent -- --watch` revisits new reports with adaptive polling, persistent deduplication and an atomic local journal. It is an auditable rules-based agent; no LLM integration is claimed. Unknown token checks and gas valuation keep every live signal unqualified. See [agent scope and phased development](docs/AGENT.md) and [SDK reference research](docs/REA-UNISWAP.md). Processing latency is recorded; it is not a claim of end-to-end market latency or continuous profits.

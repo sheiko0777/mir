@@ -11,3 +11,7 @@ jobs:
         with:
           node-version: '22'
       - run: npm test
+      - name: Install pinned isolated SDK reference (scripts disabled)
+        run: npm ci --prefix tools/rea/reference --ignore-scripts --no-audit --no-fund
+      - run: npm run test:sdk
+      - run: npm run test:sizing-reference

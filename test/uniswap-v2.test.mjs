@@ -57,6 +57,22 @@ test('selected tokens must match returned pool and missing pairs are explicit', 
   await assert.rejects(collectWatchlist(mockRpc({ handler: m => m === 'eth_getBlockByNumber' ? null : undefined }).rpc,
     { tokens: [token0, token1], nowMs: options.nowMs }), /Finalized/);
 });
+test('research retains the base fee at the same pinned block and rejects malformed header fees', async () => {
+  const sushiPool = `0x${'4'.repeat(40)}`;
+  const { rpc } = mockRpc({ handler: (m, p) => {
+    if (m === 'eth_getBlockByNumber') return { ...header, baseFeePerGas: '0x3b9aca00' };
+    if (m !== 'eth_call') return;
+    const { to, data } = p[0];
+    if (data.startsWith('0xe6a43905')) return encode(to === FACTORY ? pool : sushiPool);
+    if (data === '0xc45a0155') return encode(to === pool ? FACTORY : VENUES['sushiswap-v2']);
+  } });
+  const result = await collectWatchlist(rpc, { tokens: [token0, token1], nowMs: options.nowMs });
+  assert.deepEqual(result.gas, { blockNumber: 100, blockHash: hash, baseFeePerGasWei: 1000000000n, source: 'pinned-rpc-header' });
+  assert.equal(result.chainId, 1);
+  assert.equal(result.observedAtMs, 1000000);
+  const bad = mockRpc({ handler: m => m === 'eth_getBlockByNumber' ? { ...header, baseFeePerGas: '0x00' } : undefined });
+  await assert.rejects(collectWatchlist(bad.rpc, { tokens: [token0, token1], nowMs: options.nowMs }), /base fee/);
+});
 
 test('discovery pins all reads to one canonical hash and normalizes atomic units', async () => {
   const { rpc, calls } = mockRpc();

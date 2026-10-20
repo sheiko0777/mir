@@ -15,3 +15,5 @@ REA target SHA-256: `21d8f7c927032e429af0da69f66424abb68dd67923439194e56fb9f6119
 Full Evidence, cases, license and manifest remain local artifacts under `outputs/REA-Uniswap-V2`. Recreate with `describe-target.mjs`, `compare-v2.mjs`, `capture-analysis.mjs`, `retain-analysis.mjs outputs/REA-Uniswap-V2/rea-cli-stdout.txt`, then `summarize-evidence.mjs`. Complete stdout/stderr are captured directly to files to avoid shell output caps. These utilities do not change Codex settings; local approved REA setup was a separate action.
 
 Official source: https://github.com/Uniswap/sdks/tree/main/sdks/v2-sdk. The package and lockfile pin the actual version examined.
+
+The integrated size-search comparison adds `npm run test:sizing-reference`: 128 synthetic route/size observations across 8 scenarios, with zero unexpected differences in the verified run. The actual SDK calculates both swap hops; independent arithmetic checks assumed gas, buffer, constraints and the best tested size. CI installs the isolated lockfile with lifecycle scripts disabled and runs both harnesses. This extends runtime comparison, not the scope of the earlier REA static Evidence.
