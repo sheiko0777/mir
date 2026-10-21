@@ -1,6 +1,6 @@
 # Bounded discovery research
 
-Run `npm run research:discover -- --limit 3` for a read-only one-shot sample of the last three entries in each supported Ethereum factory (Uniswap V2 and Sushi V2). Limit is 1–10 per factory. This does not change discovery, research, agent, or forward-paper checkpoints.
+Run `node apps/monitor/discovery-search.mjs --limit 3` for a read-only one-shot sample of the last three entries in each supported Ethereum factory (Uniswap V2 and Sushi V2). `npm run research:discover` uses the same default limit. Limit is 1–10 per factory. This does not change discovery, research, agent, or forward-paper checkpoints.
 
 The scanner retains the exact pinned snapshots it already reads; pricing makes no additional network requests. Each supported two-venue pair is tested in both directions at eight sizes using existing LXR integer arithmetic, fee, size, freshness and provenance checks. Reports retain losing candidates. Inputs range from 0.0125 to 1.6 WETH, or 12.5 to 1600 USDC; size constraints can exclude any of these.
 
