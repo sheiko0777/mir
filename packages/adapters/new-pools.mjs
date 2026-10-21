@@ -38,6 +38,7 @@ export async function scanNewPools(rpc, { state = null, limit = 2, minGapBps = 1
   const discoveries = [];
   const coverage = [];
   const analyzed = new Map();
+  const marketSnapshots = new Map();
   const pending = new Map((state?.pendingPairs ?? []).map(p => [p.tokens.join(':'), { ...p, tokens: [...p.tokens] }]));
   const followUps = [];
   const trackTokens = tokens => {
@@ -54,6 +55,7 @@ export async function scanNewPools(rpc, { state = null, limit = 2, minGapBps = 1
     const key = tokens.join(':');
     if (!analyzed.has(key)) {
       const markets = await collectPairMarkets(rpc, tokens, header, nowMs);
+      marketSnapshots.set(key, markets);
       analyzed.set(key, analyzeDiscoveredPair(markets, { minGapBps, nowMs }));
     }
     const analysis = analyzed.get(key);
@@ -100,7 +102,7 @@ export async function scanNewPools(rpc, { state = null, limit = 2, minGapBps = 1
   next.pendingPairs = [...pending.values()];
   const finalHeader = await rpc('eth_getBlockByNumber', [header.number, false]);
   if (finalHeader?.hash !== header.hash) throw new Error('Canonical block changed during scan');
-  return { state: next, report: { schemaVersion: 1, brand: 'WADJ', platform: 'MIR', engine: 'LXR',
+  return { state: next, marketSnapshots: [...marketSnapshots.values()], report: { schemaVersion: 1, brand: 'WADJ', platform: 'MIR', engine: 'LXR',
     mode: 'read-only-new-pools', blockNumber, blockHash: header.hash, capturedAtMs: nowMs,
     finality: 'finalized', bootstrap: !state, qualifiedOpportunities: 0, coverage, discoveries,
     pendingPairCount: next.pendingPairs.length, followUps } };
