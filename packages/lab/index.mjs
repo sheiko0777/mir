@@ -1,6 +1,7 @@
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, readdir, writeFile, stat } from 'node:fs/promises';
 import { join } from 'node:path';
+import { validateMarketDataset, summarizeMarket } from './market-evidence.mjs';
 
 const HOUR = 3600000, SCALE = 10n ** 18n;
 const idPattern = /^[a-f0-9]{64}$/;
@@ -19,6 +20,7 @@ function decimal(value) {
   return `${sign}${n / SCALE}.${(n % SCALE).toString().padStart(18, '0')}`;
 }
 export function validateDataset(dataset) {
+  if (dataset?.kind === 'market-snapshot') return validateMarketDataset(dataset);
   if (dataset?.schemaVersion !== 1 || dataset.kind !== 'funding-history' ||
       dataset.source !== 'https://api.hyperliquid.xyz/info' || !['BTC', 'ETH', 'SOL'].includes(dataset.asset) ||
       !integer(dataset.startMs) || !integer(dataset.endMs) || !integer(dataset.capturedAtMs) ||
@@ -38,7 +40,7 @@ export function validateDataset(dataset) {
 }
 export function evaluateExperiment(experiment, dataset) {
   validateDataset(dataset);
-  if (experiment?.schemaVersion !== 1 || experiment.model !== 'funding-diagnostic-v1' ||
+  if (dataset.kind !== 'funding-history' || experiment?.schemaVersion !== 1 || experiment.model !== 'funding-diagnostic-v1' ||
       !idPattern.test(experiment.datasetId) || !['500', '5000', '50000'].includes(experiment.capitalUsd) ||
       !integer(experiment.registeredAtMs) || experiment.registeredAtMs < dataset.capturedAtMs)
     throw new Error('Invalid experiment');
@@ -93,6 +95,13 @@ export async function labView(root, type, id = null) {
     if (type === 'experiments') items.push(await experimentView(root, itemId));
     else {
       const dataset = validateDataset(await loadObject(root, type, itemId));
+      if (dataset.kind === 'market-snapshot') {
+        items.push({ id: itemId, schemaVersion: 1, kind: dataset.kind, source: dataset.source,
+          capturedAtMs: dataset.capturedAtMs, adapter: dataset.adapter,
+          markets: dataset.markets.map(m => ({ id: m.id, symbol: m.symbol, spot: m.spot, swap: m.swap })),
+          quality: summarizeMarket(dataset), coverage: 'point-in-time-market-snapshot' });
+        continue;
+      }
       const { rows, ...metadata } = dataset;
       items.push({ id: itemId, ...metadata, intervals: rows.length, coverage: 'complete-hourly-funding-only' });
     }

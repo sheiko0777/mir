@@ -11,7 +11,7 @@ from funding_probe import summarize
 
 
 def rebuild(root=Path('data/lab')):
-    records = []
+    records, funding_datasets = [], 0
     files = sorted((root / 'datasets').glob('*.json'))
     if len(files) > 1000:
         raise ValueError('Dataset count exceeds bound')
@@ -22,9 +22,12 @@ def rebuild(root=Path('data/lab')):
         if hashlib.sha256(raw).hexdigest() != file.stem:
             raise ValueError('Dataset hash mismatch')
         data = json.loads(raw)
+        if data['kind'] == 'market-snapshot':
+            continue  # Separate raw evidence; never mix depth snapshots into funding rows.
         if data['kind'] != 'funding-history' or data['source'] != 'https://api.hyperliquid.xyz/info':
             raise ValueError('Unsupported dataset')
         summarize(data['rows'], data['asset'], data['startMs'], data['endMs'])
+        funding_datasets += 1
         for row in data['rows']:
             records.append({'dataset_id': file.stem, 'asset': data['asset'],
                             'event_time_ms': row['time'], 'captured_at_ms': data['capturedAtMs'],
@@ -48,7 +51,7 @@ def rebuild(root=Path('data/lab')):
         os.replace(temp, target)
     finally:
         temp.unlink(missing_ok=True)
-    return {'file': str(target.resolve()), 'datasets': len(files), 'rows': len(records), 'counts': counts,
+    return {'file': str(target.resolve()), 'datasets': funding_datasets, 'rows': len(records), 'counts': counts,
             'versions': {name: importlib.metadata.version(name) for name in ('duckdb', 'pyarrow')},
             'note': 'Overlapping datasets remain distinct; do not aggregate funding across dataset IDs.'}
 

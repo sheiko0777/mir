@@ -1,0 +1,253 @@
+[
+  {
+    "name": "ccxt",
+    "version": "4.5.89",
+    "licenseMetadata": "MIT (wheel LICENSE.txt reviewed)",
+    "wheel": "https://files.pythonhosted.org/packages/12/2c/6a38413fb0f12531db4effe78325f68e19fb7df778e5dcb470f827ff02f4/ccxt-4.5.89-py3-none-any.whl",
+    "sha256": "afe4e59138e3873d48391115302af9e61e8fd52c8f7a56cf690be35751736f7c",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/ccxt/LICENSE.txt"
+    ]
+  },
+  {
+    "name": "aiohappyeyeballs",
+    "version": "2.7.1",
+    "licenseMetadata": "PSF-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/71/43/1947f06babed6b3f1d7f38b0c767f52df66bfb2bc10b468c4a7de9eceff2/aiohappyeyeballs-2.7.1-py3-none-any.whl",
+    "sha256": "9243213661e29250eb41368e5daa826fc017156c3b8a11440826b2e3ed376472",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/aiohappyeyeballs/LICENSE"
+    ]
+  },
+  {
+    "name": "aiohttp-fast-zlib",
+    "version": "0.3.0",
+    "licenseMetadata": "Apache-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/b7/11/ea9ecbcd6cf68c5de690fd39b66341405ab091aa0c3598277e687aa65901/aiohttp_fast_zlib-0.3.0-py3-none-any.whl",
+    "sha256": "d4cb20760a3e1137c93cb42c13871cbc9cd1fdc069352f2712cd650d6c0e537e",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/aiohttp-fast-zlib/LICENSE"
+    ]
+  },
+  {
+    "name": "aiosignal",
+    "version": "1.4.0",
+    "licenseMetadata": "Apache 2.0",
+    "wheel": "https://files.pythonhosted.org/packages/fb/76/641ae371508676492379f16e2fa48f4e2c11741bd63c48be4b12a6b09cba/aiosignal-1.4.0-py3-none-any.whl",
+    "sha256": "053243f8b92b990551949e63930a839ff0cf0b0ebbe0597b0f3fb19e1a0fe82e",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/aiosignal/LICENSE"
+    ]
+  },
+  {
+    "name": "attrs",
+    "version": "26.1.0",
+    "licenseMetadata": "MIT",
+    "wheel": "https://files.pythonhosted.org/packages/64/b4/17d4b0b2a2dc85a6df63d1157e028ed19f90d4cd97c36717afef2bc2f395/attrs-26.1.0-py3-none-any.whl",
+    "sha256": "c647aa4a12dfbad9333ca4e71fe62ddc36f4e63b2d260a37a8b83d2f043ac309",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/attrs/LICENSE"
+    ]
+  },
+  {
+    "name": "cffi",
+    "version": "2.0.0",
+    "licenseMetadata": "MIT",
+    "wheel": "https://files.pythonhosted.org/packages/bb/92/882c2d30831744296ce713f0feb4c1cd30f346ef747b530b5318715cc367/cffi-2.0.0-cp314-cp314-win_amd64.whl",
+    "sha256": "203a48d1fb583fc7d78a4c6655692963b860a417c0528492a6bc21f1aaefab25",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/cffi/LICENSE"
+    ]
+  },
+  {
+    "name": "charset-normalizer",
+    "version": "3.4.7",
+    "licenseMetadata": "MIT",
+    "wheel": "https://files.pythonhosted.org/packages/48/77/72dcb0921b2ce86420b2d79d454c7022bf5be40202a2a07906b9f2a35c97/charset_normalizer-3.4.7-cp314-cp314-win_amd64.whl",
+    "sha256": "92a0a01ead5e668468e952e4238cccd7c537364eb7d851ab144ab6627dbbe12f",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/charset-normalizer/LICENSE"
+    ]
+  },
+  {
+    "name": "frozenlist",
+    "version": "1.8.0",
+    "licenseMetadata": "Apache-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/59/ad/9caa9b9c836d9ad6f067157a531ac48b7d36499f5036d4141ce78c230b1b/frozenlist-1.8.0-cp314-cp314-win_amd64.whl",
+    "sha256": "3e0761f4d1a44f1d1a47996511752cf3dcec5bbdd9cc2b4fe595caf97754b7a0",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/frozenlist/LICENSE"
+    ]
+  },
+  {
+    "name": "idna",
+    "version": "3.18",
+    "licenseMetadata": "BSD-3-Clause",
+    "wheel": "https://files.pythonhosted.org/packages/1e/5e/d4e9f1a599fb8e573b7b87160658329fbf28d19eac2718f51fc3def3aa5a/idna-3.18-py3-none-any.whl",
+    "sha256": "7f952cbe720b688055e3f87de14f5c3e5fdaa8bc3928985c4077ca689de849a2",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/idna/LICENSE.md"
+    ]
+  },
+  {
+    "name": "multidict",
+    "version": "6.9.1",
+    "licenseMetadata": "Apache License 2.0",
+    "wheel": "https://files.pythonhosted.org/packages/33/81/014bb2128aedc8157d2848f0ec8a0209c6b822fb88deea012834e1c4a4e8/multidict-6.9.1-cp314-cp314-win_amd64.whl",
+    "sha256": "acddcac38adc8342ba48aba98896faa7928854bebb62542362138655b5367ee3",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/multidict/LICENSE"
+    ]
+  },
+  {
+    "name": "propcache",
+    "version": "0.5.2",
+    "licenseMetadata": "Apache-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/61/d2/45c9defbaa1ea297035d9d4cce9e8f80daafbf19319c6007f157c6256ea9/propcache-0.5.2-cp314-cp314-win_amd64.whl",
+    "sha256": "81e3a30b0bb60caa22033dd0f8a3618d1d67356212514f62c57db75cb0ef410c",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/propcache/LICENSE",
+      "tools/research/licenses/ccxt-dependencies/propcache/NOTICE"
+    ]
+  },
+  {
+    "name": "pycparser",
+    "version": "3.0",
+    "licenseMetadata": "BSD-3-Clause",
+    "wheel": "https://files.pythonhosted.org/packages/0c/c3/44f3fbbfa403ea2a7c779186dc20772604442dde72947e7d01069cbe98e3/pycparser-3.0-py3-none-any.whl",
+    "sha256": "b727414169a36b7d524c1c3e31839a521725078d7b2ff038656844266160a992",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/pycparser/LICENSE"
+    ]
+  },
+  {
+    "name": "typing-extensions",
+    "version": "4.16.0",
+    "licenseMetadata": "PSF-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/49/d3/b8441a820a491ddfc024b0b0cf0393375b75ea13866d9c66727e54c2fc80/typing_extensions-4.16.0-py3-none-any.whl",
+    "sha256": "481caa481374e813c1b176ada14e97f1f67a4539ce9cfeb3f350d78d6370c2e8",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/typing-extensions/LICENSE"
+    ]
+  },
+  {
+    "name": "urllib3",
+    "version": "2.8.0",
+    "licenseMetadata": "MIT",
+    "wheel": "https://files.pythonhosted.org/packages/92/9d/c4e665119135114480843e7ab388fa94d8480650450e6f8e26b70d323a4c/urllib3-2.8.0-py3-none-any.whl",
+    "sha256": "0cf3cae568d36aa9576b28dfb35f11328f1cb974ca7647d9475ebb86c75ac6e3",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/urllib3/LICENSE.txt"
+    ]
+  },
+  {
+    "name": "winloop",
+    "version": "0.6.3",
+    "licenseMetadata": "MIT License",
+    "wheel": "https://files.pythonhosted.org/packages/b5/a3/ba3220d03cfe592baa78776892910dd11945b133b6e41714191f3e486b53/winloop-0.6.3-cp314-cp314-win_amd64.whl",
+    "sha256": "2d57782d2191c5e83475f58fb6423af9fb4bf3823fb05771e9a3caa5bb870e0d",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/winloop/LICENSE-APACHE",
+      "tools/research/licenses/ccxt-dependencies/winloop/LICENSE-MIT"
+    ]
+  },
+  {
+    "name": "zlib-ng",
+    "version": "1.0.0",
+    "licenseMetadata": "PSF-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/93/4d/3475605c16a32d7ac4efc8c49c7d7b863ced4311dceca987b2f288f8d673/zlib_ng-1.0.0-cp314-cp314-win_amd64.whl",
+    "sha256": "a499413d424fd16c8a245e9dd09206f5574ec93be383a22616fb31d7be82ab75",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/zlib-ng/LICENSE"
+    ]
+  },
+  {
+    "name": "aiohttp",
+    "version": "3.14.5",
+    "licenseMetadata": "Apache-2.0 AND MIT",
+    "wheel": "https://files.pythonhosted.org/packages/a9/74/8cdaf0e58c2588371670d5a9a8215bbb971d36940b6e5d051967dd05c07d/aiohttp-3.14.5-cp314-cp314-win_amd64.whl",
+    "sha256": "6f967dde489ca6a8c02d093ab245d2cbf50ccb5c36adf0188b17b0ca39d24b67",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/aiohttp/LICENSE.txt",
+      "tools/research/licenses/ccxt-dependencies/aiohttp/LICENSE"
+    ]
+  },
+  {
+    "name": "cryptography",
+    "version": "50.0.2",
+    "licenseMetadata": "Apache-2.0 OR BSD-3-Clause",
+    "wheel": "https://files.pythonhosted.org/packages/9a/4f/adfc442765721292fff86d314ce385d3249d22db42295c0dd057727b60f3/cryptography-50.0.2-cp311-abi3-win_amd64.whl",
+    "sha256": "7afa5a6602a9f29af1f3a2965f831bae7c9d5d597b7cbb716d41ab3b7d89879c",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/cryptography/LICENSE",
+      "tools/research/licenses/ccxt-dependencies/cryptography/LICENSE.APACHE",
+      "tools/research/licenses/ccxt-dependencies/cryptography/LICENSE.BSD"
+    ]
+  },
+  {
+    "name": "orjson",
+    "version": "3.13.0",
+    "licenseMetadata": "MPL-2.0 AND (Apache-2.0 OR MIT)",
+    "wheel": "https://files.pythonhosted.org/packages/ad/ea/cf257fc8a7f4b18f5677c22b3a9673a1b51d4b7161f25177ed389b76560e/orjson-3.13.0-cp314-cp314-win_amd64.whl",
+    "sha256": "6adcaa85d79977659a448b4123a88eb33511a11ed2db243535ad7ea88a6668e0",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/orjson/LICENSE-APACHE",
+      "tools/research/licenses/ccxt-dependencies/orjson/LICENSE-MIT",
+      "tools/research/licenses/ccxt-dependencies/orjson/LICENSE-MPL-2.0"
+    ]
+  },
+  {
+    "name": "requests",
+    "version": "2.34.2",
+    "licenseMetadata": "Apache-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/a0/f4/c67b0b3f1b9245e8d266f0f112c500d50e5b4e83cb6f3b71b6528104182a/requests-2.34.2-py3-none-any.whl",
+    "sha256": "2a0d60c172f83ac6ab31e4554906c0f3b3588d37b5cb939b1c061f4907e278e0",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/requests/LICENSE",
+      "tools/research/licenses/ccxt-dependencies/requests/NOTICE"
+    ]
+  },
+  {
+    "name": "yarl",
+    "version": "1.25.1",
+    "licenseMetadata": "Apache-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/f5/01/349c0386caedbbe488d519f252df54efac8a1459282d466c474bdd84a620/yarl-1.25.1-cp314-cp314-win_amd64.whl",
+    "sha256": "acfa7e22aa6c6e7a5996a41d275bfa01efa7ea56ab890590280e9063e2cf5c1b",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/yarl/LICENSE",
+      "tools/research/licenses/ccxt-dependencies/yarl/NOTICE"
+    ]
+  },
+  {
+    "name": "certifi",
+    "version": "2026.10.19",
+    "licenseMetadata": "MPL-2.0",
+    "wheel": "https://files.pythonhosted.org/packages/c4/51/29046e48f693c54e5b7412216d447a1d8362c9653148d98c02cdf65fa733/certifi-2026.10.19-py3-none-any.whl",
+    "sha256": "42d35340cc5b9ba78e818ddbff0c5b1c2b779de448a340fd1b989f5fa8670e1b",
+    "status": "installed-version-verified; public-adapter-validation-separate",
+    "notices": [
+      "tools/research/licenses/ccxt-dependencies/certifi/LICENSE"
+    ]
+  }
+]

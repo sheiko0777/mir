@@ -11,12 +11,19 @@ The approved research plan remains the scope. This is a progress ledger, not a c
 - Public funding collector supports bounded pagination and `--days 90`. Complete hourly coverage is required; raw timestamps remain preserved. 90-day BTC/ETH/SOL observations were collected (2,160 each), distinct from the earlier seven-day dataset.
 - DuckDB 1.5.6 and PyArrow 26.0.0 installed into an isolated Python environment; wheel hashes, licenses and platform-specific lock recorded. Parquet rebuilt from verified datasets and reconciled with DuckDB. Overlapping datasets remain separate and must not be summed together.
 - Independent fixed-quantity carry scenario includes matched spot/perp quantity, oracle funding, executable-side quote inputs, four-side fees, explicit other costs, 50% spot/30% margin/20% reserve allocation, 5% drawdown stop and assumed maintenance-margin check. Tests use synthetic inputs. No synchronized real price/depth data has yet been supplied to this model. Intrahour liquidation and actual fills are unmodeled.
+- CCXT 4.5.89 and 21 dependencies installed in the isolated environment from hash-pinned binary wheels. Installed versions and 31 license/notice files retained in `ccxt-resources.json` and `licenses/ccxt-dependencies`. `pip check` passed. This is a dependency/license review, not a security audit.
+- Public Hyperliquid adapter permits only four metadata request types and L2 books on the exact public info URL. It rejects account/trade requests before transport, disables redirects, bounds capture to 20 requests and 180 seconds of admission time, and records failed requests. The research agent is not given the underlying CCXT exchange instance.
+- A real six-market capture completed in nine requests. Native decimal-string depth is preserved alongside normalized CCXT books; calculations consume native strings. BTC/ETH/SOL spot and perpetual symbols are candidate representations, not proof of equivalent underlying exposure. Snapshot source age, request p50/p95, failures and identity mismatches are recomputed for Lab display. Raw evidence is omitted from list responses.
+- Decimal depth estimates support buy/sell, weighted prices and partial depth. Empty/crossed/unsorted books, identity mismatch, nonfinite values and source age above five seconds are rejected. Estimates explicitly report zero actual fills. A one-unit probe is a validation exercise, not the 500/5,000/50,000 USD allocation experiment.
 
 ## Reproduce locally
 
 ```text
 python tools/research/funding_probe.py --days 90
 node apps/monitor/lab-import.mjs <saved-funding-report.json>
+tools/research/.venv/Scripts/python.exe tools/research/market_capture.py
+python tools/research/inspect_capture.py <saved-market-capture.json>
+node apps/monitor/lab-import-market.mjs <saved-market-capture.json>
 tools/research/.venv/Scripts/python.exe tools/research/warehouse.py
 npm start
 ```
@@ -28,9 +35,11 @@ Environment recovery on Windows x64 CPython 3.14:
 ```text
 python -m venv tools/research/.venv
 tools/research/.venv/Scripts/python.exe -m pip install --only-binary=:all: --no-deps --require-hashes -r tools/research/requirements-win-cp314.lock
+tools/research/.venv/Scripts/python.exe -m pip install --only-binary=:all: --no-deps --require-hashes -r tools/research/ccxt-win-cp314.lock
+tools/research/.venv/Scripts/python.exe tools/research/audit_ccxt.py
 ```
 
-Other platforms require their own reviewed wheel hashes. Optional DuckDB extras were not installed. Tests: `npm test`, `python tools/research/test_funding_probe.py`, and `python tools/research/test_carry_model.py`.
+Other platforms require their own reviewed wheel hashes. Optional DuckDB extras were not installed. Tests: `npm test` and the five `tools/research/test_*.py` files (funding, carry, public guard, depth, native/normalized comparison). Market imports create datasets without creating a strategy experiment. Funding Parquet excludes market snapshots. The six captured normalized books matched their native price/size conversions and timestamps; float comparisons validate parser behavior only, while calculations retain native Decimal strings.
 
 ## Remaining work — do not mark complete
 
@@ -38,7 +47,7 @@ Other platforms require their own reviewed wheel hashes. Optional DuckDB extras 
 |---|---|
 | Frozen hypotheses, 60/30 holdout and stress approval | Diagnostic definitions exist; no holdout evaluator, no approvals |
 | Spot/perp depth and synchronized pricing | Collect both legs with exact market identity and quote timestamps; do not use funding alone |
-| CCXT public-data adapter | Review pinned release/dependencies, install isolated, restrict callable methods, test against native response |
+| CCXT public-data adapter | Installed and exercised against native depth; next: sustained capture, synchronized legs, exact hedge identity and cost policy |
 | Lending and PT baselines | Add verified sources and unit/redemption accounting |
 | Cross-venue and dated futures | Add settlement/funding alignment and fragmented collateral model |
 | Resumable event index | Existing factory offsets are not event timestamps; add event journal with reorg handling |

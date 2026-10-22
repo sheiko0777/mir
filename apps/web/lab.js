@@ -13,14 +13,23 @@ async function refresh() {
     if (responses.some(r => !r.ok)) throw new Error('unavailable');
     const [datasets, experiments] = await Promise.all(responses.map(r => r.json()));
     if (!Array.isArray(datasets.items) || !Array.isArray(experiments.items)) throw new Error('invalid');
-    for (const d of datasets.items) {
+    for (const d of [...datasets.items].sort((a, b) => b.capturedAtMs - a.capturedAtMs)) {
       const card = document.createElement('article');
+      if (d.kind === 'market-snapshot') {
+        paragraph(card, 'لقطة سوق عامة — قراءة فقط');
+        paragraph(card, new Date(d.capturedAtMs).toISOString());
+        for (const market of d.markets) paragraph(card, `${market.symbol} — ${market.spot ? 'spot' : 'perpetual'} — ID: ${market.id}`);
+        paragraph(card, `${d.quality.requests} طلبات — زمن الاستجابة p50: ${d.quality.latencyP50Ms} ms، p95: ${d.quality.latencyP95Ms} ms`);
+        for (const book of d.quality.books) paragraph(card, `${book.coin}: ${book.reason ? `مرفوضة — ${book.reason}` : 'اجتازت فحص الهوية والتوقيت والبنية'}؛ عمر اللقطة: ${book.ageMs ?? 'مجهول'} ms`);
+        paragraph(card, 'اللقطات متتابعة وليست متزامنة. تكافؤ الأصل والتكاليف غير مثبتين؛ صافي الربح مجهول.');
+        evidence(card, 'هوية البيانات', d.id); byId('datasets').append(card); continue;
+      }
       paragraph(card, `${d.asset} — ${d.intervals} فترة تمويل`);
       paragraph(card, `${new Date(d.startMs).toISOString()} → ${new Date(d.endMs).toISOString()}`);
       paragraph(card, `المصدر: ${d.source}`); evidence(card, 'هوية البيانات', d.id);
       byId('datasets').append(card);
     }
-    for (const e of experiments.items) {
+    for (const e of [...experiments.items].sort((a, b) => a.asset.localeCompare(b.asset) || b.result.intervals - a.result.intervals || Number(a.experiment.capitalUsd) - Number(b.experiment.capitalUsd))) {
       const card = document.createElement('article');
       paragraph(card, `${e.asset} — رأس مال افتراضي ${e.experiment.capitalUsd} USD`);
       paragraph(card, `${e.result.intervals} ساعة — تشخيص تاريخي`);

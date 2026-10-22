@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { validateDataset, saveObject, labView, evaluateExperiment } from '../packages/lab/index.mjs';
 import { createMirServer } from '../apps/server/server.mjs';
+import { summarizeMarket } from '../packages/lab/market-evidence.mjs';
 const sample = () => ({ schemaVersion: 1, kind: 'funding-history', source: 'https://api.hyperliquid.xyz/info',
   asset: 'BTC', startMs: 0, endMs: 7200000, capturedAtMs: 7200001,
   rows: [{ coin: 'BTC', time: 15, fundingRate: '0.001' }, { coin: 'BTC', time: 3600007, fundingRate: '-0.002' }] });
@@ -44,4 +45,30 @@ test('Lab APIs recompute immutable evidence and fail closed on tampering; writes
     await new Promise(resolve => server.close(resolve));
     await rm(root, { recursive: true, force: true });
   }
+});
+test('Market snapshots preserve failed/stale/mismatched evidence without qualifying a trade', async () => {
+  const dataset = { schemaVersion: 1, kind: 'market-snapshot', source: 'https://api.hyperliquid.xyz/info',
+    adapter: 'ccxt/4.5.89', capturedAtMs: 10000, markets: [{ id: 'BTC', symbol: 'BTC/USDC:USDC', spot: false, swap: true }],
+    evidence: [{ request: { type: 'l2Book', coin: 'BTC' }, requestedAtMs: 9000, capturedAtMs: 10000,
+      response: { coin: 'BTC', time: 9500, levels: [[{ px: '100', sz: '1' }], [{ px: '101', sz: '1' }]] } }] };
+  const good = summarizeMarket(dataset);
+  assert.equal(good.books[0].status, 'capture-checks-passed');
+  assert.equal(good.netUsd, null); assert.equal(good.latencyP95Ms, 1000);
+  for (const [change, reason] of [
+    [r => { r.response.time = 1000; }, 'STALE_SNAPSHOT'],
+    [r => { r.response.coin = 'ETH'; }, 'MARKET_IDENTITY_MISMATCH'],
+    [r => { r.error = 'timeout'; delete r.response; }, 'SOURCE_REQUEST_FAILED'],
+    [r => { r.response.levels[0][0].sz = 'NaN'; }, 'INVALID_DEPTH']]) {
+    const copy = structuredClone(dataset); change(copy.evidence[0]);
+    assert.equal(summarizeMarket(copy).books[0].reason, reason);
+  }
+  const root = await mkdtemp(join(tmpdir(), 'mir-market-'));
+  try {
+    await saveObject(root, 'datasets', dataset);
+    const view = await labView(root, 'datasets');
+    assert.equal(view.items[0].evidence, undefined);
+    assert.equal(view.items[0].quality.qualified, false);
+  } finally { await rm(root, { recursive: true, force: true }); }
+  assert.throws(() => validateDataset({ ...dataset, source: 'https://unverified.invalid' }));
+  assert.throws(() => evaluateExperiment({}, dataset));
 });
