@@ -15,6 +15,7 @@ The approved research plan remains the scope. This is a progress ledger, not a c
 - Public Hyperliquid adapter permits only four metadata request types and L2 books on the exact public info URL. It rejects account/trade requests before transport, disables redirects, bounds capture to 20 requests and 180 seconds of admission time, and records failed requests. The research agent is not given the underlying CCXT exchange instance.
 - A real six-market capture completed in nine requests. Native decimal-string depth is preserved alongside normalized CCXT books; calculations consume native strings. BTC/ETH/SOL spot and perpetual symbols are candidate representations, not proof of equivalent underlying exposure. Snapshot source age, request p50/p95, failures and identity mismatches are recomputed for Lab display. Raw evidence is omitted from list responses.
 - Decimal depth estimates support buy/sell, weighted prices and partial depth. Empty/crossed/unsorted books, identity mismatch, nonfinite values and source age above five seconds are rejected. Estimates explicitly report zero actual fills. A one-unit probe is a validation exercise, not the 500/5,000/50,000 USD allocation experiment.
+- Capture now uses two workers with separate sessions, reused metadata and a shared request/deadline budget. Each book records its CCXT symbol and native request coin; numeric perpetual market IDs are retained separately from native coin names. Lab displays source-time skew for candidate symbol groups without declaring hedge equivalence. Historical sequential captures remain readable and labeled.
 
 ## Reproduce locally
 
@@ -39,7 +40,11 @@ tools/research/.venv/Scripts/python.exe -m pip install --only-binary=:all: --no-
 tools/research/.venv/Scripts/python.exe tools/research/audit_ccxt.py
 ```
 
-Other platforms require their own reviewed wheel hashes. Optional DuckDB extras were not installed. Tests: `npm test` and the five `tools/research/test_*.py` files (funding, carry, public guard, depth, native/normalized comparison). Market imports create datasets without creating a strategy experiment. Funding Parquet excludes market snapshots. The six captured normalized books matched their native price/size conversions and timestamps; float comparisons validate parser behavior only, while calculations retain native Decimal strings.
+Other platforms require their own reviewed wheel hashes. Optional DuckDB extras were not installed. Tests: `npm test` and the six `tools/research/test_*.py` files (funding, carry, public guard, depth, native/normalized comparison, shared capture budget). Market imports create datasets without creating a strategy experiment. Funding Parquet excludes market snapshots. Both six-book captures matched native price/size conversions and timestamps; float comparisons validate parser behavior only, while calculations retain native Decimal strings.
+
+## Capture observations (not a performance benchmark)
+
+Local raw reports `data/market-capture/1792675416901.json` and `1792695291670.json` are distinct market observations collected at different times. The first used sequential book requests; the second used two workers. Each used nine public requests. Observed candidate spot/perpetual source-time skews were BTC/ETH/SOL: 2167/1687/3178 ms and 532/0/0 ms respectively. Whole-capture request latency p50/p95 was 2451/4947 ms and 1044/6641 ms. Different inputs/network conditions prevent a controlled speedup claim; the tail did not uniformly improve. Matching millisecond timestamps do not establish atomic state, hedge backing or a profitable trade. Local datasets are content-addressed and excluded from Git; neither capture is a historical depth backtest or a 30-day forward experiment.
 
 ## Remaining work — do not mark complete
 

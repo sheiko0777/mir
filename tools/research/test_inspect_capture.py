@@ -6,6 +6,20 @@ from inspect_capture import inspect
 
 
 class CaptureComparisonTests(unittest.TestCase):
+    def test_parallel_response_order_uses_explicit_market_symbol(self):
+        records, books = [], []
+        for coin in ('BTC', 'ETH'):
+            symbol = f'{coin}/USDC:USDC'
+            books.append({'symbol': symbol, 'timestamp': 10000, 'bids': [[99, 2]], 'asks': [[101, 2]]})
+            records.append({'marketSymbol': symbol, 'request': {'type': 'l2Book', 'coin': coin},
+                            'requestedAtMs': 10000, 'capturedAtMs': 11000,
+                            'response': {'coin': coin, 'time': 10000, 'levels': [
+                                [{'px': '99', 'sz': '2'}], [{'px': '101', 'sz': '2'}]]}})
+        with tempfile.TemporaryDirectory() as root:
+            path = Path(root) / 'capture.json'
+            path.write_text(json.dumps({'books': books, 'evidence': list(reversed(records))}), encoding='utf-8')
+            self.assertTrue(all(row['normalizedParserMatches'] for row in inspect(path)['books']))
+
     def test_stale_record_does_not_shift_next_comparison(self):
         native = {'coin': 'BTC', 'time': 10000, 'levels': [
             [{'px': '99', 'sz': '2'}], [{'px': '101', 'sz': '2'}]]}

@@ -71,4 +71,18 @@ test('Market snapshots preserve failed/stale/mismatched evidence without qualify
   } finally { await rm(root, { recursive: true, force: true }); }
   assert.throws(() => validateDataset({ ...dataset, source: 'https://unverified.invalid' }));
   assert.throws(() => evaluateExperiment({}, dataset));
+  const concurrent = structuredClone(dataset);
+  concurrent.captureMode = 'parallel-2';
+  concurrent.markets[0].id = '0'; concurrent.markets[0].info = { name: 'BTC' };
+  concurrent.markets[0].base = 'BTC';
+  concurrent.evidence[0].marketSymbol = 'BTC/USDC:USDC';
+  assert.equal(summarizeMarket(concurrent).captureMode, 'parallel-2');
+  concurrent.markets.push({ id: '@142', symbol: 'BTC/USDC', base: 'BTC', spot: true, swap: false });
+  const spotBook = structuredClone(concurrent.evidence[0]);
+  spotBook.request.coin = '@142'; spotBook.response.coin = '@142'; spotBook.marketSymbol = 'BTC/USDC';
+  spotBook.response.time = 9400; concurrent.evidence.push(spotBook);
+  assert.equal(summarizeMarket(concurrent).candidatePairs[0].sourceSkewMs, 100);
+  assert.equal(summarizeMarket(concurrent).candidatePairs[0].hedgeIdentityVerified, false);
+  concurrent.evidence[0].marketSymbol = 'ETH/USDC:USDC';
+  assert.throws(() => validateDataset(concurrent));
 });

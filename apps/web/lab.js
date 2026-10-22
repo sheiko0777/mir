@@ -21,7 +21,9 @@ async function refresh() {
         for (const market of d.markets) paragraph(card, `${market.symbol} — ${market.spot ? 'spot' : 'perpetual'} — ID: ${market.id}`);
         paragraph(card, `${d.quality.requests} طلبات — زمن الاستجابة p50: ${d.quality.latencyP50Ms} ms، p95: ${d.quality.latencyP95Ms} ms`);
         for (const book of d.quality.books) paragraph(card, `${book.coin}: ${book.reason ? `مرفوضة — ${book.reason}` : 'اجتازت فحص الهوية والتوقيت والبنية'}؛ عمر اللقطة: ${book.ageMs ?? 'مجهول'} ms`);
-        paragraph(card, 'اللقطات متتابعة وليست متزامنة. تكافؤ الأصل والتكاليف غير مثبتين؛ صافي الربح مجهول.');
+        for (const pair of d.quality.candidatePairs ?? []) paragraph(card, `مجموعة رموز ${pair.candidateSymbolGroup}: فرق توقيت المصدر بين الطرفين ${pair.sourceSkewMs ?? 'مجهول'} ms؛ تكافؤ التحوّط غير مثبت.`);
+        paragraph(card, d.quality.captureMode === 'parallel-2' ? 'التقاط بطلبين متوازيين؛ تزامن حالة السوق غير مثبت.' : 'التقاط متتابع؛ اللقطات ليست متزامنة.');
+        paragraph(card, 'تكافؤ الأصل والتكاليف غير مثبتين؛ صافي الربح مجهول.');
         evidence(card, 'هوية البيانات', d.id); byId('datasets').append(card); continue;
       }
       paragraph(card, `${d.asset} — ${d.intervals} فترة تمويل`);

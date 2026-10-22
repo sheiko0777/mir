@@ -11,12 +11,14 @@ def inspect(path):
     report = json.loads(raw)
     results = []
     normalized = iter(report['books'])
+    by_symbol = {book['symbol']: book for book in report['books'] if 'symbol' in book}
     for item in report['evidence']:
         if item['request']['type'] != 'l2Book':
             continue
         coin = item['request']['coin']
         row = {'coin': coin, 'latencyMs': item['capturedAtMs'] - item['requestedAtMs']}
-        parsed = next(normalized, None) if 'response' in item else None
+        parsed = (by_symbol.get(item['marketSymbol']) if 'marketSymbol' in item
+                  else next(normalized, None)) if 'response' in item else None
         try:
             # A unit probe validates ordering/precision; it is not a capital allocation.
             row['unitBuy'] = quote(item['response'], coin, item['capturedAtMs'], '1', 'buy')
@@ -31,6 +33,8 @@ def inspect(path):
                 raise ValueError('Normalized CCXT book differs from native response')
             row['status'] = 'validated-snapshot'
         except (ValueError, KeyError, TypeError, StopIteration) as error:
+            row.pop('unitBuy', None)
+            row.pop('unitSell', None)
             row['status'], row['reason'] = 'rejected', str(error)
         results.append(row)
     return {'sourceSha256': hashlib.sha256(raw).hexdigest(), 'books': results,
