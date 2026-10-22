@@ -6,11 +6,14 @@ import { createReadRpc } from '../../packages/adapters/uniswap-v2.mjs';
 import { scanNewPools } from '../../packages/adapters/new-pools.mjs';
 import { searchDiscoveredMarket } from '../../packages/lxr/discovery-search.mjs';
 import { measureRpc } from '../../packages/adapters/rpc-metrics.mjs';
+import { cachePinnedReads } from '../../packages/adapters/pinned-cache.mjs';
 
 const { values } = parseArgs({ options: { limit: { type: 'string', default: '3' } } });
 const limit = Number(values.limit);
 if (!Number.isInteger(limit) || limit < 1 || limit > 10) throw new Error('Limit must be 1..10 per factory');
-const { rpc, metrics } = measureRpc(createReadRpc());
+const measured = measureRpc(createReadRpc());
+const { rpc, metrics: cacheMetrics } = cachePinnedReads(measured.rpc);
+const metrics = measured.metrics;
 try {
   // Independent one-shot sample: never advances discovery or paper checkpoints.
   const collectionStarted = performance.now();
@@ -20,7 +23,7 @@ try {
   const analysisStarted = performance.now();
   const markets = scan.marketSnapshots.map(snapshot => ({ snapshot,
     analysis: searchDiscoveredMarket(snapshot, evaluatedAtMs) }));
-  const timing = { collectionMs, analysisMs: performance.now() - analysisStarted, rpc: metrics(),
+  const timing = { collectionMs, analysisMs: performance.now() - analysisStarted, rpc: metrics(), cache: cacheMetrics(),
     scope: 'collection-and-analysis-excludes-report-write', eventToEvaluationMs: null };
   const report = { schemaVersion: 1, mode: 'bounded-discovery-size-research',
     discovery: scan.report, evaluatedAtMs, rpcCalls: timing.rpc.admitted, timing, markets,
@@ -36,6 +39,6 @@ try {
   console.log(JSON.stringify({ file, rpcCalls: timing.rpc.admitted, timing, discoveries: scan.report.discoveries.length,
     pairs: markets.length, statuses: markets.map(m => m.analysis.status), qualified: 0, actualFills: 0 }));
 } catch (error) {
-  console.error(JSON.stringify({ status: 'research-unavailable', timing: { rpc: metrics() }, reason: error.message }));
+  console.error(JSON.stringify({ status: 'research-unavailable', timing: { rpc: metrics(), cache: cacheMetrics() }, reason: error.message }));
   process.exitCode = 1;
 }

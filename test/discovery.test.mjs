@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { VENUES } from '../packages/adapters/uniswap-v2.mjs';
 import { scanNewPools } from '../packages/adapters/new-pools.mjs';
+import { cachePinnedReads } from '../packages/adapters/pinned-cache.mjs';
 import { analyzeDiscoveredPair, QUOTE_TOKENS } from '../packages/lxr/discovery.mjs';
 
 const hash = `0x${'a'.repeat(64)}`;
@@ -38,6 +39,17 @@ function source({ total = 1, reorg = false, fail = false, empty = false } = {}) 
   return { rpc, calls };
 }
 
+test('cached discovery preserves complete results and live canonical checks with fewer calls', async () => {
+  const plain = source({ total: 3 }), cached = source({ total: 3 });
+  const wrapper = cachePinnedReads(cached.rpc);
+  const expected = await scanNewPools(plain.rpc, { limit: 3, nowMs });
+  const actual = await scanNewPools(wrapper.rpc, { limit: 3, nowMs });
+  assert.deepEqual(actual, expected);
+  assert.ok(cached.calls.length < plain.calls.length);
+  assert.ok(wrapper.metrics().hits > 0);
+  assert.deepEqual(cached.calls.filter(c => c.method !== 'eth_call'), plain.calls.filter(c => c.method !== 'eth_call'));
+  await assert.rejects(scanNewPools(cachePinnedReads(source({ reorg: true }).rpc).rpc, { nowMs }), /Canonical/);
+});
 test('new pool bootstrap is bounded and token age stays unknown even when a gap exists', async () => {
   const { rpc } = source({ total: 5 });
   const { report, state } = await scanNewPools(rpc, { limit: 1, nowMs });

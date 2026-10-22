@@ -17,3 +17,9 @@ Next evidence gates: broader protocol adapters with verified pricing, timestampe
 Reports include monotonic `collectionMs` and `analysisMs`, plus nearest-rank p50/p95/max duration for completed logical RPC calls. Failed calls remain in the distribution. Admission, completion, failure, in-flight and budget rejection counts are separate. Logical call duration includes the existing adapter's retries and backoff; `networkAttempts` stays unknown. Empty distributions are null, not zero.
 
 These are per-run measurements, not service-level latency percentiles. Collection includes validation and network reads; analysis measures local calculations, and report writing is excluded. Event-to-capture and event-to-evaluation remain unknown until an event indexer provides authoritative event timing. A fast local calculation does not prove an execution advantage. The monotonic admission deadline prevents new calls after expiry; it does not cancel an existing adapter call.
+
+## Reusing pinned reads
+
+Each invocation has a bounded 1,000-entry cache tied to its one RPC provider. Only successful hex responses to exact `eth_call` requests with `requireCanonical: true` are reused; keys include block hash, contract address and calldata. The underlying transport still validates allowed selectors. Failures are never cached; different blocks never share results. The cache is discarded after the collection cycle.
+
+Chain identity and block-header reads always reach the provider, including the final canonical check. This cache must not be used as a standalone proof of current canonicality. Its integration test verifies identical full discovery output, reduced provider calls, unchanged header checks and rejection of a reorg. `timing.cache` reports hits, misses and bypasses; `timing.rpc` measures only calls forwarded to the adapter. Cache hits do not count as network calls. Comparing live runs on different blocks/providers is observational, not a controlled speed benchmark.
