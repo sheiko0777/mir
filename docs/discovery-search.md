@@ -11,3 +11,9 @@ Reports include raw snapshots, discovery coverage, exclusions, analysis and assu
 Recent factory entries do not establish token age. This sample does not cover other chains, V3, all historical pools, or all new tokens. Repeated runs are independent samples, not durable monitoring. Use the existing discovery monitor for checkpointed tracking.
 
 Next evidence gates: broader protocol adapters with verified pricing, timestamped forward observations, token sellability checks, realistic transaction simulation, then out-of-sample analysis including losses and failed attempts. A positive grid result alone is not evidence of sustainable profit.
+
+## Timing evidence
+
+Reports include monotonic `collectionMs` and `analysisMs`, plus nearest-rank p50/p95/max duration for completed logical RPC calls. Failed calls remain in the distribution. Admission, completion, failure, in-flight and budget rejection counts are separate. Logical call duration includes the existing adapter's retries and backoff; `networkAttempts` stays unknown. Empty distributions are null, not zero.
+
+These are per-run measurements, not service-level latency percentiles. Collection includes validation and network reads; analysis measures local calculations, and report writing is excluded. Event-to-capture and event-to-evaluation remain unknown until an event indexer provides authoritative event timing. A fast local calculation does not prove an execution advantage. The monotonic admission deadline prevents new calls after expiry; it does not cancel an existing adapter call.
