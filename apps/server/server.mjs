@@ -4,6 +4,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadDiscovery } from './reports.mjs';
 import { loadResearch } from './research.mjs';
+import { labView } from '../../packages/lab/index.mjs';
 import { planAgentCycle, emptyAgentState } from '../../packages/agent/index.mjs';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -13,6 +14,7 @@ const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': '
 
 export function createMirServer({ dataDirectory = path.join(project, 'data/discovery'),
   researchDirectory = path.join(project, 'data/research'),
+  labDirectory = path.join(project, 'data/lab'),
   webRoot = path.join(project, 'apps/web'), brandRoot = path.join(project, 'outputs/MIR-Brand-Kit-v2'),
   now = Date.now } = {}) {
   return http.createServer(async (request, response) => {
@@ -50,6 +52,19 @@ export function createMirServer({ dataDirectory = path.join(project, 'data/disco
           available: false, dataset: 'saved-research', freshness: 'unavailable', observations: [],
           sizing: null, analysis: null, agentPreview: null,
           error: 'Saved research could not be validated. No sample data substituted.' }));
+      }
+      return;
+    }
+    if (url.pathname.startsWith('/api/lab/')) {
+      const match = /^\/api\/lab\/(datasets|experiments)(?:\/([a-f0-9]{64}))?$/.exec(url.pathname);
+      if (!match || match[1] === 'datasets' && match[2]) { response.writeHead(404); response.end(); return; }
+      response.setHeader('Content-Type', 'application/json; charset=utf-8');
+      try {
+        const result = await labView(labDirectory, match[1], match[2]);
+        response.writeHead(200); response.end(request.method === 'HEAD' ? undefined : JSON.stringify(result));
+      } catch (error) {
+        response.writeHead(error.code === 'ENOENT' ? 404 : 503);
+        response.end(request.method === 'HEAD' ? undefined : JSON.stringify({ available: false, error: 'Lab evidence unavailable or invalid' }));
       }
       return;
     }

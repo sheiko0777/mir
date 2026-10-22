@@ -1,5 +1,6 @@
 """Public funding-only diagnostic, not a strategy backtest or execution tool."""
 import json
+import argparse
 import time
 import urllib.request
 from decimal import Decimal
@@ -11,7 +12,7 @@ ENDPOINT = 'https://api.hyperliquid.xyz/info'
 
 
 def summarize(rows, coin, start, end):
-    if not isinstance(rows, list) or len(rows) > 500:
+    if not isinstance(rows, list) or len(rows) > 366 * 24:
         raise ValueError('Invalid or oversized funding history')
     selected = {}
     for row in rows:
@@ -41,9 +42,36 @@ def summarize(rows, coin, start, end):
             'netProfit': None, 'qualified': False}
 
 
+def collect_history(coin, start, end):
+    rows, cursor = [], start
+    for _ in range(24):
+        body = json.dumps({'type': 'fundingHistory', 'coin': coin, 'startTime': cursor, 'endTime': end}).encode()
+        request = urllib.request.Request(ENDPOINT, body, {'Content-Type': 'application/json'})
+        with urllib.request.urlopen(request, timeout=25) as response:
+            payload = response.read(1000001)
+        if len(payload) > 1000000:
+            raise ValueError('Response too large')
+        page = json.loads(payload)
+        if not isinstance(page, list) or len(page) > 500:
+            raise ValueError('Invalid funding page')
+        if not page:
+            break
+        if any(type(r.get('time')) is not int or r['time'] < cursor or r['coin'] != coin for r in page):
+            raise ValueError('Invalid pagination identity or time')
+        last = max(r['time'] for r in page)
+        rows.extend(r for r in page if r['time'] < end)
+        if last >= end - HOUR:
+            break
+        cursor = last + 1
+    return rows
+
+
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--days', type=int, default=7, choices=range(1, 367))
+    args = parser.parse_args()
     end = int(time.time() * 1000) // HOUR * HOUR
-    start = end - 7 * 24 * HOUR
+    start = end - args.days * 24 * HOUR
     report = {'schemaVersion': 1, 'mode': 'funding-only-diagnostic', 'source': ENDPOINT,
               'startInclusiveMs': start, 'endExclusiveMs': end, 'assets': [],
               'assumptions': ['Constant USD notional short, normalized funding income only.',
@@ -52,14 +80,8 @@ def main():
                               'No annualization, compounding, fills or realized profit.'],
               'qualifiedOpportunities': 0}
     for coin in COINS:
-        body = json.dumps({'type': 'fundingHistory', 'coin': coin, 'startTime': start, 'endTime': end}).encode()
-        request = urllib.request.Request(ENDPOINT, body, {'Content-Type': 'application/json'})
         try:
-            with urllib.request.urlopen(request, timeout=25) as response:
-                payload = response.read(1000001)
-            if len(payload) > 1000000:
-                raise ValueError('Response too large')
-            rows = json.loads(payload)
+            rows = collect_history(coin, start, end)
             try:
                 analysis = summarize(rows, coin, start, end)
                 report['assets'].append({'raw': rows, 'analysis': analysis})

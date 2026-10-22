@@ -1,0 +1,39 @@
+{
+  "platform": "Windows x64 CPython 3.14",
+  "resources": [
+    {
+      "name": "duckdb",
+      "version": "1.5.6",
+      "wheel": "https://files.pythonhosted.org/packages/9f/58/762f7159662d7859e201fa05ca29f306795daeabf84f3e087215a966b001/duckdb-1.5.6-cp314-cp314-win_amd64.whl",
+      "sha256": "ebcbd09cd8578ab1093393e9b16289cda0e8f1791ac595bf00eb5bad75c3cf00",
+      "license": "MIT",
+      "requiresDist": [
+        "ipython; extra == \"all\"",
+        "fsspec; extra == \"all\"",
+        "numpy; extra == \"all\"",
+        "pandas; extra == \"all\"",
+        "pyarrow; extra == \"all\"",
+        "adbc-driver-manager; extra == \"all\""
+      ],
+      "notices": [
+        "tools/research/licenses/duckdb-LICENSE"
+      ],
+      "scope": "isolated local research; binary wheels; no trading access",
+      "status": "installed; warehouse integration exercised separately"
+    },
+    {
+      "name": "pyarrow",
+      "version": "26.0.0",
+      "wheel": "https://files.pythonhosted.org/packages/1e/ff/a74892c50aaf1f9f744a84493e08a2f99221e77c39d2d4a926de21a99edf/pyarrow-26.0.0-cp314-cp314-win_amd64.whl",
+      "sha256": "4a5fa8dc70dd50808990ff36faf44088e357b353d86c7682dd92d4b78d4c97d5",
+      "license": "Apache-2.0",
+      "requiresDist": [],
+      "notices": [
+        "tools/research/licenses/pyarrow-LICENSE.txt",
+        "tools/research/licenses/pyarrow-NOTICE.txt"
+      ],
+      "scope": "isolated local research; binary wheels; no trading access",
+      "status": "installed; warehouse integration exercised separately"
+    }
+  ]
+}

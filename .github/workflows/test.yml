@@ -11,6 +11,11 @@ jobs:
         with:
           node-version: '22'
       - run: npm test
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Research arithmetic and funding pagination
+        run: python -m unittest discover -s tools/research -p 'test_*.py'
       - name: Install pinned isolated SDK reference (scripts disabled)
         run: npm ci --prefix tools/rea/reference --ignore-scripts --no-audit --no-fund
       - run: npm run test:sdk
