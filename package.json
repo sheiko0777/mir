@@ -16,6 +16,8 @@
     "size:demo": "node apps/monitor/sizing-demo.mjs",
     "test": "node --test",
     "test:sdk": "node tools/rea/compare-v2.mjs",
+    "test:evm": "node tools/evm/local-quote-check.mjs",
+    "test:almanak": "node tools/research/run-almanak-probe.mjs",
     "test:sizing-reference": "node tools/rea/compare-sizing.mjs"
   }
 }

@@ -16,6 +16,8 @@ The approved research plan remains the scope. This is a progress ledger, not a c
 - A real six-market capture completed in nine requests. Native decimal-string depth is preserved alongside normalized CCXT books; calculations consume native strings. BTC/ETH/SOL spot and perpetual symbols are candidate representations, not proof of equivalent underlying exposure. Snapshot source age, request p50/p95, failures and identity mismatches are recomputed for Lab display. Raw evidence is omitted from list responses.
 - Decimal depth estimates support buy/sell, weighted prices and partial depth. Empty/crossed/unsorted books, identity mismatch, nonfinite values and source age above five seconds are rejected. Estimates explicitly report zero actual fills. A one-unit probe is a validation exercise, not the 500/5,000/50,000 USD allocation experiment.
 - Capture now uses two workers with separate sessions, reused metadata and a shared request/deadline budget. Each book records its CCXT symbol and native request coin; numeric perpetual market IDs are retained separately from native coin names. Lab displays source-time skew for candidate symbol groups without declaring hedge equivalence. Historical sequential captures remain readable and labeled.
+- Anvil v1.8.6 is installed locally with pinned archive/binary checksums and retained notices/SBOM. Seventy-two synthetic EVM arithmetic fixture cases matched LXR with no accounts, transaction submissions or external RPC. This is not a fork swap or token sellability test. See `RESEARCH-TOOLS.md` for isolated environments and remaining integration gates.
+- Almanak 2.29.2 is installed in a separate hash-pinned 91-package environment. Version checks, dependency consistency and an offline HOLD intent round trip passed; notices and source-matched license supplements are retained. No SDK strategy/backtest/fork integration or return model has been certified. The agent has no direct SDK signer/gateway capability.
 
 ## Reproduce locally
 
@@ -58,7 +60,7 @@ Local raw reports `data/market-capture/1792675416901.json` and `1792695291670.js
 | Resumable event index | Existing factory offsets are not event timestamps; add event journal with reorg handling |
 | Ethereum V3, Base and Solana | Not implemented; require separate reference-pricing checks before admission |
 | Token checks and fork sell simulation | Not implemented; unknown token behavior remains a rejection reason |
-| Foundry and protocol SDKs | Not installed by this stage; install at the relevant adapter gate |
+| Foundry and protocol SDKs | Anvil installed and arithmetic fixture exercised; Forge/Cast, actual protocol fork fixtures and V3/Solana SDK references still require their adapter gates |
 | Lab agent scheduling | Existing agent remains separate; lab currently only returns next-task suggestions |
 | Full portfolio risk | Carry scenario checks 5% drawdown only; 15% new-token track and portfolio limits still require integration |
 | Forward observation | No new 30-day experiment is registered or running. Start only after explicit frozen strategy/cost policy and data readiness |

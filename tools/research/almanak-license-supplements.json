@@ -1,0 +1,18 @@
+[
+  {
+    "name": "jsonalias",
+    "version": "0.1.1",
+    "member": "jsonalias/__init__.py",
+    "sourceBlob": "6fa3a27e20009d6f2e681f543e2a977e3008b9b7",
+    "licenseUrl": "https://github.com/kevinheavey/jsonalias/blob/2a98db9c4024b1914f198f088f2aaa15a8cd7423/LICENSE",
+    "note": "Wheel omits license. Upstream MIT file preserved verbatim including template copyright placeholders; no ownership/legal clearance claimed."
+  },
+  {
+    "name": "pyluach",
+    "version": "2.3.0",
+    "member": "pyluach/__init__.py",
+    "sourceBlob": "05386af392b5ef1d6f5531c28700d1f6d1f38018",
+    "licenseUrl": "https://github.com/simlist/pyluach/blob/v2.3.0/license.txt",
+    "note": "Wheel omits license; v2.3.0 upstream notice preserved."
+  }
+]

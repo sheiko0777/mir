@@ -1,0 +1,18 @@
+{
+  "version": "v1.8.6",
+  "executableSha256": "64c6878503d3b4d6160c116410f957949da9dfd2b78c2a8707c50f550a6c40d3",
+  "source": "https://github.com/foundry-rs/foundry",
+  "license": "MIT OR Apache-2.0 (upstream root files; dependency SBOM separate)",
+  "archive": {
+    "url": "https://github.com/foundry-rs/foundry/releases/download/v1.8.6/foundry_v1.8.6_win32_amd64.zip",
+    "sha256": "924d6395786af438e7cb315f6835185f99d727ed6127dbbc4e6a62eb14edcfff",
+    "bytes": 119259859
+  },
+  "sbom": {
+    "url": "https://github.com/foundry-rs/foundry/releases/download/v1.8.6/foundry_v1.8.6_win32_amd64.spdx.json",
+    "sha256": "6a81c52c588fedfb2113123c7691284c2699ea77f1594c88439a497b7c98ef5c",
+    "bytes": 7827931
+  },
+  "scope": "local EVM only; zero accounts; no external signer; no PATH changes",
+  "verification": "GitHub release asset SHA-256; Sigstore attestation not independently verified"
+}
