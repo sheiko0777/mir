@@ -8,7 +8,7 @@ Tools support the existing read-only and local simulation plan. Installation is 
 - The archive and upstream SPDX SBOM are checked against the release asset SHA-256 values in `tools/evm/anvil-resource.json`; the extracted executable is separately pinned. This is checksum verification, not independent Sigstore verification or a security audit.
 - MIT/Apache notices are retained under `tools/evm/licenses`. The dependency SBOM and local installation receipt remain under ignored `data/evm/`.
 - `local-quote-check.mjs` starts an ephemeral loopback chain with ID 31337, zero accounts and no mining. It uses only local read calls and per-call state overrides; no transaction submission or external RPC is used. The child process is stopped afterward.
-- Seventy-two positive synthetic uint112 arithmetic cases, including both orientations, dust, large reserves and differing token scales, matched LXR exactly. The bytecode is an original arithmetic fixture, not Uniswap deployment bytecode. Token sellability, taxes, hooks, real swap execution, mainnet fork behavior, economic gas costs and profitability are not verified.
+- Seventy-two positive synthetic uint112 arithmetic cases, including both orientations, dust, large reserves and differing token scales, matched LXR exactly. The bytecode is an original arithmetic fixture, not Uniswap deployment bytecode. Token sellability, taxes, hooks, real swap execution, economic gas costs and profitability are not verified by this fixture.
 
 ```text
 python tools/evm/install_anvil.py
@@ -16,6 +16,10 @@ node tools/evm/local-quote-check.mjs
 ```
 
 Report: `outputs/evm/local-quote-check.json`. Upstream: [release v1.8.6](https://github.com/foundry-rs/foundry/releases/tag/v1.8.6), [MIT](https://github.com/foundry-rs/foundry/blob/v1.8.6/LICENSE-MIT), [Apache](https://github.com/foundry-rs/foundry/blob/v1.8.6/LICENSE-APACHE).
+
+### Actual Router02 fork view comparison
+
+`npm run test:fork` now compares eight exact-input view quotes against actual Ethereum Uniswap V2 Router02 code in an Anvil fork, including both USDC/WETH directions. It checks factory/token identity, router WETH/factory values, runtime code, reserves and block hash. Source reads pass through a fixed-block allowlist and a request/time/response-size budget; zero accounts and zero transaction submissions remain enforced. See [fork validation and replay evidence](FORK-QUOTE-VALIDATION.md). This is a view-quote comparison, not a swap, sellability check or economic return test.
 
 ## Almanak 2.29.2 — installed; offline HOLD probe passed
 

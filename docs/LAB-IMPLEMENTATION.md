@@ -18,6 +18,7 @@ The approved research plan remains the scope. This is a progress ledger, not a c
 - Capture now uses two workers with separate sessions, reused metadata and a shared request/deadline budget. Each book records its CCXT symbol and native request coin; numeric perpetual market IDs are retained separately from native coin names. Lab displays source-time skew for candidate symbol groups without declaring hedge equivalence. Historical sequential captures remain readable and labeled.
 - Anvil v1.8.6 is installed locally with pinned archive/binary checksums and retained notices/SBOM. Seventy-two synthetic EVM arithmetic fixture cases matched LXR with no accounts, transaction submissions or external RPC. This is not a fork swap or token sellability test. See `RESEARCH-TOOLS.md` for isolated environments and remaining integration gates.
 - Almanak 2.29.2 is installed in a separate hash-pinned 91-package environment. Version checks, dependency consistency and an offline HOLD intent round trip passed; notices and source-matched license supplements are retained. No SDK strategy/backtest/fork integration or return model has been certified. The agent has no direct SDK signer/gateway capability.
+- Actual Uniswap V2 Router02 view quotes matched LXR on an Anvil fork in eight cases at a fixed Ethereum block. Code, reserves, factory/token identity and the block hash were checked. A digest-pinned replay of captured RPC state reproduced all eight cases with no external RPC. This is a finite recorded state, not arbitrary archive access, a swap, a token safety check or new market observations. Public historical access later returned HTTP 403 requiring a personal token; those failures remain recorded, and no token or paid service was used. See `FORK-QUOTE-VALIDATION.md`.
 
 ## Reproduce locally
 
@@ -59,7 +60,7 @@ Local raw reports `data/market-capture/1792675416901.json` and `1792695291670.js
 | Cross-venue and dated futures | Add settlement/funding alignment and fragmented collateral model |
 | Resumable event index | Existing factory offsets are not event timestamps; add event journal with reorg handling |
 | Ethereum V3, Base and Solana | Not implemented; require separate reference-pricing checks before admission |
-| Token checks and fork sell simulation | Not implemented; unknown token behavior remains a rejection reason |
+| Token checks and fork sell simulation | Actual fork view pricing validated for one V2 pair; transfer/sell simulation and unknown token behavior remain unimplemented rejection gates |
 | Foundry and protocol SDKs | Anvil installed and arithmetic fixture exercised; Forge/Cast, actual protocol fork fixtures and V3/Solana SDK references still require their adapter gates |
 | Lab agent scheduling | Existing agent remains separate; lab currently only returns next-task suggestions |
 | Full portfolio risk | Carry scenario checks 5% drawdown only; 15% new-token track and portfolio limits still require integration |
