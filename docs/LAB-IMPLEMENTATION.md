@@ -22,6 +22,12 @@ The approved research plan remains the scope. This is a progress ledger, not a c
 
 ## Reproduce locally
 
+The local carry sensitivity CLI now evaluates five scenarios across the three
+capital sizes, retaining complete loss ledgers and required-case screening
+reasons. Reports include input/engine hashes and never qualify a strategy. See
+`CARRY-STRESS-SCREENING.md`. This is not yet integrated into Lab APIs, a holdout
+evaluator or certified real-market evidence.
+
 ```text
 python tools/research/funding_probe.py --days 90
 node apps/monitor/lab-import.mjs <saved-funding-report.json>

@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "kind": "carry-scenario",
+  "evidenceKind": "illustrative",
+  "description": "MOCK SAMPLE: artificial arithmetic fixture, not market observations or a trading result.",
+  "policy": {"spotFeeBps": "1", "perpFeeBps": "1", "maintenanceMarginBps": "500"},
+  "observations": [
+    {"timeMs": 0, "spotBid": "100", "spotAsk": "100", "perpBid": "100", "perpAsk": "100", "oracle": "100", "mark": "100", "fundingRate": "0.001", "otherCostUsd": "0"},
+    {"timeMs": 3600000, "spotBid": "100", "spotAsk": "100", "perpBid": "100", "perpAsk": "100", "oracle": "100", "mark": "100", "fundingRate": "0.001", "otherCostUsd": "0"},
+    {"timeMs": 7200000, "spotBid": "100", "spotAsk": "100", "perpBid": "100", "perpAsk": "100", "oracle": "100", "mark": "100", "fundingRate": "0.001", "otherCostUsd": "0"}
+  ]
+}
