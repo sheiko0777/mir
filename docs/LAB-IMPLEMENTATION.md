@@ -67,6 +67,12 @@ HTTP 403 failures without fabricated data. At the user's request, three research
 agents broadened the search to [small non-trading niches](SMALL-NICHE-RESEARCH.md).
 The offline paid-work accounting prototype is tested; no live revenue is verified.
 
+The [PoolTogether accounting adapter](PROTOCOL-WORK-ACCOUNTING.md) now validates
+published event schemas, credit inventory and withdrawal-transfer matching.
+Two additional public live-data probes returned 403; promotion remains gated on
+permitted event/receipt/state evidence. These CLI research tools are not execution
+bots and are not yet ingested into the Lab HTTP evidence lists.
+
 | Plan requirement | Current gap / next gate |
 |---|---|
 | Frozen hypotheses, 60/30 holdout and stress approval | Paired-candle reference evaluator exists; all nine carry combinations rejected; execution evidence and promotion remain absent |

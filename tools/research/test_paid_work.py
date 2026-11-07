@@ -34,6 +34,11 @@ class PaidWorkTests(unittest.TestCase):
         self.assertFalse(result['qualified'])
         self.assertIsNone(result['mirRevenueReceived'])
 
+    def test_protocol_accrual_cannot_masquerade_as_direct_payment(self):
+        for semantics in (None,'accrued-claim-reward'):
+            self.doc['rewardSemantics']=semantics
+            with self.assertRaises(ValueError): analyze(self.doc)
+
     def test_duplicate_events_receipts_and_rewards_on_failed_transactions_rejected(self):
         for mutate in (lambda d:d['receipts'].append(d['receipts'][0]),
                        lambda d:d['rewardEvents'].append(d['rewardEvents'][0]),

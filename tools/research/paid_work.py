@@ -29,6 +29,8 @@ def analyze(document):
             document.get('evidenceKind') not in ('illustrative','observed-unverified') or \
             type(document.get('chainId')) is not int or document['chainId']<=0:
         raise ValueError('Explicit observed/illustrative evidence and chain required')
+    if document.get('rewardSemantics')!='direct-token-transfer':
+        raise ValueError('Direct token-transfer semantics required; accrued credits need protocol-specific accounting')
     operator = identifier(document.get('operator'),40)
     receipts,events = document.get('receipts'),document.get('rewardEvents')
     if not isinstance(receipts,list) or not isinstance(events,list) or not 1<=len(receipts)<=10000 or len(events)>50000:
@@ -79,11 +81,14 @@ def analyze(document):
                 rewardEventCount=len(events),uniqueTransactionCount=len(txs),failedTransactions=failed,
                 observedRewardAtomic=str(total_reward),knownTransactionFeesAtomic=str(total_fees),
                 knownOperatingCostsAtomic=str(operating),conditionalNetAtomic=str(net) if net is not None else None,
+                conditionalCashFlowNetAtomic=str(net) if net is not None else None,
                 doubledCostConditionalNetAtomic=str(total_reward-2*(total_fees+operating)) if complete else None,
                 missingFeeTransactions=missing_fees,missingOperatingCosts=sorted(set(missing_operating)),
                 missingAssetConversion=not same_asset,qualified=False,verifiedNetAtomic=None,mirRevenueReceived=None,
                 decision='insufficient-live-job-and-execution-evidence',
-                limitations=['One receipt cost is counted once even when a batch emits many reward events',
+                limitations=['Legacy conditionalNetAtomic is cash-flow arithmetic, not earned-profit verification',
+                             'Only supplied direct token transfers belong here; accrued protocol credits are excluded',
+                             'One receipt cost is counted once even when a batch emits many reward events',
                              'totalFeeAtomic must include chain-specific L1/operator fees; export authenticity is unverified',
                              'No reward conversion or WETH/ETH equivalence is assumed automatically',
                              'Historical operator rewards are not MIR revenue or proof of currently available jobs',

@@ -65,6 +65,12 @@ events and other operators' rewards, and refuses missing cost/conversion inputs.
 It accepts no wallet, signer, RPC endpoint or transaction method. Its fixture is
 explicitly illustrative and breaks even at base costs, losing under double costs.
 
+The subsequent [protocol accounting gate](PROTOCOL-WORK-ACCOUNTING.md) adds
+published ABI decoding and separates accrued credits from actual token transfers.
+The generic ledger now explicitly accepts direct-transfer semantics only. Live
+Blockscout and official Base RPC probes returned 403, so current job capacity and
+keeper profit remain unmeasured.
+
 ```text
 python tools/research/paid_work.py tools/research/fixtures/paid-work-illustrative.json
 python tools/research/test_paid_work.py

@@ -1,0 +1,213 @@
+{
+  "schemaVersion": 1,
+  "chainId": 8453,
+  "pool": "0x45b2010d8a4f08b53c9fa7544c51dfd9733732cb",
+  "claimer": "0xcdce635b774de77cdf791647601dba64a75547ba",
+  "prizeToken": "0x4200000000000000000000000000000000000006",
+  "publishedArtifactSha256": {
+    "abi": "6f264ba14cbe0fca4df45f7ebfd842d334d376e4afc9ef309510257c6f9f1293",
+    "config": "8b4bee822293d09677ed40e39bb15951706da0e754f8176b75f340e77329729b"
+  },
+  "publishedDeployments": [
+    {
+      "address": "0x45b2010d8a4f08b53c9fa7544c51dfd9733732cb",
+      "type": "PrizePool",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    },
+    {
+      "address": "0xcdce635b774de77cdf791647601dba64a75547ba",
+      "type": "Claimer",
+      "version": {
+        "major": 1,
+        "minor": 0,
+        "patch": 0
+      }
+    }
+  ],
+  "liveBytecodeVerified": false,
+  "liveTokenDecimalsVerified": false,
+  "sources": [
+    "https://github.com/GenerationSoftware/pt-v5-mainnet/blob/main/deployments/base/contracts.json",
+    "https://github.com/GenerationSoftware/pt-v5-mainnet/blob/main/config/base.json",
+    "https://github.com/GenerationSoftware/pt-v5-prize-pool/blob/main/src/PrizePool.sol"
+  ],
+  "events": [
+    {
+      "name": "AllocateRewardFromReserve",
+      "address": "0x45b2010d8a4f08b53c9fa7544c51dfd9733732cb",
+      "signature": "AllocateRewardFromReserve(address,uint256)",
+      "topic": "0xecb1c952c58fd78de1639daecf690934ce9017bbd60ceaf3355f80ee8d24e737",
+      "inputs": [
+        {
+          "name": "to",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "amount",
+          "type": "uint256",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "name": "ClaimedPrize",
+      "address": "0x45b2010d8a4f08b53c9fa7544c51dfd9733732cb",
+      "signature": "ClaimedPrize(address,address,address,uint24,uint8,uint32,uint152,uint96,address)",
+      "topic": "0x81d4e3306aa30f56dc9c3949abd8c27539b445f9ef380425f39f3f7114888e4f",
+      "inputs": [
+        {
+          "name": "vault",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "winner",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "recipient",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "drawId",
+          "type": "uint24",
+          "indexed": false
+        },
+        {
+          "name": "tier",
+          "type": "uint8",
+          "indexed": false
+        },
+        {
+          "name": "prizeIndex",
+          "type": "uint32",
+          "indexed": false
+        },
+        {
+          "name": "payout",
+          "type": "uint152",
+          "indexed": false
+        },
+        {
+          "name": "claimReward",
+          "type": "uint96",
+          "indexed": false
+        },
+        {
+          "name": "claimRewardRecipient",
+          "type": "address",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "name": "IncreaseClaimRewards",
+      "address": "0x45b2010d8a4f08b53c9fa7544c51dfd9733732cb",
+      "signature": "IncreaseClaimRewards(address,uint256)",
+      "topic": "0xeeb4ea63ac93d08466c88060e80ed42f0641debf45e931025fbb35faf5f2ad1a",
+      "inputs": [
+        {
+          "name": "to",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "amount",
+          "type": "uint256",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "name": "WithdrawRewards",
+      "address": "0x45b2010d8a4f08b53c9fa7544c51dfd9733732cb",
+      "signature": "WithdrawRewards(address,address,uint256,uint256)",
+      "topic": "0xf4e9e956ba4b65051e84982c3ade043c89890cdbc452e9e446afe09cd4db40c8",
+      "inputs": [
+        {
+          "name": "account",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "to",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "amount",
+          "type": "uint256",
+          "indexed": false
+        },
+        {
+          "name": "available",
+          "type": "uint256",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "name": "ClaimError",
+      "address": "0xcdce635b774de77cdf791647601dba64a75547ba",
+      "signature": "ClaimError(address,uint8,address,uint32,bytes)",
+      "topic": "0xc09b2fa185e7124c7aebcd0742e7cc3e30ef3fd28bb40faf120c2a363324df29",
+      "inputs": [
+        {
+          "name": "vault",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "tier",
+          "type": "uint8",
+          "indexed": true
+        },
+        {
+          "name": "winner",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "prizeIndex",
+          "type": "uint32",
+          "indexed": false
+        },
+        {
+          "name": "reason",
+          "type": "bytes",
+          "indexed": false
+        }
+      ]
+    },
+    {
+      "name": "Transfer",
+      "address": "0x4200000000000000000000000000000000000006",
+      "signature": "Transfer(address,address,uint256)",
+      "topic": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+      "inputs": [
+        {
+          "name": "from",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "to",
+          "type": "address",
+          "indexed": true
+        },
+        {
+          "name": "value",
+          "type": "uint256",
+          "indexed": false
+        }
+      ]
+    }
+  ]
+}

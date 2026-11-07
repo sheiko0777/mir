@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "kind": "protocol-paid-work-observations",
   "evidenceKind": "illustrative",
+  "rewardSemantics": "direct-token-transfer",
   "chainId": 8453,
   "operator": "0x1111111111111111111111111111111111111111",
   "rewardAsset": "fixture-native-asset-not-market-data",
