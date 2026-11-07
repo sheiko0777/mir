@@ -48,7 +48,7 @@ def capture():
     try:
         markets = exchange.load_markets()
         # Discover candidate representations but never equate wrapped assets by symbol.
-        names = {'BTC', 'ETH', 'SOL', 'UBTC', 'UETH', 'USOL'}
+        names = {'BTC', 'ETH', 'SOL', 'UBTC', 'UETH', 'USOL', 'HYPE'}
         chosen = [m for m in markets.values() if m.get('base') in names and m.get('quote') == 'USDC'
                   and (m.get('spot') or m.get('swap'))]
         selected = sorted(chosen, key=lambda m: m['symbol'])[:8]

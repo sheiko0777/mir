@@ -5,6 +5,13 @@ from funding_probe import summarize, collect_history, HOUR
 
 
 class FundingTests(unittest.TestCase):
+    def test_hype_is_explicitly_supported_and_unknown_assets_do_not_call_transport(self):
+        rows = [{'coin': 'HYPE', 'time': 0, 'fundingRate': '-0.001'}]
+        self.assertEqual(summarize(rows, 'HYPE', 0, HOUR)['negativeIntervals'], 1)
+        with patch('funding_probe.urllib.request.urlopen') as transport:
+            with self.assertRaises(ValueError): collect_history('UNREVIEWED', 0, HOUR)
+            transport.assert_not_called()
+
     def test_signed_rates_and_costs(self):
         rows = [{'coin': 'BTC', 'time': i * HOUR, 'fundingRate': rate}
                 for i, rate in enumerate(['0.001', '-0.002', '0.003', '-0.001'])]

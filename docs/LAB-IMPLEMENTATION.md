@@ -4,6 +4,8 @@ The approved research plan remains the scope. This is a progress ledger, not a c
 
 ## Implemented and verified
 
+- Multi-bot research cards and `GET /api/bots` now coordinate existing LXR and carry evidence with proposed tasks for Kronos and prediction markets. `npm run bots:review` saves a content-addressed review. Kronos has a source-pinned local adapter with separate-path sampling and preflight checks. Runtime, model weights, prediction-market feed integration and independent returns remain pending. See `MULTI-BOT-LAB.md`.
+
 - Content-addressed immutable funding datasets and experiment definitions in `data/lab`. File hashes and input fields are verified on read; results are recalculated, never accepted from saved winners. The directory is local and excluded from Git.
 - Three read-only endpoints: `/api/lab/datasets`, `/api/lab/experiments`, `/api/lab/experiments/:id`. Missing datasets return an empty listing, corrupt evidence returns unavailable, unknown IDs return 404, writes return 405.
 - `lab.html` displays actual datasets and funding diagnostics, unknown net profit, assumptions and missing evidence. No simulated sample fallback. Mobile widths and clearing results on endpoint failure are browser-tested.

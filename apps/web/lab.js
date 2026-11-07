@@ -7,12 +7,30 @@ const evidence = (node, label, id) => {
 async function refresh() {
   byId('reload').disabled = true;
   byId('datasets').replaceChildren(); byId('experiments').replaceChildren();
+  byId('bots').replaceChildren();
   byId('status').textContent = 'جارٍ التحقق من البيانات وإعادة الحساب…';
   try {
-    const responses = await Promise.all(['datasets', 'experiments'].map(type => fetch(`/api/lab/${type}`, { cache: 'no-store' })));
+    const responses = await Promise.all(['/api/lab/datasets', '/api/lab/experiments', '/api/bots'].map(url => fetch(url, { cache: 'no-store' })));
     if (responses.some(r => !r.ok)) throw new Error('unavailable');
-    const [datasets, experiments] = await Promise.all(responses.map(r => r.json()));
-    if (!Array.isArray(datasets.items) || !Array.isArray(experiments.items)) throw new Error('invalid');
+    const [datasets, experiments, bots] = await Promise.all(responses.map(r => r.json()));
+    if (!Array.isArray(datasets.items) || !Array.isArray(experiments.items) || !Array.isArray(bots.bots) || !Array.isArray(bots.tasks)) throw new Error('invalid');
+    const states = { 'research-evidence-available': 'أدلة بحث محفوظة', 'awaiting-data': 'بانتظار بيانات', 'awaiting-integration': 'بانتظار استكمال الدمج' };
+    const implementations = { 'integrated-analysis': 'تحليل مدمج', 'adapter-available': 'موصّل أولي متاح', 'source-reviewed': 'تم فحص المصدر' };
+    const taskNames = { 'review-route-evidence': 'مراجعة أدلة المسارات', 'collect-pinned-pools': 'جمع حالة البوولز',
+      'review-depth-and-hedge-identity': 'مراجعة العمق وهوية التحوّط', 'collect-spot-perp-depth': 'جمع عمق طرفي السوق',
+      'freeze-prospective-carry-policy': 'تثبيت سياسة تجربة التمويل', 'collect-funding-history': 'جمع تاريخ التمويل',
+      'prepare-offline-model-and-context': 'تجهيز نموذج Kronos وبياناته', 'review-public-feed-adapter': 'مراجعة موصّل أسواق التوقعات' };
+    for (const bot of bots.bots) {
+      const card = document.createElement('article');
+      const heading = document.createElement('h3'); heading.textContent = bot.name; card.append(heading);
+      paragraph(card, bot.purpose);
+      paragraph(card, `${implementations[bot.implementation]} — ${states[bot.status]}`);
+      paragraph(card, `مراجع الأدلة ${bot.evidenceIds.length} — صافي الربح غير مثبت`);
+      for (const next of bots.tasks.filter(task => task.botId === bot.id)) {
+        evidence(card, taskNames[next.kind], next.reasons.join(' · '));
+      }
+      byId('bots').append(card);
+    }
     for (const d of [...datasets.items].sort((a, b) => b.capturedAtMs - a.capturedAtMs)) {
       const card = document.createElement('article');
       if (d.kind === 'market-snapshot') {
@@ -43,6 +61,7 @@ async function refresh() {
     byId('status').textContent = datasets.items.length ? 'تم التحقق وإعادة الحساب. النتائج تاريخية وليست توصيات تنفيذ.' : 'لا توجد بيانات مختبر مستوردة بعد.';
   } catch {
     byId('datasets').replaceChildren(); byId('experiments').replaceChildren();
+    byId('bots').replaceChildren();
     byId('status').textContent = 'الأدلة غير متاحة أو تعذر التحقق منها. لم تُستخدم بيانات بديلة.';
   } finally { byId('reload').disabled = false; }
 }

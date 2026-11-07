@@ -22,7 +22,7 @@ function decimal(value) {
 export function validateDataset(dataset) {
   if (dataset?.kind === 'market-snapshot') return validateMarketDataset(dataset);
   if (dataset?.schemaVersion !== 1 || dataset.kind !== 'funding-history' ||
-      dataset.source !== 'https://api.hyperliquid.xyz/info' || !['BTC', 'ETH', 'SOL'].includes(dataset.asset) ||
+      dataset.source !== 'https://api.hyperliquid.xyz/info' || !['BTC', 'ETH', 'SOL', 'HYPE'].includes(dataset.asset) ||
       !integer(dataset.startMs) || !integer(dataset.endMs) || !integer(dataset.capturedAtMs) ||
       dataset.startMs % HOUR || dataset.endMs % HOUR || dataset.endMs <= dataset.startMs ||
       dataset.endMs > dataset.capturedAtMs || dataset.endMs - dataset.startMs > 366 * 24 * HOUR ||

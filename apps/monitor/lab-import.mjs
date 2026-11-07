@@ -6,7 +6,7 @@ const file = process.argv[2];
 if (!file || process.argv.length !== 3) throw new Error('Usage: node apps/monitor/lab-import.mjs <funding-report.json>');
 if ((await stat(file)).size > 8 * 1024 * 1024) throw new Error('Input too large');
 const report = JSON.parse(await readFile(file, 'utf8'));
-if (report.mode !== 'funding-only-diagnostic' || !Array.isArray(report.assets) || report.assets.length > 3)
+if (report.mode !== 'funding-only-diagnostic' || !Array.isArray(report.assets) || report.assets.length > 4)
   throw new Error('Unsupported source report');
 const datasets = report.assets.filter(a => Array.isArray(a.raw) && a.raw.length).map(a => validateDataset({
   schemaVersion: 1, kind: 'funding-history', source: report.source, asset: a.raw[0].coin,

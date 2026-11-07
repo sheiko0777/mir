@@ -8,6 +8,7 @@ from pathlib import Path
 
 HOUR = 3600000
 COINS = ('BTC', 'ETH', 'SOL')
+SUPPORTED_COINS = (*COINS, 'HYPE')
 ENDPOINT = 'https://api.hyperliquid.xyz/info'
 
 
@@ -43,6 +44,8 @@ def summarize(rows, coin, start, end):
 
 
 def collect_history(coin, start, end):
+    if coin not in SUPPORTED_COINS:
+        raise ValueError('Unsupported public funding asset')
     rows, cursor = [], start
     for _ in range(24):
         body = json.dumps({'type': 'fundingHistory', 'coin': coin, 'startTime': cursor, 'endTime': end}).encode()
@@ -69,6 +72,7 @@ def collect_history(coin, start, end):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--days', type=int, default=7, choices=range(1, 367))
+    parser.add_argument('--coins', nargs='+', choices=SUPPORTED_COINS, default=COINS)
     args = parser.parse_args()
     end = int(time.time() * 1000) // HOUR * HOUR
     start = end - args.days * 24 * HOUR
@@ -79,7 +83,7 @@ def main():
                               'No spot/perp basis P&L, borrow, liquidation, collateral or rehedging model.',
                               'No annualization, compounding, fills or realized profit.'],
               'qualifiedOpportunities': 0}
-    for coin in COINS:
+    for coin in dict.fromkeys(args.coins):
         try:
             rows = collect_history(coin, start, end)
             try:
