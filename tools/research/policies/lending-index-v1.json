@@ -1,0 +1,19 @@
+{
+  "version": "lending-index-v1",
+  "chainId": 42161,
+  "protocol": "Aave V3 Arbitrum",
+  "assetUnit": "Arbitrum USDT",
+  "pool": "0x794a61358d6845594f94dc1db02a252b5b4814ad",
+  "underlying": "0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9",
+  "aToken": "0x6ab707aca953edaefbc4fd23ba73294241490620",
+  "decimals": 6,
+  "capitalBudgets": ["500", "5000", "50000"],
+  "deployedFraction": "0.95",
+  "roundTripCostReserveAsset": "2",
+  "capitalOpportunityApr": "0.03",
+  "costMultipliers": [1, 2],
+  "periodsDays": [60, 30],
+  "scope": "Supply owned tokens without borrowing; capital pre-positioned on Arbitrum",
+  "costProvenance": "Fixed research cost reserve and opportunity-cost assumptions, not observed transaction fees",
+  "qualification": "No promotion without withdrawal simulation, complete costs, independent risk checks and forward tracking"
+}

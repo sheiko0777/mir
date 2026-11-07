@@ -59,12 +59,20 @@ Local raw reports `data/market-capture/1792675416901.json` and `1792695291670.js
 
 ## Remaining work — do not mark complete
 
+2026-11-07 update: the [90-day paired carry study](CARRY-CANDLE-RESEARCH.md)
+captured public spot/perpetual/mark candles and settlement marks, froze assumptions
+and produced negative 60/30 chronological reference-price scenarios. It is not an
+executable-depth backtest. Aave index collection and the public Merkl probe retain
+HTTP 403 failures without fabricated data. At the user's request, three research
+agents broadened the search to [small non-trading niches](SMALL-NICHE-RESEARCH.md).
+The offline paid-work accounting prototype is tested; no live revenue is verified.
+
 | Plan requirement | Current gap / next gate |
 |---|---|
-| Frozen hypotheses, 60/30 holdout and stress approval | Diagnostic definitions exist; no holdout evaluator, no approvals |
+| Frozen hypotheses, 60/30 holdout and stress approval | Paired-candle reference evaluator exists; all nine carry combinations rejected; execution evidence and promotion remain absent |
 | Spot/perp depth and synchronized pricing | Collect both legs with exact market identity and quote timestamps; do not use funding alone |
 | CCXT public-data adapter | Installed and exercised against native depth; next: sustained capture, synchronized legs, exact hedge identity and cost policy |
-| Lending and PT baselines | Add verified sources and unit/redemption accounting |
+| Lending and PT baselines | Aave atomic-unit/index model tested; live reads unavailable (403); PT source and redemption accounting remain absent |
 | Cross-venue and dated futures | Add settlement/funding alignment and fragmented collateral model |
 | Resumable event index | Existing factory offsets are not event timestamps; add event journal with reorg handling |
 | Ethereum V3, Base and Solana | Not implemented; require separate reference-pricing checks before admission |

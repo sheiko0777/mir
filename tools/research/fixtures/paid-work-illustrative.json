@@ -1,0 +1,18 @@
+{
+  "schemaVersion": 1,
+  "kind": "protocol-paid-work-observations",
+  "evidenceKind": "illustrative",
+  "chainId": 8453,
+  "operator": "0x1111111111111111111111111111111111111111",
+  "rewardAsset": "fixture-native-asset-not-market-data",
+  "costAsset": "fixture-native-asset-not-market-data",
+  "receipts": [
+    {"txHash":"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","payer":"0x1111111111111111111111111111111111111111","success":true,"timeMs":1000,"totalFeeAtomic":"10"},
+    {"txHash":"0xbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb","payer":"0x1111111111111111111111111111111111111111","success":false,"timeMs":2000,"totalFeeAtomic":"15"}
+  ],
+  "rewardEvents": [
+    {"txHash":"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","logIndex":0,"recipient":"0x1111111111111111111111111111111111111111","rewardAtomic":"20"},
+    {"txHash":"0xaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","logIndex":1,"recipient":"0x1111111111111111111111111111111111111111","rewardAtomic":"10"}
+  ],
+  "operatingCostsAtomic":{"rpc":"1","compute":"1","hosting":"1","support":"1","acquisition":"1","conversionAndWithdrawal":"0"}
+}

@@ -1,0 +1,21 @@
+{
+  "version": "carry-candle-v1",
+  "assets": ["BTC", "ETH", "SOL"],
+  "quoteUnit": "USDT",
+  "capitalBudgetsQuote": ["500", "5000", "50000"],
+  "spotAllocation": "0.5",
+  "marginAllocation": "0.3",
+  "spotTakerFeeBps": "10",
+  "perpTakerFeeBps": "5",
+  "perLegSlippageBps": "5",
+  "capitalOpportunityApr": "0.03",
+  "maintenanceMarginBps": "100",
+  "maximumDrawdown": "0.05",
+  "minimumRoundTripFundingIntervals": 2,
+  "developmentDays": 60,
+  "holdoutDays": 30,
+  "stressMultipliers": [1, 2],
+  "costProvenance": "Fixed research assumptions, not account-specific commission or observed historical execution costs",
+  "scope": "Long owned spot, short equal base quantity perpetual; no spot borrowing; capital pre-positioned on one venue",
+  "limitations": ["No USD peg assumed", "No executable fills inferred from candles", "Funding mark price is an observed settlement input", "No promotion based on selecting the best asset after holdout"]
+}
