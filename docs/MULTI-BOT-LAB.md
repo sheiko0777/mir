@@ -11,7 +11,7 @@ recomputed evidence and proposed tasks.
 |---|---|---|
 | LXR Liquidity | Existing reserve, size and cost analysis connected to the coordinator | Token transfer behavior, fresh evidence and independent net-return validation |
 | Carry Research | Funding diagnostics, HYPE history, native depth cost estimates and cost stresses | Synchronized historical executable-side prices, complete costs, prospective policy and holdout |
-| Kronos Forecast | Source-pinned adapter, separate sampled paths, closed-candle checks and runtime preflight | Reviewed Python runtime, pinned local weights/tokenizer, actual inference and forecast evaluation |
+| Kronos Forecast | Reviewed isolated runtime, pinned model/tokenizer, actual CPU inference and baseline/outcome evaluator | Independent multi-window evaluation, economic policy and cost-aware forward validation |
 | Prediction Markets | Reviewed Polymarket SDK and OpenMarket sources mapped to the research track | Public feed adapter, timestamp alignment, settlement identity and cost-aware replay |
 
 The coordinator proposes five bounded tasks with stable evidence-based IDs. It
@@ -38,11 +38,12 @@ The adapter loads the reviewed source at commit
 `67b630e67f6a18c9e9be918d9b4337c960db1e9a` from the local source checkout. It checks
 the three imported source files against Git before loading them. Model assets
 belong under `tools/models/kronos-small` and
-`tools/models/kronos-tokenizer-base`. Runtime and model installation are pending.
-Package and model provenance must be recorded before an evaluated model run.
+`tools/models/kronos-tokenizer-base`. The isolated runtime and pinned official
+model assets have been installed and actually tested. Full procedures and the
+negative first diagnostic are recorded in [Kronos validation](KRONOS-VALIDATION.md).
 
 ```text
-python tools/research/kronos_adapter.py --context <closed-candles.json> --horizon 24 --samples 8
+tools/research/.venv-kronos/Scripts/python.exe tools/research/kronos_adapter.py --context <closed-candles.json> --horizon 24 --samples 2 --lookback 128
 ```
 
 Context JSON uses `schemaVersion: 1`, `kind: "ohlcv-context"`, `market`,
@@ -57,7 +58,10 @@ Upstream `sample_count` averages outputs internally. MIR requests each path with
 input hash and the last-close baseline. CPU generation has a 180-second admission
 budget checked between paths. An individual inference call can exceed that budget.
 The adapter keeps model outputs as forecast evidence awaiting observed outcomes
-and cost evaluation. Model runtime execution remains unverified in this delivery.
+and cost evaluation. The first actual 488-context/24-target diagnostic had MAE
+1737.1707356771 versus 295.125 for the last-close baseline. It does not support
+promotion of that configuration. Forecast files currently use the local CLI;
+the bot coordinator does not yet ingest them into its evidence list.
 
 ## Observed carry inputs
 
@@ -78,7 +82,7 @@ Other costs and net return remain unknown. USDC-to-USD conversion is an open inp
 
 | Resource | Decision and purpose |
 |---|---|
-| [Kronos](https://github.com/shiyu-coder/Kronos) · MIT | Downloaded and source-pinned. Adapter contract tested using a controlled predictor. Runtime and weights pending. |
+| [Kronos](https://github.com/shiyu-coder/Kronos) · MIT | Source and model revisions pinned, isolated runtime installed and real CPU inference tested. First diagnostic failed to beat the baseline. |
 | [AgentDiscover](https://github.com/mhdfb/AgentDiscover) | Reference for independent evaluator, persistent evidence and bounded sessions. Current checkout has no discovered code license, so the coordinator is MIR code. |
 | [ShinkaEvolve](https://github.com/SakanaAI/ShinkaEvolve) · Apache-2.0 | Downloaded. Candidate for experiment genealogy views after local format adaptation. |
 | [MiroFish](https://github.com/666ghj/MiroFish) · AGPL-3.0 | Downloaded. Graphic/social simulation reuse deferred pending license fit and measured value. |

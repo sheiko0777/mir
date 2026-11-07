@@ -1,7 +1,12 @@
 import unittest
 from copy import deepcopy
+import hashlib
+import json
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from unittest.mock import patch
 
-from kronos_adapter import sample_paths, validate_context
+from kronos_adapter import sample_paths, validate_context, historical_split, verify_models
 
 
 class Predictor:
@@ -15,6 +20,39 @@ class Predictor:
 
 
 class KronosAdapterTests(unittest.TestCase):
+    def test_model_files_are_rehashed_before_import(self):
+        with TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = []
+            for repo,folder in [('NeoQuasar/Kronos-small','kronos-small'),
+                                ('NeoQuasar/Kronos-Tokenizer-base','kronos-tokenizer-base')]:
+                files = []
+                for name in ('README.md','config.json','model.safetensors'):
+                    raw = b'model-test-fixture'
+                    path = root / 'tools/models' / folder / name
+                    path.parent.mkdir(parents=True,exist_ok=True)
+                    path.write_bytes(raw)
+                    files.append(dict(name=name,size=len(raw),sha256=hashlib.sha256(raw).hexdigest()))
+                manifest.append(dict(repo=repo,folder=folder,license='MIT',files=files))
+            location = root / 'tools/research/kronos-models.json'
+            location.parent.mkdir(parents=True)
+            location.write_text(json.dumps(manifest),encoding='utf-8')
+            with patch('kronos_adapter.ROOT',root):
+                self.assertEqual(len(verify_models()['models']),2)
+                (root / 'tools/models/kronos-small/model.safetensors').write_bytes(b'altered-test-model')
+                with self.assertRaises(ValueError): verify_models()
+
+    def test_historical_targets_are_absent_from_model_context(self):
+        document = {'schemaVersion':1,'kind':'ohlcv-context','market':'test','intervalMs':1000,'asOfMs':40000,
+                    'rows':[dict(timeMs=i*1000,open='100',high='102',low='99',close='101',volume='1') for i in range(40)]}
+        training, targets = historical_split(document,24,40000)
+        self.assertEqual(len(training['rows']),16)
+        self.assertEqual(len(targets),24)
+        self.assertEqual(training['asOfMs'],targets[0]['timeMs'])
+        self.assertTrue(all(row['timeMs'] < targets[0]['timeMs'] for row in training['rows']))
+        self.assertEqual(len(document['rows']),40)
+        with self.assertRaises(ValueError): historical_split({**document,'rows':document['rows'][1:]},24,40000)
+
     def test_paths_are_kept_separate_and_single_sample_mode_is_used(self):
         predictor, frame, seeds = Predictor(), [], []
         paths = sample_paths(predictor, frame, [], [], 2, 3, seeds.append)
