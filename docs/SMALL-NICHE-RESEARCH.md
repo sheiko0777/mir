@@ -128,6 +128,8 @@ continuous future income or authorize financial execution.
 
 ## Tool reuse decisions
 
+For the 7 November follow-up, see [economic evidence and actual sample](ECONOMIC-EVIDENCE-2026-11-07.md) and [the bounded pilot protocol](ECONOMIC-PILOT.md). These separate historical funded demand from a current accessible buyer and from MIR profit.
+
 Ponder and viem (MIT) are candidates for indexing/reading after a dataset need is
 established. OpenZeppelin Monitor is AGPL-3.0, not MIT; license compatibility must
 be reviewed before reuse. Public Merkl REST reads require no API key according
