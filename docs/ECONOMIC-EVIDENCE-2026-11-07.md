@@ -1,5 +1,7 @@
 # MIR: economic evidence review — 7 November 2026
 
+Update, 8 November: the user clarified that protocol-funded mechanisms take priority over finding service customers. See [the revised research order](PROTOCOL-INCOME-PRIORITY.md). Historical service demand below is retained as evidence for that separate hypothesis.
+
 Research only. MIR is an independent platform built by WADJ Studio; LXR is its internal engine.
 
 ## Decision

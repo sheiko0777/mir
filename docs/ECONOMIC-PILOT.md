@@ -1,5 +1,7 @@
 # MIR economic pilot v1
 
+Status update, 8 November 2026: deferred as the primary path following the user's requirement to earn from protocol mechanisms without customer acquisition. See [protocol-funded research priority](PROTOCOL-INCOME-PRIORITY.md). Retained as a separate service hypothesis, not proof of protocol profitability.
+
 Frozen research protocol: 7 November 2026. No current buyer or paid engagement. This is a draft for review, not a sent offer, advertised SLA or trading service.
 
 ## Hypothesis and deliverable
