@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "chainId": 8453,
+  "seeds": [],
+  "costs": {
+    "executionWei": null,
+    "l1Wei": null,
+    "operatorWei": null,
+    "withdrawalWei": null,
+    "failedAttemptsWei": null,
+    "computeAndDataWei": null,
+    "maintenanceWei": null
+  }
+}

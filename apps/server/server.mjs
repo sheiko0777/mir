@@ -6,6 +6,7 @@ import { loadDiscovery } from './reports.mjs';
 import { loadResearch } from './research.mjs';
 import { labView } from '../../packages/lab/index.mjs';
 import { loadBots } from './bots.mjs';
+import { loadClaimBot } from './pooltogether.mjs';
 import { planAgentCycle, emptyAgentState } from '../../packages/agent/index.mjs';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -16,6 +17,7 @@ const MIME = { '.html': 'text/html; charset=utf-8', '.css': 'text/css', '.js': '
 export function createMirServer({ dataDirectory = path.join(project, 'data/discovery'),
   researchDirectory = path.join(project, 'data/research'),
   labDirectory = path.join(project, 'data/lab'),
+  claimDirectory = path.join(path.dirname(labDirectory), 'bots/pooltogether'),
   webRoot = path.join(project, 'apps/web'), brandRoot = path.join(project, 'outputs/MIR-Brand-Kit-v2'),
   now = Date.now } = {}) {
   return http.createServer(async (request, response) => {
@@ -56,10 +58,22 @@ export function createMirServer({ dataDirectory = path.join(project, 'data/disco
       }
       return;
     }
+    if (url.pathname === '/api/bots/pooltogether') {
+      response.setHeader('Content-Type', 'application/json; charset=utf-8');
+      try {
+        const result = await loadClaimBot(claimDirectory, now());
+        response.writeHead(200); response.end(request.method === 'HEAD' ? undefined : JSON.stringify(result));
+      } catch {
+        response.writeHead(503); response.end(request.method === 'HEAD' ? undefined : JSON.stringify({
+          available: false, batches: [], executionEnabled: false, qualified: false,
+          error: 'Protocol bot evidence could not be verified' }));
+      }
+      return;
+    }
     if (url.pathname === '/api/bots') {
       response.setHeader('Content-Type', 'application/json; charset=utf-8');
       try {
-        const result = await loadBots({ researchDirectory, labDirectory, nowMs: now() });
+        const result = await loadBots({ researchDirectory, labDirectory, claimDirectory, nowMs: now() });
         response.writeHead(200);
         response.end(request.method === 'HEAD' ? undefined : JSON.stringify(result));
       } catch {

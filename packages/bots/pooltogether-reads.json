@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 1,
+  "sourceSha256": "6f264ba14cbe0fca4df45f7ebfd842d334d376e4afc9ef309510257c6f9f1293",
+  "chainId": 8453,
+  "pool": "0x45b2010d8a4f08b53c9fa7544c51dfd9733732cb",
+  "claimer": "0xcdce635b774de77cdf791647601dba64a75547ba",
+  "functions": {
+    "pool.getLastAwardedDrawId()": {
+      "selector": "0x49421996",
+      "inputs": [],
+      "output": "uint24"
+    },
+    "pool.numberOfTiers()": {
+      "selector": "0x6e27a2e5",
+      "inputs": [],
+      "output": "uint8"
+    },
+    "pool.getTierPrizeCount(uint8)": {
+      "selector": "0x571d0223",
+      "inputs": [
+        "uint8"
+      ],
+      "output": "uint32"
+    },
+    "pool.isWinner(address,address,uint8,uint32)": {
+      "selector": "0xb31b69e0",
+      "inputs": [
+        "address",
+        "address",
+        "uint8",
+        "uint32"
+      ],
+      "output": "bool"
+    },
+    "pool.wasClaimed(address,address,uint8,uint32)": {
+      "selector": "0x269fdac8",
+      "inputs": [
+        "address",
+        "address",
+        "uint8",
+        "uint32"
+      ],
+      "output": "bool"
+    },
+    "pool.prizeToken()": {
+      "selector": "0xd0ef024a",
+      "inputs": [],
+      "output": "address"
+    },
+    "claimer.prizePool()": {
+      "selector": "0x719ce73e",
+      "inputs": [],
+      "output": "address"
+    },
+    "claimer.computeTotalFees(uint8,uint256)": {
+      "selector": "0x7bae48c3",
+      "inputs": [
+        "uint8",
+        "uint256"
+      ],
+      "output": "uint256"
+    },
+    "token.decimals()": {
+      "selector": "0x313ce567",
+      "inputs": [],
+      "output": "uint8"
+    }
+  },
+  "encodingVector": {
+    "method": "pool.isWinner(address,address,uint8,uint32)",
+    "values": [
+      "0x1111111111111111111111111111111111111111",
+      "0x2222222222222222222222222222222222222222",
+      3,
+      17
+    ],
+    "data": "0xb31b69e00000000000000000000000001111111111111111111111111111111111111111000000000000000000000000222222222222222222222222222222222222222200000000000000000000000000000000000000000000000000000000000000030000000000000000000000000000000000000000000000000000000000000011"
+  }
+}

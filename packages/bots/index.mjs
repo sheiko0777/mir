@@ -1,6 +1,9 @@
 import { createHash } from 'node:crypto';
 
 export const BOT_DEFINITIONS = Object.freeze([
+  { id: 'pooltogether-claimer', name: 'Protocol Claim Watcher', implementation: 'integrated-analysis',
+    purpose: 'فحص مكافآت PoolTogether — قائمة مراقبة محدودة وقراءة فقط',
+    sources: ['https://dev.pooltogether.com/protocol/guides/bots/claiming-prizes/'] },
   { id: 'lxr-liquidity', name: 'LXR Liquidity', implementation: 'integrated-analysis',
     purpose: 'فحص سيولة البوولز ومقارنة أحجام المسارات',
     sources: ['https://github.com/Uniswap/v2-sdk'] },
@@ -26,6 +29,8 @@ export function planBotResearch(research, datasets, nowMs = Date.now()) {
   if (!Number.isSafeInteger(nowMs) || nowMs < 0 || !Array.isArray(datasets?.items) ||
       typeof research?.available !== 'boolean') throw new Error('Invalid bot research inputs');
   const tasks = [];
+  tasks.push(task('pooltogether-claimer', 'review-protocol-claims', [],
+    ['PINNED_WINNER_AND_CLAIM_STATE_REQUIRED', 'FULL_COST_AND_COMPETITION_EVIDENCE_REQUIRED'], 0));
   const funding = datasets.items.filter(item => item.kind === 'funding-history');
   const markets = datasets.items.filter(item => item.kind === 'market-snapshot');
   const latestMarket = [...markets].sort((a, b) => b.capturedAtMs - a.capturedAtMs)[0];
@@ -43,7 +48,10 @@ export function planBotResearch(research, datasets, nowMs = Date.now()) {
     ['FEED_ADAPTER_AND_CLOCK_ALIGNMENT_REQUIRED', 'SETTLEMENT_AND_DEPTH_MODEL_REQUIRED'], 5));
   const bots = BOT_DEFINITIONS.map(definition => {
     let evidence = [], reasons = [], status = 'awaiting-integration';
-    if (definition.id === 'lxr-liquidity') {
+    if (definition.id === 'pooltogether-claimer') {
+      status = 'awaiting-data';
+      reasons = ['PROTOCOL_WATCHLIST_CAPTURE_REQUIRED'];
+    } else if (definition.id === 'lxr-liquidity') {
       evidence = researchIds;
       status = research.available ? 'research-evidence-available' : 'awaiting-data';
       reasons = research.available ? ['TOKEN_TRANSFER_CHECKS_REQUIRED', 'INDEPENDENT_VALIDATION_REQUIRED'] : ['POOL_EVIDENCE_MISSING'];

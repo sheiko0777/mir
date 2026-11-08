@@ -4,7 +4,8 @@ import { resolve, join } from 'node:path';
 import { loadBots } from '../server/bots.mjs';
 
 if (process.argv.length !== 2) throw new Error('Usage: npm run bots:review');
-const report = await loadBots({ researchDirectory: resolve('data/research'), labDirectory: resolve('data/lab') });
+const report = await loadBots({ researchDirectory: resolve('data/research'), labDirectory: resolve('data/lab'),
+  claimDirectory: resolve('data/bots/pooltogether') });
 const encoded = JSON.stringify(report, null, 2) + '\n';
 const id = createHash('sha256').update(encoded).digest('hex');
 const folder = resolve('data/bots/reviews');

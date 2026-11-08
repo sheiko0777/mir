@@ -11,9 +11,9 @@ test('multi-bot planner keeps capability, evidence and qualification separate an
   const research = { available: false, freshness: 'unavailable', qualified: true };
   const datasets = { items: [] };
   const plan = planBotResearch(research, datasets, 100);
-  assert.equal(plan.bots.length, 4);
-  assert.equal(plan.tasks.length, 5);
-  assert.equal(new Set(plan.tasks.map(task => task.id)).size, 5);
+  assert.equal(plan.bots.length, 5);
+  assert.equal(plan.tasks.length, 6);
+  assert.equal(new Set(plan.tasks.map(task => task.id)).size, 6);
   assert.deepEqual(plan.tasks.map(task => task.id), planBotResearch(research, datasets, 200).tasks.map(task => task.id));
   assert.equal(plan.executionEnabled, false);
   assert.equal(plan.qualifiedStrategies, 0);
@@ -41,7 +41,7 @@ test('bot endpoint recomputes saved evidence, rejects writes and clears corrupt 
   try {
     await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
     const url = `http://127.0.0.1:${server.address().port}/api/bots`;
-    assert.equal((await (await fetch(url)).json()).bots.length, 4);
+    assert.equal((await (await fetch(url)).json()).bots.length, 5);
     assert.equal((await fetch(url, { method: 'POST' })).status, 405);
     assert.equal((await fetch(url, { method: 'HEAD' })).status, 200);
     const id = await saveObject(labDirectory, 'datasets', { kind: 'forged-winner', qualified: true });

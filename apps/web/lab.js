@@ -19,13 +19,28 @@ async function refresh() {
     const taskNames = { 'review-route-evidence': 'مراجعة أدلة المسارات', 'collect-pinned-pools': 'جمع حالة البوولز',
       'review-depth-and-hedge-identity': 'مراجعة العمق وهوية التحوّط', 'collect-spot-perp-depth': 'جمع عمق طرفي السوق',
       'freeze-prospective-carry-policy': 'تثبيت سياسة تجربة التمويل', 'collect-funding-history': 'جمع تاريخ التمويل',
-      'prepare-offline-model-and-context': 'تجهيز نموذج Kronos وبياناته', 'review-public-feed-adapter': 'مراجعة موصّل أسواق التوقعات' };
+      'prepare-offline-model-and-context': 'تجهيز نموذج Kronos وبياناته', 'review-public-feed-adapter': 'مراجعة موصّل أسواق التوقعات',
+      'review-protocol-claims': 'فحص مكافآت البروتوكول وتكلفة اقتناصها' };
     for (const bot of bots.bots) {
       const card = document.createElement('article');
       const heading = document.createElement('h3'); heading.textContent = bot.name; card.append(heading);
       paragraph(card, bot.purpose);
       paragraph(card, `${implementations[bot.implementation]} — ${states[bot.status]}`);
       paragraph(card, `مراجع الأدلة ${bot.evidenceIds.length} — صافي الربح غير مثبت`);
+      if (bot.worker) {
+        const worker = bot.worker;
+        const labels = { 'awaiting-data': 'بانتظار التقاط بيانات', 'source-unavailable': 'المصدر العام غير متاح',
+          'rejected-evidence': 'القراءة مرفوضة بسبب التوقيت — لا توجد فرصة معتمدة',
+          'illustrative-only': 'عينة وهمية للاختبار فقط', 'stale-evidence': 'بيانات قديمة — لا تمثل فرصة حالية',
+          'read-only-evidence': 'قراءة حديثة — التنفيذ والربح غير مثبتين' };
+        paragraph(card, labels[worker.status] ?? 'حالة غير معتمدة');
+        if (worker.coverage) paragraph(card, `تم فحص ${worker.coverage.seedsChecked} ترشيحات من القائمة فقط؛ التغطية ليست شاملة.`);
+        for (const batch of worker.batches) {
+          paragraph(card, `Tier ${batch.tier} — ${batch.claims} مطالبات — مكافأة مشروطة ${batch.quotedRewardAtomic} بوحدة WETH wei`);
+          paragraph(card, batch.scenario.netAtomic === null ? 'التكاليف ناقصة؛ الصافي مجهول.' :
+            `سيناريو بافتراض نجاح المطالبات: ${batch.scenario.netAtomic}؛ مع مضاعفة التكاليف: ${batch.scenario.doubledCostNetAtomic}. ليس ربحًا محققًا.`);
+        }
+      }
       for (const next of bots.tasks.filter(task => task.botId === bot.id)) {
         evidence(card, taskNames[next.kind], next.reasons.join(' · '));
       }
