@@ -2,6 +2,8 @@
 
 8 November 2026. Read-only/offline research. No financial execution, accounts, keys, purchases or background monitor.
 
+Follow-up: a user-authorized Alchemy endpoint subsequently provided a complete sorted-list capture and successful replay, with zero below-MCR candidates. The access limitations below describe the earlier public-source attempts. See [the new checkpoint](ALCHEMY-READONLY-CHECKPOINT-2026-11-08.md); verified profit remains unknown.
+
 ## Evidence status
 
 The previously saved eight-read preflight remains valid evidence of its observed state: the current Liquity V2 WETH manager was not shut down and reported 98 TroveIds. It does not contain position-level data, oracle rounds or gas usage. See [target selection](PROTOCOL-TARGET-DECISION-2026-11-08.md).

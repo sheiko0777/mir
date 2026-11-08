@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 import time
@@ -14,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[2]
 REFERENCE_PATH = Path(__file__).with_name('liquity-read-reference.json')
 REFERENCE = json.loads(REFERENCE_PATH.read_bytes())
 RPC = 'https://eth.llamarpc.com'
+ALCHEMY_SOURCE = 'https://eth-mainnet.g.alchemy.com/v2/[redacted]'
 SCALE = 10 ** 18
 MAX_TROVES = 128
 
@@ -168,6 +170,7 @@ def validate_read(method, params):
 
 class PublicCapture:
     def __init__(self):
+        self._rpc, self.source = rpc_configuration()
         self.records = []; self.started = time.monotonic(); self.raw_bytes = 0
         self.opener = urllib.request.build_opener(NoRedirect())
 
@@ -179,7 +182,7 @@ class PublicCapture:
         request_id = len(self.records)
         body = json.dumps(dict(jsonrpc='2.0', id=request_id, method=method, params=params)).encode()
         try:
-            request = urllib.request.Request(RPC, data=body, headers={'Content-Type': 'application/json'})
+            request = urllib.request.Request(self._rpc, data=body, headers={'Content-Type': 'application/json'})
             with self.opener.open(request, timeout=min(8, max(0.1, 60 - (time.monotonic() - self.started)))) as response:
                 raw = response.read(256 * 1024 + 1)
             self.raw_bytes += len(raw)
@@ -194,12 +197,30 @@ class PublicCapture:
             row['error'] = 'Public source unavailable or invalid'; raise
 
 
+def rpc_configuration():
+    endpoint = os.environ.get('MIR_ETHEREUM_RPC_URL')
+    if endpoint is None:
+        return RPC, RPC
+    if not re.fullmatch(r'https://eth-mainnet\.g\.alchemy\.com/v2/[A-Za-z0-9_-]{8,128}', endpoint):
+        raise ValueError('MIR_ETHEREUM_RPC_URL must be an Alchemy Ethereum mainnet HTTPS endpoint')
+    return endpoint, ALCHEMY_SOURCE
+
+
+def capture_payload(document, capture):
+    # Even an unexpected provider result must not persist the credential.
+    payload = json.dumps(document, sort_keys=True, allow_nan=False)
+    if capture.source == ALCHEMY_SOURCE:
+        payload = payload.replace(capture._rpc, ALCHEMY_SOURCE)
+        payload = payload.replace(capture._rpc.rsplit('/', 1)[1], '[redacted]')
+    return payload.encode()
+
+
 def replay_capture(path):
     if path.stat().st_size > 2 * 1024 * 1024: raise ValueError('Capture exceeds replay budget')
     raw = path.read_bytes()
     if path.name != hashlib.sha256(raw).hexdigest() + '.json': raise ValueError('Capture content identity mismatch')
     document = json.loads(raw)
-    if document.get('schemaVersion') != 1 or document.get('source') != RPC or document.get('kind') != 'liquity-screen-capture' or document.get('engineSha256') != hashlib.sha256(Path(__file__).read_bytes()).hexdigest() or document.get('referenceSha256') != hashlib.sha256(REFERENCE_PATH.read_bytes()).hexdigest():
+    if document.get('schemaVersion') != 1 or document.get('source') not in (RPC, ALCHEMY_SOURCE) or document.get('kind') != 'liquity-screen-capture' or document.get('engineSha256') != hashlib.sha256(Path(__file__).read_bytes()).hexdigest() or document.get('referenceSha256') != hashlib.sha256(REFERENCE_PATH.read_bytes()).hexdigest():
         raise ValueError('Capture engine/reference mismatch')
     records = document.get('records')
     if not isinstance(records, list) or len(records) > 32 or not isinstance(document.get('analysis'), dict):
@@ -232,13 +253,13 @@ def main():
     capture = PublicCapture(); report = None
     try: report = analyze(capture.read, lambda: int(time.time() * 1000))
     except Exception as error: failure = 'Source unavailable or validation failed: ' + type(error).__name__
-    result = dict(schemaVersion=1, kind='liquity-screen-capture', source=RPC,
+    result = dict(schemaVersion=1, kind='liquity-screen-capture', source=capture.source,
                   capturedAtMs=int(time.time() * 1000), records=capture.records, analysis=report,
                   failure=None if report is not None else failure,
                   engineSha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
                   referenceSha256=hashlib.sha256(REFERENCE_PATH.read_bytes()).hexdigest(),
                   requests=len(capture.records), responseBytes=capture.raw_bytes, retries=0)
-    payload = json.dumps(result, sort_keys=True, allow_nan=False).encode(); identity = hashlib.sha256(payload).hexdigest()
+    payload = capture_payload(result, capture); identity = hashlib.sha256(payload).hexdigest()
     folder = ROOT / 'data/liquity-screen'; folder.mkdir(parents=True, exist_ok=True)
     pending = folder / ('.' + identity + '.pending'); target = folder / (identity + '.json')
     with pending.open('xb') as stream: stream.write(payload)

@@ -2,6 +2,9 @@ import unittest
 import tempfile
 import hashlib
 import json
+import os
+import urllib.error
+from unittest.mock import patch
 from pathlib import Path
 from eth_abi import encode
 import liquity_screen
@@ -40,6 +43,27 @@ def fixture(oracle_age=10, duplicate=False, incomplete=False, zero_coll=False):
 
 
 class LiquityScreenTests(unittest.TestCase):
+    def test_rpc_configuration_is_scoped_and_never_returns_a_secret_source(self):
+        token = 'fictional_test_token_123'
+        endpoint = 'https://eth-mainnet.g.alchemy.com/v2/' + token
+        with patch.dict(os.environ, {'MIR_ETHEREUM_RPC_URL': endpoint}):
+            capture = liquity_screen.PublicCapture()
+            self.assertEqual(capture.source, liquity_screen.ALCHEMY_SOURCE)
+            raw = liquity_screen.capture_payload({'source': capture.source, 'unexpected': endpoint, 'echo': token}, capture)
+            self.assertNotIn(token.encode(), raw)
+            self.assertNotIn(endpoint.encode(), raw)
+            with patch.object(capture.opener, 'open', side_effect=urllib.error.HTTPError(endpoint, 401, token, {}, None)) as request:
+                with self.assertRaises(urllib.error.HTTPError): capture.read('eth_chainId', [])
+                self.assertEqual(request.call_count, 1)
+            self.assertEqual(capture.records, [{'method': 'eth_chainId', 'params': [], 'error': 'HTTP 401'}])
+        with patch.dict(os.environ, {}, clear=True):
+            self.assertEqual(liquity_screen.rpc_configuration(), (liquity_screen.RPC, liquity_screen.RPC))
+        for url in ['http://eth-mainnet.g.alchemy.com/v2/' + token,
+                    'https://eth-mainnet.g.alchemy.com.evil.test/v2/' + token,
+                    endpoint + '?extra=1', 'https://localhost/v2/' + token, '']:
+            with patch.dict(os.environ, {'MIR_ETHEREUM_RPC_URL': url}, clear=True):
+                with self.assertRaises(ValueError): liquity_screen.rpc_configuration()
+
     def test_ratio_boundary_is_exact_and_positive_control_never_becomes_profit(self):
         read, _ = fixture(); result = analyze(read, 1001000)
         self.assertEqual(result['status'], 'below-mcr-screen-only')
@@ -103,6 +127,11 @@ class LiquityScreenTests(unittest.TestCase):
                 raw = json.dumps(value, sort_keys=True).encode(); target = Path(directory) / (hashlib.sha256(raw).hexdigest() + '.json')
                 target.write_bytes(raw); return target
             self.assertEqual(replay_capture(save(document)), analysis)
+            document['source'] = liquity_screen.ALCHEMY_SOURCE
+            self.assertEqual(replay_capture(save(document)), analysis)
+            document['source'] = 'https://unreviewed.invalid'
+            with self.assertRaises(ValueError): replay_capture(save(document))
+            document['source'] = liquity_screen.ALCHEMY_SOURCE
             document['analysis']['verifiedNetAtomic'] = '100000'
             with self.assertRaisesRegex(ValueError, 'reproduce'): replay_capture(save(document))
 
