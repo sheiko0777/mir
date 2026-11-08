@@ -1,5 +1,7 @@
 # MIR protocol income: target viability before more indexing
 
+Follow-up: [JSON-RPC clarification, network-access diagnostic and offline economics](LIQUITY-ECONOMIC-EXPERIMENT.md). The detailed data gap remains unresolved; no real candidate result is implied by the new calculator.
+
 8 November 2026. All observations below are read-only snapshots, not permission to execute financially. MIR is independent, built by WADJ Studio; LXR is its internal engine.
 
 ## Decision and correction

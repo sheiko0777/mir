@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "origin": "assumed-scenario",
+  "costs": {
+    "gasPriceWei": null,
+    "successGasUnits": null,
+    "failedGasUnits": null,
+    "successOtherWei": null,
+    "failedOtherWei": null,
+    "settlementWei": null,
+    "sharedPerAttemptWei": null
+  },
+  "winProbability": null
+}
