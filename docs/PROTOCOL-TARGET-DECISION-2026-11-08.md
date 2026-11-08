@@ -1,5 +1,7 @@
 # MIR protocol income: target viability before more indexing
 
+**Superseded research priority:** the [historical economic decision](PROTOCOL-INCOME-DECISION-2026-11-08.md) pauses WETH liquidation development as the first recurring-income bot. Alchemy resolved access and all 98 tracked positions were screened; the earlier data-gap statement below is historical. No profitable MIR model has been established.
+
 Follow-up: [JSON-RPC clarification, network-access diagnostic and offline economics](LIQUITY-ECONOMIC-EXPERIMENT.md). The detailed data gap remains unresolved; no real candidate result is implied by the new calculator.
 
 8 November 2026. All observations below are read-only snapshots, not permission to execute financially. MIR is independent, built by WADJ Studio; LXR is its internal engine.

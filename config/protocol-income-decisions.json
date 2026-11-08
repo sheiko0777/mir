@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "asOfDate": "2026-11-08",
+  "executionEnabled": false,
+  "qualifiedModels": [],
+  "discoveryEvidenceId": "97cc0a4c1bc8336785bf1a7f8260d1aa85cb25efef2eb0fa026c1343c55a785c",
+  "receiptAuditEvidenceId": "c3afaa4ed8bb1cf7db4de491efbe7e3e33cdec3a314fde596c5bbe6d70d678b1",
+  "decisions": [
+    {
+      "model": "liquity-v2-weth-liquidations",
+      "decision": "pause-as-first-recurring-income-bot",
+      "reason": "One receipt-confirmed compensation transaction among all 89 discovered gas-pool transfer transactions over approximately 90 days; no evidence of attainable recurring MIR income.",
+      "verifiedNetAtomic": null
+    },
+    {
+      "model": "curve-pegkeeper-v2-maintenance",
+      "decision": "valuation-research-only",
+      "reason": "Historical caller LP transfers confirmed in 11 of 16 recent selected transactions; redemption, reward/gas conversion, failed attempts and operating costs remain unmeasured. Four current caller estimates were zero.",
+      "verifiedNetAtomic": null
+    },
+    {
+      "model": "gmx-order-execution",
+      "decision": "exclude-from-open-entry-pilot",
+      "reason": "Current source requires OrderKeeper role; MIR access is not established.",
+      "verifiedNetAtomic": null
+    }
+  ]
+}
