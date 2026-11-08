@@ -60,7 +60,7 @@ No signing, private keys, wallet connections, token approvals, transaction submi
 
 ## Evidence agent
 
-MIR's first protocol-reward worker is **Protocol Claim Watcher**, a bounded PoolTogether read-only watchlist scanner integrated into MIR Lab. `npm run bot:pooltogether` runs an explicit fictional control; `npm run bot:pooltogether:live` makes a bounded public read attempt. The default watchlist is empty and costs unknown. No signing or financial execution exists, and no MIR protocol profit has been established. See [setup, observed results and next gates](docs/FIRST-PROTOCOL-BOT.md).
+MIR's first protocol-reward worker is **Protocol Claim Watcher**, a bounded PoolTogether read-only scanner integrated into MIR Lab. `npm run bot:pooltogether` runs an explicit fictional control; `npm run bot:pooltogether:live` makes a bounded public capture with optional discovery from previous claim participants. The default manual watchlist is empty, recent-event discovery is enabled, and costs are unknown. No signing or financial execution exists, and no MIR protocol profit has been established. See [setup and next gates](docs/FIRST-PROTOCOL-BOT.md) and [actual discovery results and coverage limits](docs/PROTOCOL-BOT-DISCOVERY.md).
 
 Costed-size research is now available through `npm run size:demo` (explicit synthetic data) and `npm run research` (saved live observations with optional explicit gas assumptions). It compares a bounded size grid after pool fees, gas scenarios and buffer, retaining losses and unknowns. The best modeled case remains unqualified. See [cost identity, commands and limitations](docs/SIZING.md), and [verified open-source reuse](docs/OPEN-SOURCE-REUSE.md).
 

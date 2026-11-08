@@ -1,4 +1,5 @@
 import { CLAIM_LIMITS, CLAIM_REFERENCE, BASE_WETH, encodeClaimRead } from '../bots/pooltogether.mjs';
+import { CLAIM_EVENT_TOPIC, DISCOVERY_LIMITS } from '../bots/pooltogether-discovery.mjs';
 
 export const CLAIM_PUBLIC_RPC = 'https://base-rpc.publicnode.com';
 const hash = /^0x[0-9a-f]{64}$/;
@@ -15,6 +16,15 @@ export function createClaimRpc({ fetchImpl = fetch, clock = Date.now } = {}) {
     if (method === 'eth_getBlockByNumber') valid = Array.isArray(params) && params.length === 2 && params[1] === false &&
       (params[0] === 'latest' || typeof params[0] === 'string' && /^0x(?:0|[1-9a-f][0-9a-f]*)$/.test(params[0]));
     if (method === 'eth_getCode') valid = params?.length === 2 && targetRoles.has(params[0]) && pin(params[1]);
+    if (method === 'eth_getLogs' && Array.isArray(params) && params.length === 1) {
+      const filter = params[0];
+      if (filter && Object.keys(filter).length === 4 && filter.address === CLAIM_REFERENCE.pool &&
+          Array.isArray(filter.topics) && filter.topics.length === 1 && filter.topics[0] === CLAIM_EVENT_TOPIC &&
+          [filter.fromBlock, filter.toBlock].every(n => typeof n === 'string' && /^0x(?:0|[1-9a-f][0-9a-f]*)$/.test(n))) {
+        const from = BigInt(filter.fromBlock), to = BigInt(filter.toBlock);
+        valid = from <= to && to - from < BigInt(DISCOVERY_LIMITS.maxLookbackBlocks) && to <= BigInt(Number.MAX_SAFE_INTEGER);
+      }
+    }
     if (method === 'eth_call' && params?.length === 2 && pin(params[1])) {
       const call = params[0], role = targetRoles.get(call?.to);
       if (role && Object.keys(call).length === 2 && typeof call.data === 'string' && /^0x[0-9a-f]+$/.test(call.data)) {

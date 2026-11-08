@@ -27,6 +27,7 @@ const capture = { schemaVersion: 1, kind: 'pooltogether-claim-capture', captured
 const report = await replayClaimCapture(capture, Date.now());
 const id = await saveClaimCapture(resolve('data/bots/pooltogether'), capture);
 console.log(JSON.stringify({ evidenceId: id, status: report.status, illustrative: report.illustrative ?? false,
-  seedsChecked: report.coverage?.seedsChecked ?? 0, batches: report.batches,
+  seedsChecked: report.coverage?.seedsChecked ?? 0, coverage: report.coverage ?? null, batches: report.batches,
+  failure: report.failure ?? null,
   source: report.source, requests: session.records.length, metrics: session.metrics?.(),
   executionEnabled: false, verifiedNetAtomic: null }));

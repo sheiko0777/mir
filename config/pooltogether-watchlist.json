@@ -2,6 +2,7 @@
   "schemaVersion": 1,
   "chainId": 8453,
   "seeds": [],
+  "discovery": { "kind": "recent-claim-participants", "lookbackBlocks": 128 },
   "costs": {
     "executionWei": null,
     "l1Wei": null,

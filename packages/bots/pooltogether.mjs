@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import reference from './pooltogether-reads.json' with { type: 'json' };
+import { discoverClaimSeeds, validateSeedDiscovery } from './pooltogether-discovery.mjs';
 
 export const CLAIM_REFERENCE = reference;
 export const BASE_WETH = '0x4200000000000000000000000000000000000006';
@@ -53,12 +54,13 @@ export function decodeClaimRead(method, result) {
 export function validateClaimWatchlist(input) {
   if (input?.schemaVersion !== 1 || input.chainId !== 8453 || !Array.isArray(input.seeds) ||
       input.seeds.length > CLAIM_LIMITS.maxSeeds || !input.costs ||
-      Object.keys(input).some(key => !['schemaVersion', 'chainId', 'seeds', 'costs'].includes(key)) ||
+      Object.keys(input).some(key => !['schemaVersion', 'chainId', 'seeds', 'costs', 'discovery'].includes(key)) ||
       Object.keys(input.costs).length !== COST_FIELDS.length) throw new Error('Invalid claim watchlist');
   for (const key of COST_FIELDS) {
     if (!Object.hasOwn(input.costs, key) || input.costs[key] !== null &&
         (typeof input.costs[key] !== 'string' || !decimal.test(input.costs[key]) || input.costs[key].length > 78 || BigInt(input.costs[key]) >= 2n ** 256n)) throw new Error('Invalid cost assumption');
   }
+  validateSeedDiscovery(input.discovery);
   const seen = new Set();
   for (const seed of input.seeds) {
     if (!validAddress(seed.vault) || !validAddress(seed.winner) ||
@@ -117,8 +119,11 @@ export async function scanPoolTogether(read, watchlist, capturedAtMs) {
   const drawId = await call('pool.getLastAwardedDrawId()');
   const tiers = await call('pool.numberOfTiers()');
   if (tiers > 16n) throw new Error('Tier count exceeds scan budget');
+  const discovered = watchlist.discovery ? await discoverClaimSeeds(read, { header, drawId,
+    discovery: watchlist.discovery, existingSeeds: watchlist.seeds }) : null;
+  const seeds = discovered?.seeds ?? watchlist.seeds;
   const observations = [], groups = new Map(), counts = new Map();
-  for (const seed of watchlist.seeds) {
+  for (const seed of seeds) {
     const row = { ...seed, status: 'rejected', reason: null };
     observations.push(row);
     if (drawId === 0n) { row.reason = 'NO_AWARDED_DRAW'; continue; }
@@ -147,7 +152,9 @@ export async function scanPoolTogether(read, watchlist, capturedAtMs) {
     drawId: drawId.toString(), finality: 'latest-unfinalized', deployment: {
       pool: reference.pool, claimer: reference.claimer, prizeToken: BASE_WETH, decimals: 18,
       codeSha256, codeObserved: true, codeMatchedToAuditedBuild: false },
-    coverage: { kind: 'supplied-seeds-only', seedsChecked: watchlist.seeds.length, wholePoolComplete: false },
+    coverage: { kind: discovered ? 'watchlist-and-event-sample' : 'supplied-seeds-only',
+      manualSeeds: watchlist.seeds.length, seedsChecked: seeds.length, wholePoolComplete: false,
+      discovery: discovered?.coverage ?? null },
     observations, batches, executionEnabled: false, qualified: false, actualReceiptsAtomic: null, verifiedNetAtomic: null,
     limitations: ['No inclusion, expiry or saleability guarantee', 'Batch scenarios are alternatives; do not sum independent fee quotes',
       'Latest block may reorganize', 'No vault-hook simulation, complete account index or automatic scheduling'] };
@@ -159,13 +166,14 @@ export async function replayClaimCapture(capture, nowMs = Date.now()) {
       !validTime(capture.capturedAtMs) || !validTime(nowMs) || nowMs < capture.capturedAtMs ||
       !Array.isArray(capture.records) || capture.records.length > CLAIM_LIMITS.maxCalls ||
       capture.source.kind === 'public-rpc' && capture.source.url !== 'https://base-rpc.publicnode.com') throw new Error('Invalid claim capture');
-  let cursor = 0, failedRecord = false;
+  let cursor = 0, failedRecord = null;
   const read = async (method, params) => {
     const row = capture.records[cursor++];
     if (!row || row.method !== method || JSON.stringify(row.params) !== JSON.stringify(params)) throw new Error('Read transcript mismatch');
     if (Object.hasOwn(row, 'error')) {
-      if (typeof row.error !== 'string' || row.error.length > 100 || Object.hasOwn(row, 'result')) throw new Error('Invalid failed read');
-      failedRecord = true; throw new Error('Recorded public source unavailable');
+      if (typeof row.error !== 'string' || !/^Public RPC (HTTP \d{3}|error -?\d+|unavailable or invalid)$/.test(row.error) ||
+          Object.hasOwn(row, 'result')) throw new Error('Invalid failed read');
+      failedRecord = { method, classification: row.error }; throw new Error('Recorded public source unavailable');
     }
     if (!Object.hasOwn(row, 'result')) throw new Error('Incomplete read transcript');
     return row.result;
@@ -178,7 +186,7 @@ export async function replayClaimCapture(capture, nowMs = Date.now()) {
       qualified: false, executionEnabled: false, verifiedNetAtomic: null, source: capture.source };
     if (!failedRecord || cursor !== capture.records.length) throw error;
     return { available: false, status: 'source-unavailable', botId: 'pooltogether-claimer', batches: [],
-      qualified: false, executionEnabled: false, verifiedNetAtomic: null, source: capture.source };
+      qualified: false, executionEnabled: false, verifiedNetAtomic: null, source: capture.source, failure: failedRecord };
   }
   if (cursor !== capture.records.length) throw new Error('Unused transcript records');
   const illustrative = capture.source.kind === 'illustrative-fixture';

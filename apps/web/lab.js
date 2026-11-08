@@ -34,7 +34,11 @@ async function refresh() {
           'illustrative-only': 'عينة وهمية للاختبار فقط', 'stale-evidence': 'بيانات قديمة — لا تمثل فرصة حالية',
           'read-only-evidence': 'قراءة حديثة — التنفيذ والربح غير مثبتين' };
         paragraph(card, labels[worker.status] ?? 'حالة غير معتمدة');
-        if (worker.coverage) paragraph(card, `تم فحص ${worker.coverage.seedsChecked} ترشيحات من القائمة فقط؛ التغطية ليست شاملة.`);
+        if (worker.coverage) paragraph(card, `تم فحص ${worker.coverage.seedsChecked} ترشيحات محدودة؛ التغطية ليست شاملة.`);
+        if (worker.coverage?.discovery) {
+          const d = worker.coverage.discovery;
+          paragraph(card, `اكتشاف من ${d.eventsObserved} أحداث سابقة: ${d.addedSeeds} ترشيحات إضافية بين بلوك ${d.fromBlock} و${d.toBlock}. عينة من فائزين سابقين وليست كل الحسابات المؤهلة.`);
+        }
         for (const batch of worker.batches) {
           paragraph(card, `Tier ${batch.tier} — ${batch.claims} مطالبات — مكافأة مشروطة ${batch.quotedRewardAtomic} بوحدة WETH wei`);
           paragraph(card, batch.scenario.netAtomic === null ? 'التكاليف ناقصة؛ الصافي مجهول.' :

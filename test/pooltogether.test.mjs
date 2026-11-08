@@ -126,6 +126,7 @@ test('terminal source failure is explicit; extra records cannot hide after a fai
   capture.records = [{ method: 'eth_chainId', params: [], error: 'Public RPC HTTP 403' }];
   const report = await replayClaimCapture(capture, capture.capturedAtMs);
   assert.equal(report.status, 'source-unavailable'); assert.deepEqual(report.batches, []);
+  assert.deepEqual(report.failure, { method: 'eth_chainId', classification: 'Public RPC HTTP 403' });
   capture.records.push({ method: 'eth_chainId', params: [], result: '0x2105' });
   await assert.rejects(replayClaimCapture(capture, capture.capturedAtMs));
 });
