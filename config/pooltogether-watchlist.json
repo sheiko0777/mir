@@ -2,6 +2,8 @@
   "schemaVersion": 1,
   "chainId": 8453,
   "seeds": [],
+  "viabilityChecks": true,
+  "vaultChecks": true,
   "discovery": { "kind": "recent-claim-participants", "lookbackBlocks": 128 },
   "costs": {
     "executionWei": null,

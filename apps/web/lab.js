@@ -14,13 +14,15 @@ async function refresh() {
     if (responses.some(r => !r.ok)) throw new Error('unavailable');
     const [datasets, experiments, bots] = await Promise.all(responses.map(r => r.json()));
     if (!Array.isArray(datasets.items) || !Array.isArray(experiments.items) || !Array.isArray(bots.bots) || !Array.isArray(bots.tasks)) throw new Error('invalid');
-    const states = { 'research-evidence-available': 'أدلة بحث محفوظة', 'awaiting-data': 'بانتظار بيانات', 'awaiting-integration': 'بانتظار استكمال الدمج' };
+    const states = { 'research-evidence-available': 'أدلة بحث محفوظة', 'awaiting-data': 'بانتظار بيانات', 'awaiting-integration': 'بانتظار استكمال الدمج',
+      'protocol-ineligible': 'العقد المحدد غير مؤهل للمطالبة عند البلوك المحفوظ' };
     const implementations = { 'integrated-analysis': 'تحليل مدمج', 'adapter-available': 'موصّل أولي متاح', 'source-reviewed': 'تم فحص المصدر' };
     const taskNames = { 'review-route-evidence': 'مراجعة أدلة المسارات', 'collect-pinned-pools': 'جمع حالة البوولز',
       'review-depth-and-hedge-identity': 'مراجعة العمق وهوية التحوّط', 'collect-spot-perp-depth': 'جمع عمق طرفي السوق',
       'freeze-prospective-carry-policy': 'تثبيت سياسة تجربة التمويل', 'collect-funding-history': 'جمع تاريخ التمويل',
       'prepare-offline-model-and-context': 'تجهيز نموذج Kronos وبياناته', 'review-public-feed-adapter': 'مراجعة موصّل أسواق التوقعات',
-      'review-protocol-claims': 'فحص مكافآت البروتوكول وتكلفة اقتناصها' };
+      'review-protocol-claims': 'فحص مكافآت البروتوكول وتكلفة اقتناصها',
+      'select-active-protocol': 'اختيار هدف نشط والتحقق منه قبل استكمال البحث' };
     for (const bot of bots.bots) {
       const card = document.createElement('article');
       const heading = document.createElement('h3'); heading.textContent = bot.name; card.append(heading);
@@ -34,6 +36,12 @@ async function refresh() {
           'illustrative-only': 'عينة وهمية للاختبار فقط', 'stale-evidence': 'بيانات قديمة — لا تمثل فرصة حالية',
           'read-only-evidence': 'قراءة حديثة — التنفيذ والربح غير مثبتين' };
         paragraph(card, labels[worker.status] ?? 'حالة غير معتمدة');
+        if (worker.viability) {
+          const drawStates = { unverified: 'نافذة المطالبة لم تُفحص', shutdown: 'العقد المحدد متوقف عند البلوك المحفوظ — لا مطالبات معتمدة',
+            'no-awarded-draw': 'لا يوجد سحب مُعلن', 'claim-window-expired': 'نافذة المطالبة منتهية',
+            'claim-window-open': 'نافذة المطالبة مفتوحة عند البلوك المحفوظ؛ التنفيذ غير مثبت' };
+          paragraph(card, drawStates[worker.viability.status] ?? 'حالة السحب غير معتمدة');
+        }
         if (worker.coverage) paragraph(card, `تم فحص ${worker.coverage.seedsChecked} ترشيحات محدودة؛ التغطية ليست شاملة.`);
         if (worker.coverage?.discovery) {
           const d = worker.coverage.discovery;

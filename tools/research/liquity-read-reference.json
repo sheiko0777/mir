@@ -1,0 +1,158 @@
+{
+  "schemaVersion": 1,
+  "chainId": 1,
+  "registry": "0xf949982b91c8c61e952b3ba942cbbfaef5386684",
+  "manager": "0x7bcb64b2c9206a5b699ed43363f6f98d4776cf5a",
+  "collateral": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+  "helper": "0xfa61db085510c64b83056db3a7acf3b6f631d235",
+  "settings": "0x20f7c9ad66983f6523a0881d0f82406541417526",
+  "sorted": "0xa25269e41bd072513849f2e64ad221e84f3063f4",
+  "price": "0xcc5f8102eb670c89a4a3c567c13851260303c24f",
+  "sourceCommit": "d262669ef3c4d37bf0544df3bb2624c07b8a5ee0",
+  "sourceRepository": "https://github.com/liquity/bold",
+  "basis": "reviewed Solidity public getters and published addresses; not compiled or bytecode-matched",
+  "functions": {
+    "registry.getTroveManager(uint256)": {
+      "selector": "0x0bc17feb",
+      "inputs": [
+        "uint256"
+      ],
+      "output": "address",
+      "outputs": [
+        "address"
+      ]
+    },
+    "registry.getToken(uint256)": {
+      "selector": "0xe4b50cb8",
+      "inputs": [
+        "uint256"
+      ],
+      "output": "address",
+      "outputs": [
+        "address"
+      ]
+    },
+    "manager.shutdownTime()": {
+      "selector": "0x58569081",
+      "inputs": [],
+      "output": "uint256",
+      "outputs": [
+        "uint256"
+      ]
+    },
+    "manager.getTroveIdsCount()": {
+      "selector": "0x4aff96e1",
+      "inputs": [],
+      "output": "uint256",
+      "outputs": [
+        "uint256"
+      ]
+    },
+    "helper.collateralRegistry()": {
+      "selector": "0xd330fadd",
+      "inputs": [],
+      "outputs": [
+        "address"
+      ],
+      "output": "address"
+    },
+    "helper.getMultipleSortedTroves(uint256,int256,uint256)": {
+      "selector": "0x27addfca",
+      "inputs": [
+        "uint256",
+        "int256",
+        "uint256"
+      ],
+      "outputs": [
+        "(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,uint256,uint256,uint256)[]"
+      ],
+      "output": "(uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,uint256,address,uint256,uint256,uint256)[]"
+    },
+    "manager.sortedTroves()": {
+      "selector": "0xae918754",
+      "inputs": [],
+      "outputs": [
+        "address"
+      ],
+      "output": "address"
+    },
+    "sorted.getSize()": {
+      "selector": "0xde8fa431",
+      "inputs": [],
+      "outputs": [
+        "uint256"
+      ],
+      "output": "uint256"
+    },
+    "settings.troveManager()": {
+      "selector": "0x3d83908a",
+      "inputs": [],
+      "outputs": [
+        "address"
+      ],
+      "output": "address"
+    },
+    "settings.collToken()": {
+      "selector": "0x31b8c946",
+      "inputs": [],
+      "outputs": [
+        "address"
+      ],
+      "output": "address"
+    },
+    "settings.priceFeed()": {
+      "selector": "0x741bef1a",
+      "inputs": [],
+      "outputs": [
+        "address"
+      ],
+      "output": "address"
+    },
+    "settings.MCR()": {
+      "selector": "0x794e5724",
+      "inputs": [],
+      "outputs": [
+        "uint256"
+      ],
+      "output": "uint256"
+    },
+    "price.priceSource()": {
+      "selector": "0x20531bc9",
+      "inputs": [],
+      "outputs": [
+        "uint8"
+      ],
+      "output": "uint8"
+    },
+    "price.ethUsdOracle()": {
+      "selector": "0x8a97f9c9",
+      "inputs": [],
+      "outputs": [
+        "address",
+        "uint256",
+        "uint8"
+      ],
+      "output": null
+    },
+    "oracle.latestRoundData()": {
+      "selector": "0xfeaf968c",
+      "inputs": [],
+      "outputs": [
+        "uint80",
+        "int256",
+        "uint256",
+        "uint256",
+        "uint80"
+      ],
+      "output": null
+    },
+    "oracle.decimals()": {
+      "selector": "0x313ce567",
+      "inputs": [],
+      "outputs": [
+        "uint8"
+      ],
+      "output": "uint8"
+    }
+  }
+}

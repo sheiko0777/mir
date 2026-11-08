@@ -47,6 +47,35 @@
       "inputs": [],
       "output": "address"
     },
+    "pool.isShutdown()": {
+      "selector": "0xbf86d690",
+      "inputs": [],
+      "output": "bool"
+    },
+    "pool.lastAwardedDrawAwardedAt()": {
+      "selector": "0x6067e20f",
+      "inputs": [],
+      "output": "uint48"
+    },
+    "pool.claimCount()": {
+      "selector": "0x8da4d3c9",
+      "inputs": [],
+      "output": "uint24"
+    },
+    "pool.isDrawFinalized(uint24)": {
+      "selector": "0x10501d04",
+      "inputs": [
+        "uint24"
+      ],
+      "output": "bool"
+    },
+    "pool.drawClosesAt(uint24)": {
+      "selector": "0xdd1ecaec",
+      "inputs": [
+        "uint24"
+      ],
+      "output": "uint48"
+    },
     "claimer.prizePool()": {
       "selector": "0x719ce73e",
       "inputs": [],
@@ -64,7 +93,22 @@
       "selector": "0x313ce567",
       "inputs": [],
       "output": "uint8"
+    },
+    "vault.prizePool()": {
+      "selector": "0x719ce73e",
+      "inputs": [],
+      "output": "address"
+    },
+    "vault.claimer()": {
+      "selector": "0xd379be23",
+      "inputs": [],
+      "output": "address"
     }
+  },
+  "vaultGetterSource": {
+    "url": "https://github.com/GenerationSoftware/pt-v5-vault/blob/e328b319b66a341ea45d7aa565095888f2008294/src/abstract/Claimable.sol",
+    "commit": "e328b319b66a341ea45d7aa565095888f2008294",
+    "basis": "Solidity public address getters; source reviewed; not compiled-bytecode verification"
   },
   "encodingVector": {
     "method": "pool.isWinner(address,address,uint8,uint32)",

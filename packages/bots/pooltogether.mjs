@@ -4,7 +4,7 @@ import { discoverClaimSeeds, validateSeedDiscovery } from './pooltogether-discov
 
 export const CLAIM_REFERENCE = reference;
 export const BASE_WETH = '0x4200000000000000000000000000000000000006';
-export const CLAIM_LIMITS = Object.freeze({ maxSeeds: 16, maxCalls: 96, maxElapsedMs: 60_000, maxAgeMs: 120_000 });
+export const CLAIM_LIMITS = Object.freeze({ maxSeeds: 16, maxCalls: 128, maxElapsedMs: 60_000, maxAgeMs: 120_000 });
 const address = /^0x[0-9a-f]{40}$/;
 const hash = /^0x[0-9a-f]{64}$/;
 const decimal = /^(0|[1-9][0-9]*)$/;
@@ -54,8 +54,9 @@ export function decodeClaimRead(method, result) {
 export function validateClaimWatchlist(input) {
   if (input?.schemaVersion !== 1 || input.chainId !== 8453 || !Array.isArray(input.seeds) ||
       input.seeds.length > CLAIM_LIMITS.maxSeeds || !input.costs ||
-      Object.keys(input).some(key => !['schemaVersion', 'chainId', 'seeds', 'costs', 'discovery'].includes(key)) ||
+      Object.keys(input).some(key => !['schemaVersion', 'chainId', 'seeds', 'costs', 'discovery', 'viabilityChecks', 'vaultChecks'].includes(key)) ||
       Object.keys(input.costs).length !== COST_FIELDS.length) throw new Error('Invalid claim watchlist');
+  for (const key of ['viabilityChecks', 'vaultChecks']) if (input[key] !== undefined && typeof input[key] !== 'boolean') throw new Error('Invalid verification policy');
   for (const key of COST_FIELDS) {
     if (!Object.hasOwn(input.costs, key) || input.costs[key] !== null &&
         (typeof input.costs[key] !== 'string' || !decimal.test(input.costs[key]) || input.costs[key].length > 78 || BigInt(input.costs[key]) >= 2n ** 256n)) throw new Error('Invalid cost assumption');
@@ -119,17 +120,47 @@ export async function scanPoolTogether(read, watchlist, capturedAtMs) {
   const drawId = await call('pool.getLastAwardedDrawId()');
   const tiers = await call('pool.numberOfTiers()');
   if (tiers > 16n) throw new Error('Tier count exceeds scan budget');
-  const discovered = watchlist.discovery ? await discoverClaimSeeds(read, { header, drawId,
+  let viability = { checked: false, status: 'unverified', claimingAllowed: null };
+  if (watchlist.viabilityChecks) {
+    const shutdown = await call('pool.isShutdown()');
+    const awardedAt = await call('pool.lastAwardedDrawAwardedAt()');
+    const claimCount = await call('pool.claimCount()');
+    const awardedAtMs = Number(awardedAt) * 1000;
+    if (!validTime(awardedAtMs) || awardedAtMs > timestampMs || drawId > 0n && awardedAt === 0n) throw new Error('Invalid awarded draw timestamp');
+    let finalized = null, claimWindowEndsAtMs = null;
+    if (drawId > 0n) {
+      finalized = await call('pool.isDrawFinalized(uint24)', [drawId.toString()]);
+      const closesAt = await call('pool.drawClosesAt(uint24)', [(drawId + 1n).toString()]);
+      claimWindowEndsAtMs = Number(closesAt) * 1000;
+      if (!validTime(claimWindowEndsAtMs) || finalized !== (timestampMs >= claimWindowEndsAtMs)) throw new Error('Inconsistent draw finality');
+    }
+    viability = { checked: true, status: shutdown ? 'shutdown' : drawId === 0n ? 'no-awarded-draw' : finalized ? 'claim-window-expired' : 'claim-window-open',
+      shutdown, finalized, awardedAtMs, awardAgeMs: drawId > 0n ? timestampMs - awardedAtMs : null,
+      claimWindowEndsAtMs, remainingAtBlockMs: claimWindowEndsAtMs === null ? null : Math.max(0, claimWindowEndsAtMs - timestampMs),
+      claimCount: claimCount.toString(), claimingAllowed: !shutdown && drawId > 0n && !finalized };
+  }
+  const discovered = watchlist.discovery && viability.claimingAllowed !== false ? await discoverClaimSeeds(read, { header, drawId,
     discovery: watchlist.discovery, existingSeeds: watchlist.seeds }) : null;
   const seeds = discovered?.seeds ?? watchlist.seeds;
-  const observations = [], groups = new Map(), counts = new Map();
+  const observations = [], groups = new Map(), counts = new Map(), vaultChecks = new Map();
   for (const seed of seeds) {
     const row = { ...seed, status: 'rejected', reason: null };
     observations.push(row);
+    if (viability.claimingAllowed === false) { row.reason = viability.status.toUpperCase().replaceAll('-', '_'); continue; }
     if (drawId === 0n) { row.reason = 'NO_AWARDED_DRAW'; continue; }
     if (BigInt(seed.tier) >= tiers) { row.reason = 'TIER_OUT_OF_RANGE'; continue; }
     if (!counts.has(seed.tier)) counts.set(seed.tier, await call('pool.getTierPrizeCount(uint8)', [seed.tier]));
     if (BigInt(seed.prizeIndex) >= counts.get(seed.tier)) { row.reason = 'PRIZE_INDEX_OUT_OF_RANGE'; continue; }
+    if (watchlist.vaultChecks) {
+      if (!vaultChecks.has(seed.vault)) {
+        const vaultCall = async method => decodeClaimRead(method, await read('eth_call', [{ to: seed.vault, data: encodeClaimRead(method) }, pin]));
+        const pool = await vaultCall('vault.prizePool()'), claimer = await vaultCall('vault.claimer()');
+        vaultChecks.set(seed.vault, { vault: seed.vault, pool, claimer,
+          relationshipMatched: pool === reference.pool && claimer === reference.claimer,
+          codeMatchedToAuditedBuild: false, hooksSimulated: false });
+      }
+      if (!vaultChecks.get(seed.vault).relationshipMatched) { row.reason = 'VAULT_RELATIONSHIP_MISMATCH'; continue; }
+    }
     const args = [seed.vault, seed.winner, seed.tier, seed.prizeIndex];
     if (!await call('pool.isWinner(address,address,uint8,uint32)', args)) { row.reason = 'NOT_A_WINNER'; continue; }
     if (await call('pool.wasClaimed(address,address,uint8,uint32)', args)) { row.reason = 'ALREADY_CLAIMED'; continue; }
@@ -143,18 +174,20 @@ export async function scanPoolTogether(read, watchlist, capturedAtMs) {
     const reward = await call('claimer.computeTotalFees(uint8,uint256)', [group.tier, group.claims]);
     batches.push({ ...group, quotedRewardAtomic: reward.toString(), rewardSemantics: 'conditional-accrued-credit',
       scenario: claimCostScenario(reward, watchlist.costs), qualified: false,
-      reasons: ['VAULT_CLAIMER_AND_HOOKS_UNVERIFIED', 'CLAIM_EXECUTION_NOT_SIMULATED', 'COMPETITION_UNMEASURED', 'COSTS_ARE_ASSUMPTIONS'] });
+      reasons: [watchlist.vaultChecks ? 'VAULT_BYTECODE_AND_HOOKS_UNVERIFIED' : 'VAULT_CLAIMER_AND_HOOKS_UNVERIFIED',
+        ...(viability.checked ? [] : ['CLAIM_WINDOW_UNVERIFIED']), 'CLAIM_EXECUTION_NOT_SIMULATED', 'COMPETITION_UNMEASURED', 'COSTS_ARE_ASSUMPTIONS'] });
   }
   const confirmed = await read('eth_getBlockByNumber', [header.number, false]);
   if (confirmed?.hash !== header.hash || confirmed?.number !== header.number || confirmed?.timestamp !== header.timestamp) throw new Error('Canonical block changed during scan');
   return { schemaVersion: 1, botId: 'pooltogether-claimer', mode: 'read-only-watchlist', chainId: 8453,
     blockNumber: number, blockHash: header.hash, blockTimestampMs: timestampMs, capturedAtMs,
-    drawId: drawId.toString(), finality: 'latest-unfinalized', deployment: {
+    drawId: drawId.toString(), viability, vaultChecks: [...vaultChecks.values()], finality: 'latest-unfinalized', deployment: {
       pool: reference.pool, claimer: reference.claimer, prizeToken: BASE_WETH, decimals: 18,
       codeSha256, codeObserved: true, codeMatchedToAuditedBuild: false },
     coverage: { kind: discovered ? 'watchlist-and-event-sample' : 'supplied-seeds-only',
       manualSeeds: watchlist.seeds.length, seedsChecked: seeds.length, wholePoolComplete: false,
-      discovery: discovered?.coverage ?? null },
+      discovery: discovered?.coverage ?? null,
+      discoverySkippedReason: watchlist.discovery && viability.claimingAllowed === false ? viability.status : null },
     observations, batches, executionEnabled: false, qualified: false, actualReceiptsAtomic: null, verifiedNetAtomic: null,
     limitations: ['No inclusion, expiry or saleability guarantee', 'Batch scenarios are alternatives; do not sum independent fee quotes',
       'Latest block may reorganize', 'No vault-hook simulation, complete account index or automatic scheduling'] };

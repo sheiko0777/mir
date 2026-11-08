@@ -26,7 +26,8 @@ export function createClaimRpc({ fetchImpl = fetch, clock = Date.now } = {}) {
       }
     }
     if (method === 'eth_call' && params?.length === 2 && pin(params[1])) {
-      const call = params[0], role = targetRoles.get(call?.to);
+      const call = params[0], role = targetRoles.get(call?.to) ??
+        (typeof call?.to === 'string' && /^0x[0-9a-f]{40}$/.test(call.to) && BigInt(call.to) !== 0n ? 'vault' : null);
       if (role && Object.keys(call).length === 2 && typeof call.data === 'string' && /^0x[0-9a-f]+$/.test(call.data)) {
         const entry = Object.entries(CLAIM_REFERENCE.functions).find(([name, abi]) => name.startsWith(role + '.') && call.data.startsWith(abi.selector));
         if (entry) {

@@ -12,7 +12,8 @@ POOL = '0x45b2010d8a4f08b53c9fa7544c51dfd9733732cb'
 CLAIMER = '0xcdce635b774de77cdf791647601dba64a75547ba'
 FUNCTIONS = {
     'pool': ['getLastAwardedDrawId()', 'numberOfTiers()', 'getTierPrizeCount(uint8)',
-             'isWinner(address,address,uint8,uint32)', 'wasClaimed(address,address,uint8,uint32)', 'prizeToken()'],
+             'isWinner(address,address,uint8,uint32)', 'wasClaimed(address,address,uint8,uint32)', 'prizeToken()',
+             'isShutdown()', 'lastAwardedDrawAwardedAt()', 'claimCount()', 'isDrawFinalized(uint24)', 'drawClosesAt(uint24)'],
     'claimer': ['prizePool()', 'computeTotalFees(uint8,uint256)'],
 }
 
@@ -26,8 +27,7 @@ def main():
               'pool': POOL, 'claimer': CLAIMER, 'functions': {}}
     for role, signatures in FUNCTIONS.items():
         matches = [c for c in contracts if c.get('chainId') == 8453 and
-                   (c.get('address', '').lower() == {'pool': POOL, 'claimer': CLAIMER}.get(role)
-                    if role != 'vault' else c.get('type') == 'PrizeVault')]
+                   c.get('address', '').lower() == {'pool': POOL, 'claimer': CLAIMER}[role]]
         if not matches:
             raise ValueError(f'Published {role} ABI missing')
         for signature in signatures:
@@ -41,6 +41,15 @@ def main():
                 'inputs': [i['type'] for i in entry['inputs']], 'output': entry['outputs'][0]['type']}
     result['functions']['token.decimals()'] = {'selector': '0x' + keccak(text='decimals()').hex()[:8],
                                              'inputs': [], 'output': 'uint8'}
+    # Public address getters reconstructed from reviewed Solidity declarations,
+    # not claimed to be present in the pinned deployment ABI or live vault code.
+    result['vaultGetterSource'] = {
+        'url': 'https://github.com/GenerationSoftware/pt-v5-vault/blob/e328b319b66a341ea45d7aa565095888f2008294/src/abstract/Claimable.sol',
+        'commit': 'e328b319b66a341ea45d7aa565095888f2008294',
+        'basis': 'Solidity public address getters; source reviewed; not compiled-bytecode verification'}
+    for signature in ['prizePool()', 'claimer()']:
+        result['functions']['vault.' + signature] = {'selector': '0x' + keccak(text=signature).hex()[:8],
+                                                    'inputs': [], 'output': 'address'}
     # Independent standard ABI encoding vector, used by the JS codec tests.
     signature = 'isWinner(address,address,uint8,uint32)'
     values = ['0x1111111111111111111111111111111111111111',

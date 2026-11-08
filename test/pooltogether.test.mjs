@@ -154,9 +154,9 @@ test('transport stops at first HTTP denial without retry and enforces request bu
     const body = JSON.parse(options.body);
     return new Response(JSON.stringify({ jsonrpc: '2.0', id: body.id, result: '0x2105' }));
   } });
-  for (let i = 0; i < 96; i++) await rpc.read('eth_chainId', []);
+  for (let i = 0; i < 128; i++) await rpc.read('eth_chainId', []);
   await assert.rejects(rpc.read('eth_chainId', []), /budget/);
-  assert.equal(rpc.records.length, 96);
+  assert.equal(rpc.records.length, 128);
 });
 
 test('stored captures are verified; latest public failure is not replaced by illustrative success', async () => {

@@ -1,5 +1,7 @@
 # MIR: protocol-funded work is the primary research track
 
+Latest evidence overrides the initial ranking for these deployments: [Base/Arbitrum shutdown, Ethereum claim-window expiry, and current Liquity preflight](PROTOCOL-TARGET-DECISION-2026-11-08.md). Do not continue indexing an ineligible target merely because its worker exists.
+
 Implementation update: [first read-only protocol worker, commands and test evidence](FIRST-PROTOCOL-BOT.md). This is a bounded watchlist prototype, not a profitable autonomous executor.
 
 Decision date: 8 November 2026. User clarification: first build something that earns for MIR from existing protocol mechanisms, without finding or selling to a customer. The customer-service pilot remains a separate, deferred hypothesis. Its evidence does not validate protocol income.
