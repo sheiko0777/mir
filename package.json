@@ -18,6 +18,7 @@
     "start": "node apps/server/server.mjs",
     "size:demo": "node apps/monitor/sizing-demo.mjs",
     "test": "node tools/test.mjs",
+    "test:services": "python -m unittest discover -s services/tests -t .",
     "test:sdk": "node tools/rea/compare-v2.mjs",
     "test:evm": "node tools/evm/local-quote-check.mjs",
     "test:fork": "node tools/evm/fork-quote-check.mjs",

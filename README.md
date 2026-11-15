@@ -56,6 +56,8 @@ Still needed: full discovery/event indexing, queryable historical storage/reorg 
 
 Fees and reserve price impact are included in each swap estimate. Gas and buffer are explicit synthetic quote-token inputs. A positive estimate does not establish that a trade could execute or earn that amount. The token-check fixture flag is not a security audit.
 
+Read-only service workers now live under `services/`. Each writes a common JSON report that the server validates and serves at `GET /api/services`. The first is the Launchpad buyback-and-burn threshold watcher; it has no live results yet. See [services guide (Arabic)](docs/SERVICES.md) and the [expansion plan (Arabic)](docs/SERVICES-EXPANSION-PLAN.md).
+
 No signing, private keys, wallet connections, token approvals, transaction submission or autonomous real-money execution is included.
 
 ## Evidence agent
