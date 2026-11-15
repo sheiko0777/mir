@@ -1,0 +1,5 @@
+# Minimal dependencies for the tools/research unit tests in CI.
+# Versions match tools/research/almanak-win-cp314.lock.
+eth-abi==6.0.0
+eth-utils==6.0.0
+pycryptodome==3.24.1
