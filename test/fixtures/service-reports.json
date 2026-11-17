@@ -1,0 +1,430 @@
+{
+  "comment": "Shared by services/tests/test_report.py and test/services.test.mjs. Both validators must agree.",
+  "valid": [
+    {
+      "schemaVersion": 1,
+      "service": "example-service",
+      "title": "Example service",
+      "status": "ok",
+      "provenance": "PINNED_FIXTURE",
+      "generatedAt": "2026-11-15T12:00:00Z",
+      "staleAfterSeconds": 3600,
+      "executionEnabled": false,
+      "summary": {
+        "positions": 2,
+        "note": "synthetic",
+        "share": null
+      },
+      "caveats": [
+        "Synthetic fixture, not chain data."
+      ],
+      "data": {
+        "rows": [
+          1,
+          2
+        ]
+      }
+    }
+  ],
+  "invalid": [
+    {
+      "reason": "execution enabled",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": true,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "unknown provenance",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "TRUST_ME",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "unknown status",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "profitable",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "bad service id",
+      "report": {
+        "schemaVersion": 1,
+        "service": "../etc",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "uppercase service id",
+      "report": {
+        "schemaVersion": 1,
+        "service": "Example",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "wrong schema version",
+      "report": {
+        "schemaVersion": 2,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "non-UTC timestamp",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15 12:00:00",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "impossible date",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-13-45T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "zero stale window",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 0,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "stale window too long",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 2592001,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "boolean stale window",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": true,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "nested summary",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "a": {
+            "b": 1
+          }
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "missing data",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ]
+      }
+    },
+    {
+      "reason": "caveats not strings",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": "Example service",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          1
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    },
+    {
+      "reason": "empty title",
+      "report": {
+        "schemaVersion": 1,
+        "service": "example-service",
+        "title": " ",
+        "status": "ok",
+        "provenance": "PINNED_FIXTURE",
+        "generatedAt": "2026-11-15T12:00:00Z",
+        "staleAfterSeconds": 3600,
+        "executionEnabled": false,
+        "summary": {
+          "positions": 2,
+          "note": "synthetic",
+          "share": null
+        },
+        "caveats": [
+          "Synthetic fixture, not chain data."
+        ],
+        "data": {
+          "rows": [
+            1,
+            2
+          ]
+        }
+      }
+    }
+  ]
+}

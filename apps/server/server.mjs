@@ -7,6 +7,7 @@ import { loadResearch } from './research.mjs';
 import { labView } from '../../packages/lab/index.mjs';
 import { loadBots } from './bots.mjs';
 import { loadClaimBot } from './pooltogether.mjs';
+import { loadServices, loadService } from './services.mjs';
 import { planAgentCycle, emptyAgentState } from '../../packages/agent/index.mjs';
 
 const project = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../..');
@@ -18,6 +19,7 @@ export function createMirServer({ dataDirectory = path.join(project, 'data/disco
   researchDirectory = path.join(project, 'data/research'),
   labDirectory = path.join(project, 'data/lab'),
   claimDirectory = path.join(path.dirname(labDirectory), 'bots/pooltogether'),
+  servicesDirectory = path.join(path.dirname(labDirectory), 'services'),
   webRoot = path.join(project, 'apps/web'), brandRoot = path.join(project, 'outputs/MIR-Brand-Kit-v2'),
   now = Date.now } = {}) {
   return http.createServer(async (request, response) => {
@@ -81,6 +83,31 @@ export function createMirServer({ dataDirectory = path.join(project, 'data/disco
         response.end(request.method === 'HEAD' ? undefined : JSON.stringify({
           available: false, bots: [], tasks: [], executionEnabled: false,
           error: 'Bot evidence could not be verified' }));
+      }
+      return;
+    }
+    if (url.pathname === '/api/services') {
+      response.setHeader('Content-Type', 'application/json; charset=utf-8');
+      try {
+        const result = await loadServices(servicesDirectory, now());
+        response.writeHead(200); response.end(request.method === 'HEAD' ? undefined : JSON.stringify(result));
+      } catch {
+        response.writeHead(503); response.end(request.method === 'HEAD' ? undefined : JSON.stringify({
+          available: false, services: [], executionEnabled: false,
+          error: 'Service reports could not be read' }));
+      }
+      return;
+    }
+    if (url.pathname.startsWith('/api/services/')) {
+      response.setHeader('Content-Type', 'application/json; charset=utf-8');
+      try {
+        const result = await loadService(servicesDirectory, url.pathname.slice('/api/services/'.length), now());
+        response.writeHead(200); response.end(request.method === 'HEAD' ? undefined : JSON.stringify(result));
+      } catch (error) {
+        response.writeHead(error.code === 'ENOENT' ? 404 : 503);
+        response.end(request.method === 'HEAD' ? undefined : JSON.stringify({
+          available: false, executionEnabled: false,
+          error: 'Service report unavailable or invalid. No sample data substituted.' }));
       }
       return;
     }

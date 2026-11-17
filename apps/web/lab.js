@@ -4,7 +4,60 @@ const evidence = (node, label, id) => {
   const details = document.createElement('details'), summary = document.createElement('summary');
   summary.textContent = label; details.append(summary); paragraph(details, id); node.append(details);
 };
+const SERVICE_PROVENANCE = { CHAIN_OBSERVED: 'قراءة من الشبكة', PINNED_FIXTURE: 'لقطة محفوظة (ليست حالة حية)',
+  FORK_SIMULATED: 'محاكاة fork', ASSUMED_INPUT: 'مدخلات مفترضة — ليست دليلًا' };
+const SERVICE_STATUS = { ok: 'مكتمل', incomplete: 'غير مكتمل', 'source-unavailable': 'المصدر غير متاح',
+  invalid: 'التقرير المحفوظ فشل التحقق — لم تُستخدم بيانات بديلة', 'no-report': 'لا يوجد تقرير بعد' };
+const SUMMARY_LABELS = { positions: 'المراكز', ready: 'جاهزة بلا مخزون', approaching: 'تقترب من الحد', claims: 'مطالبات سابقة',
+  topExecutorSharePct: 'حصة أكبر منفذ %', worstLevel: 'أسوأ مستوى', liquidatable: 'قابلة للتصفية', critical: 'حرجة',
+  danger: 'خطر', watch: 'مراقبة', unknown: 'مجهولة' };
+const LEVEL_LABELS = { NO_DEBT: 'بلا دين', SAFE: 'آمن', WATCH: 'مراقبة', DANGER: 'خطر', CRITICAL: 'حرج',
+  LIQUIDATABLE: 'قابل للتصفية', UNKNOWN: 'مجهول' };
+const summaryValue = (key, value) => value === null || value === undefined ? 'مجهول'
+  : key === 'worstLevel' ? LEVEL_LABELS[value] ?? 'غير معتمد' : value;
+function age(seconds) {
+  if (!Number.isFinite(seconds) || seconds < 0) return 'مجهول';
+  if (seconds < 3600) return `${Math.floor(seconds / 60)} دقيقة`;
+  if (seconds < 172800) return `${Math.floor(seconds / 3600)} ساعة`;
+  return `${Math.floor(seconds / 86400)} يوم`;
+}
+async function refreshServices() {
+  const node = byId('services'), status = byId('services-status');
+  node.replaceChildren(); status.textContent = 'جارٍ قراءة تقارير الخدمات…';
+  try {
+    const response = await fetch('/api/services', { cache: 'no-store' });
+    if (!response.ok) throw new Error('unavailable');
+    const body = await response.json();
+    if (!Array.isArray(body.services) || body.executionEnabled !== false) throw new Error('invalid');
+    for (const service of body.services) {
+      if (service.executionEnabled !== false) continue;
+      const card = document.createElement('article');
+      const heading = document.createElement('h3'); heading.textContent = service.title ?? service.id; card.append(heading);
+      paragraph(card, SERVICE_STATUS[service.status] ?? 'حالة غير معتمدة');
+      if (service.available) {
+        paragraph(card, `المصدر: ${SERVICE_PROVENANCE[service.provenance] ?? 'غير معتمد'}`);
+        paragraph(card, `${service.freshness === 'fresh' ? 'حديث' : 'قديم — لا يمثل الحالة الحالية'} — عمر البيانات ${age(service.ageSeconds)}`);
+        const rows = Object.entries(service.summary ?? {}).filter(([key]) => key in SUMMARY_LABELS);
+        if (rows.length) paragraph(card, rows.map(([key, value]) => `${SUMMARY_LABELS[key]}: ${summaryValue(key, value)}`).join(' — '));
+        if (Array.isArray(service.caveats) && service.caveats.length) {
+          const details = document.createElement('details'), summary = document.createElement('summary');
+          summary.textContent = 'حدود التقرير'; details.append(summary);
+          for (const caveat of service.caveats) paragraph(details, caveat);
+          card.append(details);
+        }
+      }
+      if (service.lastAttempt) paragraph(card, `آخر محاولة (${service.lastAttempt.generatedAt}): ${SERVICE_STATUS[service.lastAttempt.status] ?? 'فشلت'}`);
+      evidence(card, 'معرّف الخدمة', service.id);
+      node.append(card);
+    }
+    status.textContent = body.services.length ? 'تقارير الخدمات تم التحقق منها. ليست توصيات تنفيذ.' : 'لا توجد تقارير خدمات بعد.';
+  } catch {
+    node.replaceChildren();
+    status.textContent = 'تقارير الخدمات غير متاحة أو تعذر التحقق منها. لم تُستخدم بيانات بديلة.';
+  }
+}
 async function refresh() {
+  refreshServices();
   byId('reload').disabled = true;
   byId('datasets').replaceChildren(); byId('experiments').replaceChildren();
   byId('bots').replaceChildren();
